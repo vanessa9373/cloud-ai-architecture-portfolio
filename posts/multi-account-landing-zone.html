@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="How I built a Multi-Account AWS Landing Zone from scratch — SCPs, Transit Gateway, IAM Identity Center, and the lessons learned building enterprise cloud governance.">
+  <meta name="description" content="How I built a Multi-Account AWS Landing Zone from scratch, SCPs, Transit Gateway, IAM Identity Center, and the lessons learned building enterprise cloud governance.">
   <title>How I Built a Multi-Account AWS Landing Zone from Scratch | Vanessa Awo</title>
   <link rel="stylesheet" href="../style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -55,73 +55,73 @@
 
         <p>When most people start learning AWS, they spin up a single account, launch an EC2 instance, and call it a day.</p>
         <p>That works for learning. It doesn't work for enterprise.</p>
-        <p>Real companies don't run everything in one AWS account. They use dozens — sometimes hundreds — of accounts, organized by environment, business unit, and compliance boundary. Managing that at scale requires a deliberate architecture called a Landing Zone.</p>
-        <p>This is how I built one from scratch — the decisions I made, the mistakes I avoided, and what I learned that no certification course teaches you.</p>
+        <p>Real companies don't run everything in one AWS account. They use dozens, sometimes hundreds, of accounts, organized by environment, business unit, and compliance boundary. Managing that at scale requires a deliberate architecture called a Landing Zone.</p>
+        <p>This is how I built one from scratch, the decisions I made, the mistakes I avoided, and what I learned that no certification course teaches you.</p>
 
         <h2>Why Multiple Accounts?</h2>
-        <p>The single-account model has one fatal flaw: a mistake in development can affect production. A misconfigured IAM policy, an accidental resource deletion, a runaway Lambda function — in a single account, these blast across every environment simultaneously.</p>
+        <p>The single-account model has one fatal flaw: a mistake in development can affect production. A misconfigured IAM policy, an accidental resource deletion, a runaway Lambda function, in a single account, these blast across every environment simultaneously.</p>
         <p>Multi-account solves this with hard isolation boundaries. Each account is a separate security and billing domain. What happens in Dev stays in Dev. A developer cannot accidentally terminate a production EC2 instance if they don't have access to the production account at all.</p>
-        <p>But isolation creates a new problem: how do you govern 10, 50, or 100 accounts consistently without losing control? How do you ensure every account enforces encryption, blocks root access, and ships logs to a central location — without manually configuring each one?</p>
+        <p>But isolation creates a new problem: how do you govern 10, 50, or 100 accounts consistently without losing control? How do you ensure every account enforces encryption, blocks root access, and ships logs to a central location, without manually configuring each one?</p>
         <p>That's what a Landing Zone answers.</p>
 
-        <h2>Layer 1 — AWS Organizations: The Control Plane</h2>
+        <h2>Layer 1, AWS Organizations: The Control Plane</h2>
         <p>AWS Organizations is the root of the entire architecture. I structured it with four Organizational Units:</p>
         <ul>
-          <li><strong>Security OU</strong> — centralized security tooling: GuardDuty master, Security Hub aggregator, Log Archive S3</li>
-          <li><strong>Infrastructure OU</strong> — shared services: Transit Gateway, DNS, egress inspection</li>
-          <li><strong>Development OU</strong> — sandboxes and dev environments with relaxed but still governed policies</li>
-          <li><strong>Production OU</strong> — customer-facing workloads with the strictest controls</li>
+          <li><strong>Security OU</strong>, centralized security tooling: GuardDuty master, Security Hub aggregator, Log Archive S3</li>
+          <li><strong>Infrastructure OU</strong>, shared services: Transit Gateway, DNS, egress inspection</li>
+          <li><strong>Development OU</strong>, sandboxes and dev environments with relaxed but still governed policies</li>
+          <li><strong>Production OU</strong>, customer-facing workloads with the strictest controls</li>
         </ul>
-        <p>Every account lives inside one of these OUs. The OU determines what that account is allowed to do — enforced by Service Control Policies, not IAM. This is the critical distinction.</p>
+        <p>Every account lives inside one of these OUs. The OU determines what that account is allowed to do, enforced by Service Control Policies, not IAM. This is the critical distinction.</p>
 
-        <h2>Layer 2 — Service Control Policies: The Guardrails</h2>
+        <h2>Layer 2, Service Control Policies: The Guardrails</h2>
         <p>SCPs are the most powerful tool in AWS Organizations, and the most misunderstood.</p>
-        <p>IAM policies grant permissions. SCPs set the maximum permissions that can ever be granted — and they override IAM. Even if a user has <code>AdministratorAccess</code>, an SCP can block them from using specific services or actions. There is no way around an SCP from inside the account.</p>
+        <p>IAM policies grant permissions. SCPs set the maximum permissions that can ever be granted, and they override IAM. Even if a user has <code>AdministratorAccess</code>, an SCP can block them from using specific services or actions. There is no way around an SCP from inside the account.</p>
         <p>I implemented 8 SCPs across the organization:</p>
         <ul>
-          <li><strong>DenyRootUser</strong> — no API calls from the root account, ever. Root credentials should never be used after initial account setup.</li>
-          <li><strong>RequireIMDSv2</strong> — forces all EC2 instances to use IMDSv2, blocking the SSRF attack vector that compromised Capital One in 2019.</li>
-          <li><strong>DenyPublicS3ACLs</strong> — prevents any account from creating public S3 buckets via ACLs. Works alongside S3 Block Public Access, but SCPs make it organization-wide and uncircumventable.</li>
-          <li><strong>AllowedRegionsOnly</strong> — workloads can only run in <code>us-east-1</code> and <code>us-west-2</code>. Prevents data residency violations and rogue resource creation in unexpected regions.</li>
-          <li><strong>DenyCloudTrailDisable</strong> — the audit trail cannot be turned off or modified. Not by developers, not by admins, not by anyone inside the account.</li>
-          <li><strong>RequireMFA</strong> — enforces multi-factor authentication for all human users making IAM changes.</li>
-          <li><strong>DenyLargeInstances</strong> — applied to the Development OU only. Developers cannot spin up <code>p4d</code>, <code>trn1</code>, or other expensive GPU/HPC instances in non-production accounts.</li>
-          <li><strong>DenyUnencryptedStorage</strong> — all EBS volumes and S3 objects must be encrypted at rest. Unencrypted <code>CreateVolume</code> and <code>PutObject</code> calls are denied.</li>
+          <li><strong>DenyRootUser</strong>, no API calls from the root account, ever. Root credentials should never be used after initial account setup.</li>
+          <li><strong>RequireIMDSv2</strong>, forces all EC2 instances to use IMDSv2, blocking the SSRF attack vector that compromised Capital One in 2019.</li>
+          <li><strong>DenyPublicS3ACLs</strong>, prevents any account from creating public S3 buckets via ACLs. Works alongside S3 Block Public Access, but SCPs make it organization-wide and uncircumventable.</li>
+          <li><strong>AllowedRegionsOnly</strong>, workloads can only run in <code>us-east-1</code> and <code>us-west-2</code>. Prevents data residency violations and rogue resource creation in unexpected regions.</li>
+          <li><strong>DenyCloudTrailDisable</strong>, the audit trail cannot be turned off or modified. Not by developers, not by admins, not by anyone inside the account.</li>
+          <li><strong>RequireMFA</strong>, enforces multi-factor authentication for all human users making IAM changes.</li>
+          <li><strong>DenyLargeInstances</strong>, applied to the Development OU only. Developers cannot spin up <code>p4d</code>, <code>trn1</code>, or other expensive GPU/HPC instances in non-production accounts.</li>
+          <li><strong>DenyUnencryptedStorage</strong>, all EBS volumes and S3 objects must be encrypted at rest. Unencrypted <code>CreateVolume</code> and <code>PutObject</code> calls are denied.</li>
         </ul>
-        <p>The key insight about SCPs: they are preventative, not detective. They stop the mistake before it happens — not after GuardDuty fires an alert three hours later.</p>
+        <p>The key insight about SCPs: they are preventative, not detective. They stop the mistake before it happens, not after GuardDuty fires an alert three hours later.</p>
 
-        <h2>Layer 3 — Transit Gateway: The Network Backbone</h2>
+        <h2>Layer 3, Transit Gateway: The Network Backbone</h2>
         <p>Naive multi-account networking uses VPC peering. The problem is that peering doesn't scale. With 10 accounts you need up to 45 peering connections. With 20 accounts, 190. With 50, over 1,200. Each connection is a separate routing configuration to manage.</p>
-        <p>Transit Gateway solves this with a hub-and-spoke model. Every VPC connects to one central Transit Gateway in the Network account. Routing is managed in one place. Adding a new account means adding one attachment — not reconfiguring every existing peer.</p>
+        <p>Transit Gateway solves this with a hub-and-spoke model. Every VPC connects to one central Transit Gateway in the Network account. Routing is managed in one place. Adding a new account means adding one attachment, not reconfiguring every existing peer.</p>
         <p>I used separate Transit Gateway route tables to enforce traffic boundaries:</p>
         <ul>
           <li>Production VPCs cannot route directly to Development VPCs</li>
           <li>All internet egress is routed through an Inspection VPC running network firewall rules</li>
-          <li>The Network account owns all route tables — no workload account can modify routing</li>
+          <li>The Network account owns all route tables, no workload account can modify routing</li>
         </ul>
-        <p>The non-negotiable design constraint: <strong>plan your CIDR ranges before creating a single subnet.</strong> VPC CIDRs cannot be changed after creation, and overlapping CIDRs prevent Transit Gateway routing. I allocated a /8 supernet and subdivided it systematically — /16 per OU, /20 per account, /24 per subnet tier.</p>
+        <p>The non-negotiable design constraint: <strong>plan your CIDR ranges before creating a single subnet.</strong> VPC CIDRs cannot be changed after creation, and overlapping CIDRs prevent Transit Gateway routing. I allocated a /8 supernet and subdivided it systematically, /16 per OU, /20 per account, /24 per subnet tier.</p>
 
-        <h2>Layer 4 — IAM Identity Center: Single Sign-On</h2>
-        <p>With 10+ accounts, managing users in each account separately is operationally impossible. Each account would have its own IAM users, passwords, and access keys — a compliance nightmare and a security risk.</p>
-        <p>IAM Identity Center (formerly AWS SSO) provides one identity source for all accounts. I configured it with SAML 2.0 federation and enforced MFA for all users. Permission Sets define what each role can do in each account — a developer gets read-only access to Production and full access to their assigned Development account, managed centrally and applied everywhere simultaneously.</p>
+        <h2>Layer 4, IAM Identity Center: Single Sign-On</h2>
+        <p>With 10+ accounts, managing users in each account separately is operationally impossible. Each account would have its own IAM users, passwords, and access keys, a compliance nightmare and a security risk.</p>
+        <p>IAM Identity Center (formerly AWS SSO) provides one identity source for all accounts. I configured it with SAML 2.0 federation and enforced MFA for all users. Permission Sets define what each role can do in each account, a developer gets read-only access to Production and full access to their assigned Development account, managed centrally and applied everywhere simultaneously.</p>
         <p>When a team member leaves, one action in IAM Identity Center revokes access across all accounts instantly. No hunting for forgotten IAM users across 10 accounts.</p>
 
         <h2>Centralized Security</h2>
         <p>Security tooling runs in the Security account and monitors everything else:</p>
         <ul>
-          <li><strong>GuardDuty</strong> — delegated to the Security account. ML-based threat detection runs in every member account, findings aggregate in one place. A compromised EC2 in any account shows up on the Security team's dashboard within minutes.</li>
-          <li><strong>Security Hub</strong> — aggregates findings from GuardDuty, Config, Inspector, and Macie across all accounts. The CIS AWS Benchmark score gives a single compliance number for the entire organization.</li>
-          <li><strong>CloudTrail</strong> — org-wide trail ships all API activity to an S3 bucket in the Log Archive account. That bucket has MFA-Delete and Object Lock enabled. The <code>DenyCloudTrailDisable</code> SCP ensures the trail stays on. Nobody can tamper with the audit trail — not even an account administrator.</li>
+          <li><strong>GuardDuty</strong>, delegated to the Security account. ML-based threat detection runs in every member account, findings aggregate in one place. A compromised EC2 in any account shows up on the Security team's dashboard within minutes.</li>
+          <li><strong>Security Hub</strong>, aggregates findings from GuardDuty, Config, Inspector, and Macie across all accounts. The CIS AWS Benchmark score gives a single compliance number for the entire organization.</li>
+          <li><strong>CloudTrail</strong>, org-wide trail ships all API activity to an S3 bucket in the Log Archive account. That bucket has MFA-Delete and Object Lock enabled. The <code>DenyCloudTrailDisable</code> SCP ensures the trail stays on. Nobody can tamper with the audit trail, not even an account administrator.</li>
         </ul>
 
         <h2>Three Things That Surprised Me</h2>
-        <p><strong>1. SCPs fail open, not closed.</strong> If you don't have an SCP, everything is allowed. You have to explicitly deny what you don't want. Most guides tell you to start with a list of SCPs to apply — but the more important advice is to apply <code>DenyRoot</code> and <code>DenyPublicS3ACLs</code> before any workloads exist in any account. Retrofitting guardrails is much harder than building with them from day one.</p>
-        <p><strong>2. Account vending is the real operational challenge.</strong> Creating the architecture is the easy part. The hard part is enabling engineering teams to get new accounts quickly — in under 15 minutes — without bypassing the guardrails. Account Factory automates this: a new account is created, assigned to the correct OU, tagged, and enrolled in baseline services automatically. Teams get their account fast; the security team doesn't have to manually configure each one.</p>
-        <p><strong>3. Network design is permanent.</strong> Everything else in this architecture can be modified after the fact. VPC CIDRs cannot. I spent more time planning the IP addressing scheme than any other single design decision — and it was time well spent. Non-overlapping CIDRs across every account, every region, with room to grow, is a requirement. Plan it on a spreadsheet before you create your first subnet.</p>
+        <p><strong>1. SCPs fail open, not closed.</strong> If you don't have an SCP, everything is allowed. You have to explicitly deny what you don't want. Most guides tell you to start with a list of SCPs to apply, but the more important advice is to apply <code>DenyRoot</code> and <code>DenyPublicS3ACLs</code> before any workloads exist in any account. Retrofitting guardrails is much harder than building with them from day one.</p>
+        <p><strong>2. Account vending is the real operational challenge.</strong> Creating the architecture is the easy part. The hard part is enabling engineering teams to get new accounts quickly, in under 15 minutes, without bypassing the guardrails. Account Factory automates this: a new account is created, assigned to the correct OU, tagged, and enrolled in baseline services automatically. Teams get their account fast; the security team doesn't have to manually configure each one.</p>
+        <p><strong>3. Network design is permanent.</strong> Everything else in this architecture can be modified after the fact. VPC CIDRs cannot. I spent more time planning the IP addressing scheme than any other single design decision, and it was time well spent. Non-overlapping CIDRs across every account, every region, with room to grow, is a requirement. Plan it on a spreadsheet before you create your first subnet.</p>
 
         <h2>The Result</h2>
         <p>A governance framework that scales from 10 to 1,000 accounts without changing the core architecture. New teams get a compliant, isolated, network-connected account in under 15 minutes. Security findings are centralized. The audit trail is immutable. No developer can accidentally destroy production. And every account starts life with encryption enforced, root access blocked, and logging enabled.</p>
-        <p>This is the architecture that enterprises pay consultants six figures to design. I built it to understand it — because understanding is what lets you explain it, defend it, and improve it in front of a customer.</p>
+        <p>This is the architecture that enterprises pay consultants six figures to design. I built it to understand it, because understanding is what lets you explain it, defend it, and improve it in front of a customer.</p>
 
         <div style="background:rgba(0,180,216,0.07);border:1px solid rgba(0,180,216,0.2);border-radius:10px;padding:20px 24px;margin-top:36px;">
           <p style="margin:0 0 10px;font-weight:600;color:var(--accent,#00b4d8);">Explore the architecture</p>

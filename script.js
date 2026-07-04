@@ -13,10 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- AOS (ANIMATE ON SCROLL) ---------- */
   if (typeof AOS !== 'undefined') {
     AOS.init({
-      duration: 700,
+      duration: 400,
       easing: 'ease-out',
       once: true,
-      offset: 60
+      offset: 60,
+      disable: 'mobile'
     });
   }
 
@@ -24,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- PAGE LOADER ---------- */
   const pageLoader = document.getElementById('page-loader');
   if (pageLoader) {
-    const minTime = 800;
+    const minTime = 400;
     const startTime = performance.now();
     let dismissed = false;
 
@@ -36,8 +37,8 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => pageLoader.classList.add('hidden'), remaining);
     }
 
-    // Hard cap: dismiss after 2.5s even if CDN resources are still loading
-    const hardCap = setTimeout(dismissLoader, 2500);
+    // Hard cap: dismiss after 600ms even if CDN resources are still loading
+    const hardCap = setTimeout(dismissLoader, 600);
 
     if (document.readyState === 'complete') {
       clearTimeout(hardCap);
@@ -60,18 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ---------- BUTTON RIPPLE ---------- */
-  document.querySelectorAll('.ripple-btn').forEach(btn => {
-    btn.addEventListener('click', (e) => {
-      const ripple = document.createElement('span');
-      ripple.classList.add('ripple');
-      const rect = btn.getBoundingClientRect();
-      const size = Math.max(rect.width, rect.height);
-      ripple.style.cssText = `width:${size}px;height:${size}px;left:${e.clientX - rect.left - size / 2}px;top:${e.clientY - rect.top - size / 2}px`;
-      btn.appendChild(ripple);
-      ripple.addEventListener('animationend', () => ripple.remove());
-    });
-  });
+  /* ---------- BUTTON RIPPLE — removed ---------- */
 
 
   /* ---------- MOBILE NAVIGATION ---------- */
@@ -212,46 +202,8 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ---------- TYPING EFFECT (Home page only) ---------- */
-  const typedElement = document.getElementById('typed-text');
-  if (typedElement) {
-    const titles = [
-      'Solutions Architect',
-      'Solutions Engineer',
-      'Pre-Sales SE',
-      'Cloud Professional'
-    ];
-    let titleIndex = 0;
-    let charIndex = 0;
-    let isDeleting = false;
-
-    function typeEffect() {
-      const current = titles[titleIndex];
-
-      if (isDeleting) {
-        typedElement.textContent = current.substring(0, charIndex - 1);
-        charIndex--;
-      } else {
-        typedElement.textContent = current.substring(0, charIndex + 1);
-        charIndex++;
-      }
-
-      let speed = isDeleting ? 40 : 80;
-
-      if (!isDeleting && charIndex === current.length) {
-        speed = 2000;
-        isDeleting = true;
-      } else if (isDeleting && charIndex === 0) {
-        isDeleting = false;
-        titleIndex = (titleIndex + 1) % titles.length;
-        speed = 400;
-      }
-
-      setTimeout(typeEffect, speed);
-    }
-
-    typeEffect();
-  }
+  /* ---------- TYPED TEXT — static display ---------- */
+  // Static role title; no animation loop needed
 
 
   /* ---------- COUNTER ANIMATION (Home page only) ---------- */
@@ -263,7 +215,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     statNumbers.forEach(stat => {
       const target = parseInt(stat.getAttribute('data-target'));
-      const duration = 1500;
+      const duration = 600;
       const start = performance.now();
 
       function updateCounter(now) {

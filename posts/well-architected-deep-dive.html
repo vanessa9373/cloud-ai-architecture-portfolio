@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AWS Well-Architected Framework: Going Beyond the Checklist — how to use the 6 pillars as a living design tool for real trade-off conversations.">
+  <meta name="description" content="AWS Well-Architected Framework: Going Beyond the Checklist, how to use the 6 pillars as a living design tool for real trade-off conversations.">
   <title>AWS Well-Architected Framework: Going Beyond the Checklist | Vanessa Awo</title>
   <link rel="stylesheet" href="../style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,52 +50,52 @@
       </div>
 
       <div class="post-body">
-        <p>Most teams treat the AWS Well-Architected Framework as a compliance exercise — run the tool, answer the questions, generate the report, file it away. That's the wrong use of one of the most valuable architecture resources AWS has produced. The six pillars aren't a pass/fail checklist. They're a structured way to have trade-off conversations that most architecture reviews skip entirely.</p>
-        <p>Here's how I use the Well-Architected Framework as a living design tool — and why the trade-offs between pillars are the most important conversations it enables.</p>
+        <p>Most teams treat the AWS Well-Architected Framework as a compliance exercise, run the tool, answer the questions, generate the report, file it away. That's the wrong use of one of the most valuable architecture resources AWS has produced. The six pillars aren't a pass/fail checklist. They're a structured way to have trade-off conversations that most architecture reviews skip entirely.</p>
+        <p>Here's how I use the Well-Architected Framework as a living design tool, and why the trade-offs between pillars are the most important conversations it enables.</p>
 
-        <h2>The Six Pillars — and the Tensions Between Them</h2>
-        <p>The pillars are: <strong>Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, and Sustainability</strong>. Every practitioner can recite them. What separates senior architects from junior ones is understanding that optimizing for one pillar often comes at the expense of another — and being explicit about those trade-offs with stakeholders.</p>
+        <h2>The Six Pillars, and the Tensions Between Them</h2>
+        <p>The pillars are: <strong>Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimization, and Sustainability</strong>. Every practitioner can recite them. What separates senior architects from junior ones is understanding that optimizing for one pillar often comes at the expense of another, and being explicit about those trade-offs with stakeholders.</p>
         <p>The most common tensions I navigate:</p>
         <ul>
-          <li><strong>Reliability vs. Cost:</strong> Multi-AZ RDS Multi-Standby gives you near-zero RPO/RTO but costs 2–3x a single-AZ deployment. Is your workload revenue-critical enough to justify it? That's a business decision, not a technical one — but the architect needs to frame it clearly.</li>
+          <li><strong>Reliability vs. Cost:</strong> Multi-AZ RDS Multi-Standby gives you near-zero RPO/RTO but costs 2–3x a single-AZ deployment. Is your workload revenue-critical enough to justify it? That's a business decision, not a technical one, but the architect needs to frame it clearly.</li>
           <li><strong>Security vs. Performance:</strong> End-to-end TLS, WAF inspection, and GuardDuty all add latency. For most workloads, the latency is negligible. For latency-sensitive APIs, it's worth measuring before assuming it's free.</li>
-          <li><strong>Operational Excellence vs. Cost:</strong> A fully automated, infrastructure-as-code, GitOps-driven deployment pipeline is operationally excellent — and requires ongoing investment in tooling, training, and maintenance. For a small team on a tight budget, that overhead may not be justified yet.</li>
+          <li><strong>Operational Excellence vs. Cost:</strong> A fully automated, infrastructure-as-code, GitOps-driven deployment pipeline is operationally excellent, and requires ongoing investment in tooling, training, and maintenance. For a small team on a tight budget, that overhead may not be justified yet.</li>
         </ul>
-        <p>Making these trade-offs visible — rather than silently optimizing for one pillar — is what builds trust with both engineering teams and business stakeholders.</p>
+        <p>Making these trade-offs visible, rather than silently optimizing for one pillar, is what builds trust with both engineering teams and business stakeholders.</p>
 
         <h2>Pillar Deep Dive: Reliability (Where Most Teams Under-Invest)</h2>
         <p>Reliability is the pillar I see most under-invested in during the early stages of cloud adoption. Teams rush to get workloads running and defer reliability work as "something we'll do later." Later usually arrives as a production incident.</p>
         <p>The reliability questions I always ask during architecture review:</p>
         <ul>
           <li><strong>What is your RTO and RPO?</strong> If the team doesn't have defined targets, the business hasn't decided how much downtime costs them. That conversation needs to happen before architecture decisions are locked in.</li>
-          <li><strong>Have you tested your failover?</strong> Untested DR is theater. I advocate for regular chaos engineering — at minimum, quarterly RDS failover drills and AZ-failure simulations.</li>
+          <li><strong>Have you tested your failover?</strong> Untested DR is theater. I advocate for regular chaos engineering, at minimum, quarterly RDS failover drills and AZ-failure simulations.</li>
           <li><strong>Are your dependencies reliable?</strong> Your architecture is only as reliable as its external dependencies. Map every third-party API and service your system calls. Add circuit breakers, retries with exponential backoff, and fallback paths for each one.</li>
           <li><strong>How does the system behave under load beyond design capacity?</strong> Graceful degradation under overload is a reliability requirement, not a nice-to-have. Auto Scaling with warm pools, SQS buffering, and read replicas for read-heavy workloads are standard patterns here.</li>
         </ul>
 
         <h2>Pillar Deep Dive: Cost Optimization (The FinOps Mindset)</h2>
-        <p>Cost optimization in the Well-Architected sense isn't about being cheap — it's about understanding the cost of every architectural decision and making those costs visible to stakeholders.</p>
+        <p>Cost optimization in the Well-Architected sense isn't about being cheap, it's about understanding the cost of every architectural decision and making those costs visible to stakeholders.</p>
         <p>The patterns I apply in every architecture I design:</p>
         <ul>
           <li><strong>Right-size before you commit.</strong> Don't purchase Reserved Instances for a workload you haven't profiled under production load. Run on On-Demand for 30–60 days, analyze CloudWatch metrics, then commit.</li>
-          <li><strong>Use the right storage class.</strong> S3 Intelligent-Tiering automatically moves objects between access tiers and pays for itself at scale. S3 Glacier for archival, EFS Infrequent Access for cold file storage — don't pay for hot storage for cold data.</li>
+          <li><strong>Use the right storage class.</strong> S3 Intelligent-Tiering automatically moves objects between access tiers and pays for itself at scale. S3 Glacier for archival, EFS Infrequent Access for cold file storage, don't pay for hot storage for cold data.</li>
           <li><strong>Graviton where you can.</strong> AWS Graviton3 instances deliver 20–40% better price-performance than equivalent x86 instances for most workloads. Lambda ARM (Graviton2) is 20% cheaper and 20% faster. Default to it unless you have a specific x86 dependency.</li>
-          <li><strong>Tag everything from day one.</strong> Cost allocation without tags is guesswork. Enforce tagging via SCPs or AWS Config rules — not best-effort convention.</li>
+          <li><strong>Tag everything from day one.</strong> Cost allocation without tags is guesswork. Enforce tagging via SCPs or AWS Config rules, not best-effort convention.</li>
         </ul>
 
         <h2>Using the Framework in Customer Conversations</h2>
-        <p>When I'm in an architecture review with a customer, I use the Well-Architected pillars as a conversation structure, not a form to fill out. I'll say something like: "You've got great operational tooling. Let's talk about reliability — specifically, what happens to your order processing if us-east-1a goes down right now."</p>
-        <p>That kind of question, framed around a pillar, surfaces real gaps in a way that doesn't feel accusatory. It positions the architect as a partner helping the team think through edge cases — not an auditor marking things as non-compliant.</p>
-        <p>The Well-Architected Review meeting is also a natural place to introduce new AWS services. If a customer is running self-managed MySQL on EC2 and the reliability pillar reveals their failover isn't tested, that's the right moment to introduce Amazon Aurora — with its automated failover, and performance improvements — as a solution to the reliability gap, not as a product pitch.</p>
+        <p>When I'm in an architecture review with a customer, I use the Well-Architected pillars as a conversation structure, not a form to fill out. I'll say something like: "You've got great operational tooling. Let's talk about reliability, specifically, what happens to your order processing if us-east-1a goes down right now."</p>
+        <p>That kind of question, framed around a pillar, surfaces real gaps in a way that doesn't feel accusatory. It positions the architect as a partner helping the team think through edge cases, not an auditor marking things as non-compliant.</p>
+        <p>The Well-Architected Review meeting is also a natural place to introduce new AWS services. If a customer is running self-managed MySQL on EC2 and the reliability pillar reveals their failover isn't tested, that's the right moment to introduce Amazon Aurora, with its automated failover, and performance improvements, as a solution to the reliability gap, not as a product pitch.</p>
 
         <h2>The Right Cadence for Reviews</h2>
         <p>I recommend running a Well-Architected Review at three specific moments:</p>
         <ul>
-          <li><strong>Before a major launch</strong> — catch architectural gaps before they become production incidents</li>
-          <li><strong>After a significant incident</strong> — use the framework to identify what pillar the failure touched and what the systematic fix is</li>
-          <li><strong>Annually for production systems</strong> — cloud best practices evolve, new services appear, and workloads change. A point-in-time review quickly goes stale.</li>
+          <li><strong>Before a major launch</strong>, catch architectural gaps before they become production incidents</li>
+          <li><strong>After a significant incident</strong>, use the framework to identify what pillar the failure touched and what the systematic fix is</li>
+          <li><strong>Annually for production systems</strong>, cloud best practices evolve, new services appear, and workloads change. A point-in-time review quickly goes stale.</li>
         </ul>
-        <p>The framework is most powerful when it's a living part of how a team makes architecture decisions — not something that gets dusted off once a year for a compliance audit.</p>
+        <p>The framework is most powerful when it's a living part of how a team makes architecture decisions, not something that gets dusted off once a year for a compliance audit.</p>
       </div>
     </div>
   </section>

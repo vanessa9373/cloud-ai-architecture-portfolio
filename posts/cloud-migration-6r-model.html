@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="The 6R Cloud Migration Model in Practice — how to apply Rehost, Replatform, Refactor, Repurchase, Retire, and Retain to real enterprise workloads.">
+  <meta name="description" content="The 6R Cloud Migration Model in Practice, how to apply Rehost, Replatform, Refactor, Repurchase, Retire, and Retain to real enterprise workloads.">
   <title>The 6R Cloud Migration Model in Practice | Vanessa Awo</title>
   <link rel="stylesheet" href="../style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,13 +50,13 @@
       </div>
 
       <div class="post-body">
-        <p>The 6R framework is one of the most cited models in cloud migration — and one of the most misapplied. In theory, it's a clean decision tree: assess each workload and assign it a strategy. In practice, the lines between strategies blur, organizational politics complicate technical decisions, and the model gets treated as a formality rather than a genuine tool. Here's how I actually use it.</p>
+        <p>The 6R framework is one of the most cited models in cloud migration, and one of the most misapplied. In theory, it's a clean decision tree: assess each workload and assign it a strategy. In practice, the lines between strategies blur, organizational politics complicate technical decisions, and the model gets treated as a formality rather than a genuine tool. Here's how I actually use it.</p>
 
-        <h2>The 6 Strategies — What They Actually Mean</h2>
+        <h2>The 6 Strategies, What They Actually Mean</h2>
 
         <h3>Rehost (Lift-and-Shift)</h3>
-        <p>Move the workload to cloud infrastructure without changing anything about the application. Same OS, same application server, same database engine — just running on EC2 instead of on-prem VMware.</p>
-        <p><strong>When it's the right call:</strong> Speed is the priority, the team lacks cloud skills, or the application is a black box with no available source code. Rehost is also strategically right as a first step when you need to exit a data center by a hard deadline. You can always modernize after the workload is in the cloud — you can't modernize while the data center is shutting down around you.</p>
+        <p>Move the workload to cloud infrastructure without changing anything about the application. Same OS, same application server, same database engine, just running on EC2 instead of on-prem VMware.</p>
+        <p><strong>When it's the right call:</strong> Speed is the priority, the team lacks cloud skills, or the application is a black box with no available source code. Rehost is also strategically right as a first step when you need to exit a data center by a hard deadline. You can always modernize after the workload is in the cloud, you can't modernize while the data center is shutting down around you.</p>
         <p><strong>The hidden cost:</strong> Rehosted workloads often don't realize cloud economics. You're paying cloud prices for an architecture designed for on-prem economics. Plan a replatform or refactor pass within 12–18 months if the workload is important.</p>
 
         <h3>Replatform (Lift, Tinker, and Shift)</h3>
@@ -64,21 +64,21 @@
         <p><strong>When it's the right call:</strong> The workload is worth investing in, there's a clear operational win available (like managed patching or automatic backups), and the team has bandwidth for a contained modernization effort. Replatform often delivers 20–30% cost savings over rehost with manageable risk.</p>
 
         <h3>Refactor (Re-architect)</h3>
-        <p>Redesign the application to be cloud-native — breaking monoliths into microservices, moving to serverless, adopting managed data services. This is the highest ROI strategy and the highest risk.</p>
-        <p><strong>When it's the right call:</strong> The workload is business-critical, the team has cloud maturity, and there's a clear functional gap that the current architecture can't address (scalability, developer velocity, cost at scale). I've seen refactors deliver 60–70% cost reductions for the right workloads — but I've also seen refactor projects balloon in scope and never ship. Scope tightly.</p>
+        <p>Redesign the application to be cloud-native, breaking monoliths into microservices, moving to serverless, adopting managed data services. This is the highest ROI strategy and the highest risk.</p>
+        <p><strong>When it's the right call:</strong> The workload is business-critical, the team has cloud maturity, and there's a clear functional gap that the current architecture can't address (scalability, developer velocity, cost at scale). I've seen refactors deliver 60–70% cost reductions for the right workloads, but I've also seen refactor projects balloon in scope and never ship. Scope tightly.</p>
 
         <h3>Repurchase (Drop and Shop)</h3>
         <p>Replace the existing solution with a SaaS product. Move your on-prem CRM to Salesforce, your email server to Microsoft 365, your VPN to Zscaler.</p>
-        <p><strong>When it's the right call:</strong> The application is commodity infrastructure that doesn't differentiate your business, the on-prem version is expensive to maintain, and a mature SaaS alternative exists. Repurchase is often the highest-ROI decision for non-core systems — you eliminate maintenance overhead entirely.</p>
+        <p><strong>When it's the right call:</strong> The application is commodity infrastructure that doesn't differentiate your business, the on-prem version is expensive to maintain, and a mature SaaS alternative exists. Repurchase is often the highest-ROI decision for non-core systems, you eliminate maintenance overhead entirely.</p>
         <p><strong>The gotcha:</strong> SaaS migrations involve data migration, user retraining, and integration work that teams consistently underestimate. Budget for change management, not just the SaaS subscription.</p>
 
         <h3>Retire</h3>
-        <p>Decommission applications that are no longer needed. This sounds simple, but it's politically difficult — someone always feels ownership of a system, even if no one is using it.</p>
-        <p><strong>How I identify retire candidates:</strong> Pull the last-login or last-access logs for every application. Anything with no meaningful activity in 90 days is a retirement candidate. Have the business owner confirm the application is still needed — you'll often find it isn't. I've seen discovery processes surface 10–20% of an application portfolio as retire candidates, which significantly simplifies the migration.</p>
+        <p>Decommission applications that are no longer needed. This sounds simple, but it's politically difficult, someone always feels ownership of a system, even if no one is using it.</p>
+        <p><strong>How I identify retire candidates:</strong> Pull the last-login or last-access logs for every application. Anything with no meaningful activity in 90 days is a retirement candidate. Have the business owner confirm the application is still needed, you'll often find it isn't. I've seen discovery processes surface 10–20% of an application portfolio as retire candidates, which significantly simplifies the migration.</p>
 
         <h3>Retain</h3>
         <p>Keep the workload on-prem, at least for now. This is the right answer for applications with hard compliance constraints (data sovereignty, air-gapped requirements), recent capital investment, or technical incompatibilities with cloud deployment.</p>
-        <p><strong>Important:</strong> Retain is a decision, not a default. Applications end up in the retain bucket for legitimate reasons — and also because no one wanted to deal with them. Make sure retain decisions are documented with a review date, so they get revisited rather than forgotten.</p>
+        <p><strong>Important:</strong> Retain is a decision, not a default. Applications end up in the retain bucket for legitimate reasons, and also because no one wanted to deal with them. Make sure retain decisions are documented with a review date, so they get revisited rather than forgotten.</p>
 
         <h2>How I Apply It in Practice</h2>
         <p>During a migration assessment, I score each application on two dimensions: <strong>migration complexity</strong> (technical risk, dependencies, team familiarity) and <strong>business value</strong> (revenue impact, user base, strategic importance). This produces a 2x2 that makes the 6R decisions much more intuitive:</p>

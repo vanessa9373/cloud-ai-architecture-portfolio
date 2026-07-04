@@ -53,10 +53,10 @@
 
       <div class="post-body">
 
-        <p>This is a complete walkthrough of how I designed a production-grade, three-tier web application architecture on AWS — built for high availability across three Availability Zones in us-east-1, with a warm standby disaster recovery site in us-west-2.</p>
+        <p>This is a complete walkthrough of how I designed a production-grade, three-tier web application architecture on AWS, built for high availability across three Availability Zones in us-east-1, with a warm standby disaster recovery site in us-west-2.</p>
         <p>This post covers every decision: networking, compute, database, security, DR strategy, monitoring, cost, and the AWS Well-Architected Framework review. This is the kind of architecture I would present to an enterprise customer evaluating AWS for a mission-critical workload.</p>
 
-        <img src="../diagrams/three-tier-ha-dr.png" alt="Three-Tier HA Web Application with Multi-Region DR Architecture Diagram" style="width:100%;border-radius:10px;margin:28px 0;border:1px solid rgba(0,180,216,0.2);">
+        <img src="../diagrams/three-tier-ha-dr.png" alt="Three-Tier HA Web Application with Multi-Region DR Architecture Diagram" style="width:100%;border-radius:10px;margin:28px 0;border:1px solid rgba(0,180,216,0.2);" loading="lazy">
 
         <h2>Business Requirements</h2>
         <p>Before drawing a single box, I define what the architecture must deliver:</p>
@@ -65,7 +65,7 @@
           <li><strong>Recovery Time Objective (RTO):</strong> less than 15 minutes</li>
           <li><strong>Recovery Point Objective (RPO):</strong> less than 5 minutes</li>
           <li><strong>Traffic:</strong> 100,000 concurrent users at peak, with 10x burst capacity</li>
-          <li><strong>Compliance:</strong> PCI DSS — encryption in transit and at rest, audit logging, network segmentation</li>
+          <li><strong>Compliance:</strong> PCI DSS, encryption in transit and at rest, audit logging, network segmentation</li>
           <li><strong>Data:</strong> Relational database with ACID guarantees, caching layer for read-heavy workloads</li>
           <li><strong>Deployment:</strong> Zero-downtime releases, automated rollbacks</li>
         </ul>
@@ -74,10 +74,10 @@
         <h2>Architecture Overview</h2>
         <p>The architecture consists of four layers:</p>
         <ul>
-          <li><strong>Edge layer</strong> — Route 53, CloudFront, WAF, ACM</li>
-          <li><strong>Compute layer</strong> — Application Load Balancer, EC2 Auto Scaling Group</li>
-          <li><strong>Data layer</strong> — RDS MySQL Multi-AZ, ElastiCache Redis, S3</li>
-          <li><strong>Operations layer</strong> — CloudWatch, CloudTrail, AWS Config, GuardDuty, Backup, CodePipeline</li>
+          <li><strong>Edge layer</strong>, Route 53, CloudFront, WAF, ACM</li>
+          <li><strong>Compute layer</strong>, Application Load Balancer, EC2 Auto Scaling Group</li>
+          <li><strong>Data layer</strong>, RDS MySQL Multi-AZ, ElastiCache Redis, S3</li>
+          <li><strong>Operations layer</strong>, CloudWatch, CloudTrail, AWS Config, GuardDuty, Backup, CodePipeline</li>
         </ul>
         <p>The primary region is <strong>us-east-1</strong> (N. Virginia) with a warm standby DR environment in <strong>us-west-2</strong> (Oregon). Route 53 health checks monitor the primary ALB and automatically fail over to the DR region when the primary becomes unhealthy.</p>
 
@@ -99,50 +99,50 @@
             <tr><td style="padding:8px 12px;">Private DB</td><td style="padding:8px 12px;"><code>10.0.21.0/24</code></td><td style="padding:8px 12px;"><code>10.0.22.0/24</code></td><td style="padding:8px 12px;"><code>10.0.23.0/24</code></td><td style="padding:8px 12px;">RDS, ElastiCache</td></tr>
           </tbody>
         </table>
-        <p><strong>DR VPC (us-west-2):</strong> <code>10.1.0.0/16</code> — non-overlapping CIDR is critical if VPC peering or Transit Gateway is ever needed between the regions.</p>
+        <p><strong>DR VPC (us-west-2):</strong> <code>10.1.0.0/16</code>, non-overlapping CIDR is critical if VPC peering or Transit Gateway is ever needed between the regions.</p>
 
         <h3>Why Three Tiers of Subnets?</h3>
-        <p>This enforces the principle of least privilege at the network layer. The <strong>public subnet</strong> is internet-reachable — only the ALB and NAT Gateways sit here. The <strong>private app subnet</strong> can reach the internet only through the NAT Gateway — one-directional outbound. The <strong>private DB subnet</strong> has no route to the internet at all; the only allowed inbound is from the application tier security group.</p>
+        <p>This enforces the principle of least privilege at the network layer. The <strong>public subnet</strong> is internet-reachable, only the ALB and NAT Gateways sit here. The <strong>private app subnet</strong> can reach the internet only through the NAT Gateway, one-directional outbound. The <strong>private DB subnet</strong> has no route to the internet at all; the only allowed inbound is from the application tier security group.</p>
         <p>An attacker who compromises the web tier cannot directly reach the database. Each layer is an independent blast radius boundary.</p>
 
         <h3>Internet Gateway and NAT Gateways</h3>
-        <p>Three NAT Gateways are deployed — one per Availability Zone. This eliminates cross-AZ NAT traffic (which costs money and adds latency) and removes the NAT Gateway as a single point of failure. Deploying only one NAT Gateway is a common architecture mistake in cost-optimized designs that sacrifice reliability.</p>
+        <p>Three NAT Gateways are deployed, one per Availability Zone. This eliminates cross-AZ NAT traffic (which costs money and adds latency) and removes the NAT Gateway as a single point of failure. Deploying only one NAT Gateway is a common architecture mistake in cost-optimized designs that sacrifice reliability.</p>
 
         <h2>Edge Layer</h2>
-        <h3>Route 53 — Failover Routing</h3>
+        <h3>Route 53, Failover Routing</h3>
         <p>Route 53 is configured with two A record sets: a <strong>Primary</strong> pointing to the CloudFront distribution (us-east-1), and a <strong>Secondary</strong> pointing to the DR ALB (us-west-2). Route 53 health checks poll the primary endpoint every 10 seconds from multiple global health checker locations. If three consecutive checks fail, Route 53 activates the failover record. DNS TTL is set to 60 seconds for fast propagation.</p>
-        <p>If the primary region fails at minute 0, health checks detect it within 30 seconds, Route 53 switches at 30 seconds, and DNS propagates globally within 90 seconds — well under 15 minutes RTO.</p>
+        <p>If the primary region fails at minute 0, health checks detect it within 30 seconds, Route 53 switches at 30 seconds, and DNS propagates globally within 90 seconds, well under 15 minutes RTO.</p>
 
-        <h3>CloudFront — Global Content Delivery</h3>
-        <p>CloudFront sits in front of the ALB with two behaviors: static assets (<code>/static/*</code>) cached at edge locations with a 7-day TTL served from S3, and dynamic requests forwarded to the ALB with caching disabled. <strong>Origin Access Control (OAC)</strong> ensures CloudFront is the only entity that can read the S3 bucket — the bucket policy denies all other access.</p>
+        <h3>CloudFront, Global Content Delivery</h3>
+        <p>CloudFront sits in front of the ALB with two behaviors: static assets (<code>/static/*</code>) cached at edge locations with a 7-day TTL served from S3, and dynamic requests forwarded to the ALB with caching disabled. <strong>Origin Access Control (OAC)</strong> ensures CloudFront is the only entity that can read the S3 bucket, the bucket policy denies all other access.</p>
 
-        <h3>AWS WAF — Web Application Firewall</h3>
-        <p>WAF is attached to CloudFront (not the ALB) so filtering happens at the edge before traffic reaches your infrastructure. Rule groups: AWSManagedRulesCommonRuleSet (OWASP Top 10), AWSManagedRulesSQLiRuleSet, AWSManagedRulesAmazonIpReputationList, plus rate limiting at 2,000 requests/IP per 5 minutes. Attaching WAF to CloudFront means malicious traffic is dropped at the edge — never reaching your VPC — and you pay for WAF WCUs on far less traffic since cached requests bypass WAF on cache hits.</p>
+        <h3>AWS WAF, Web Application Firewall</h3>
+        <p>WAF is attached to CloudFront (not the ALB) so filtering happens at the edge before traffic reaches your infrastructure. Rule groups: AWSManagedRulesCommonRuleSet (OWASP Top 10), AWSManagedRulesSQLiRuleSet, AWSManagedRulesAmazonIpReputationList, plus rate limiting at 2,000 requests/IP per 5 minutes. Attaching WAF to CloudFront means malicious traffic is dropped at the edge, never reaching your VPC, and you pay for WAF WCUs on far less traffic since cached requests bypass WAF on cache hits.</p>
 
         <h2>Compute Layer</h2>
         <h3>Application Load Balancer</h3>
-        <p>The ALB operates in the public subnets across all three AZs. HTTPS/443 listener with ACM certificate — HTTP/80 redirects to HTTPS. The ALB security group allows inbound 443 <strong>only from the CloudFront managed prefix list</strong>. This prevents WAF bypass attacks where an attacker finds your origin ALB DNS name and hits it directly.</p>
+        <p>The ALB operates in the public subnets across all three AZs. HTTPS/443 listener with ACM certificate, HTTP/80 redirects to HTTPS. The ALB security group allows inbound 443 <strong>only from the CloudFront managed prefix list</strong>. This prevents WAF bypass attacks where an attacker finds your origin ALB DNS name and hits it directly.</p>
 
         <h3>EC2 Auto Scaling Group</h3>
         <p>The ASG spans all three private app subnets:</p>
         <ul>
-          <li><strong>Minimum: 2</strong> — ensures capacity during AZ failure</li>
-          <li><strong>Desired: 3</strong> — one per AZ for even distribution</li>
-          <li><strong>Maximum: 10</strong> — handles 10x traffic surge</li>
+          <li><strong>Minimum: 2</strong>, ensures capacity during AZ failure</li>
+          <li><strong>Desired: 3</strong>, one per AZ for even distribution</li>
+          <li><strong>Maximum: 10</strong>, handles 10x traffic surge</li>
         </ul>
-        <p><strong>Scaling policy:</strong> Target tracking on ALBRequestCountPerTarget = 1,000 requests per instance. Launch template requires IMDSv2 (disables SSRF attacks on the metadata endpoint) and uses IAM instance profiles with least-privilege permissions — no long-term access keys on any EC2 instance. SSM Session Manager replaces SSH; no bastion host required.</p>
+        <p><strong>Scaling policy:</strong> Target tracking on ALBRequestCountPerTarget = 1,000 requests per instance. Launch template requires IMDSv2 (disables SSRF attacks on the metadata endpoint) and uses IAM instance profiles with least-privilege permissions, no long-term access keys on any EC2 instance. SSM Session Manager replaces SSH; no bastion host required.</p>
 
         <h2>Data Layer</h2>
-        <h3>RDS MySQL — Multi-AZ</h3>
-        <p>RDS MySQL with Multi-AZ deploys a primary instance (active, receives all reads and writes) and a standby instance (passive, synchronous replication, in a different AZ). Multi-AZ is a <strong>high availability</strong> solution, not a read scaling solution — RDS fails over automatically in 60–120 seconds without any application change.</p>
-        <p>Key configuration: <code>db.r6g.large</code> (Graviton2 — 10% better price/performance), 500 GB gp3 with autoscaling to 2 TB, encryption at rest via KMS, automated backups with 7-day retention. The database security group allows inbound 3306 <strong>only from the application tier security group</strong>.</p>
+        <h3>RDS MySQL, Multi-AZ</h3>
+        <p>RDS MySQL with Multi-AZ deploys a primary instance (active, receives all reads and writes) and a standby instance (passive, synchronous replication, in a different AZ). Multi-AZ is a <strong>high availability</strong> solution, not a read scaling solution, RDS fails over automatically in 60–120 seconds without any application change.</p>
+        <p>Key configuration: <code>db.r6g.large</code> (Graviton2, 10% better price/performance), 500 GB gp3 with autoscaling to 2 TB, encryption at rest via KMS, automated backups with 7-day retention. The database security group allows inbound 3306 <strong>only from the application tier security group</strong>.</p>
         <p>Application retrieves credentials from <strong>AWS Secrets Manager</strong> at startup. Secrets Manager auto-rotates RDS credentials on a 30-day schedule. No hardcoded credentials anywhere in the codebase or launch templates.</p>
 
-        <h3>ElastiCache Redis — Caching Layer</h3>
-        <p>Redis with Multi-AZ and automatic failover used for: session storage (eliminating the need for ALB stickiness — enabling truly stateless EC2), database query result caching with TTLs of 5–60 minutes, and rate limiting counters with atomic increments.</p>
+        <h3>ElastiCache Redis, Caching Layer</h3>
+        <p>Redis with Multi-AZ and automatic failover used for: session storage (eliminating the need for ALB stickiness, enabling truly stateless EC2), database query result caching with TTLs of 5–60 minutes, and rate limiting counters with atomic increments.</p>
 
-        <h3>S3 — Static Assets and Cross-Region Replication</h3>
-        <p>The primary S3 bucket serves images, CSS, and JS via CloudFront OAC. <strong>S3 Cross-Region Replication (CRR)</strong> copies every new object to the DR bucket in us-west-2 within minutes. The DR CloudFront distribution uses this replica bucket as its origin — so static assets are always current in the DR region.</p>
+        <h3>S3, Static Assets and Cross-Region Replication</h3>
+        <p>The primary S3 bucket serves images, CSS, and JS via CloudFront OAC. <strong>S3 Cross-Region Replication (CRR)</strong> copies every new object to the DR bucket in us-west-2 within minutes. The DR CloudFront distribution uses this replica bucket as its origin, so static assets are always current in the DR region.</p>
 
         <h2>Security Design</h2>
         <h3>Defense in Depth</h3>
@@ -160,11 +160,11 @@
           </tbody>
         </table>
 
-        <h3>Security Groups — Layered Micro-Segmentation</h3>
-        <p>Four security groups form a chain: ALB-SG (inbound 443 from CloudFront prefix list) → App-SG (inbound 8080 from ALB-SG) → DB-SG (inbound 3306 from App-SG) → Cache-SG (inbound 6379 from App-SG). Each tier references the tier above it as source — not a CIDR range. Even a fully compromised EC2 instance cannot reach the database directly.</p>
+        <h3>Security Groups, Layered Micro-Segmentation</h3>
+        <p>Four security groups form a chain: ALB-SG (inbound 443 from CloudFront prefix list) → App-SG (inbound 8080 from ALB-SG) → DB-SG (inbound 3306 from App-SG) → Cache-SG (inbound 6379 from App-SG). Each tier references the tier above it as source, not a CIDR range. Even a fully compromised EC2 instance cannot reach the database directly.</p>
 
         <h2>Disaster Recovery Strategy</h2>
-        <h3>Warm Standby — Why This Tier</h3>
+        <h3>Warm Standby, Why This Tier</h3>
         <table style="width:100%;border-collapse:collapse;margin:16px 0;font-size:0.9rem;">
           <thead><tr style="border-bottom:1px solid rgba(0,180,216,0.3);">
             <th style="text-align:left;padding:8px 12px;color:var(--accent,#00b4d8);">DR Tier</th>
@@ -216,8 +216,8 @@
 
         <h2>AWS Well-Architected Review</h2>
         <ul>
-          <li><strong>Operational Excellence:</strong> All infrastructure in Terraform (reproducible, version-controlled). Automated deployments via CodePipeline — no manual changes to production. CloudWatch dashboards for proactive monitoring.</li>
-          <li><strong>Security:</strong> All data encrypted at rest (KMS CMK) and in transit (TLS 1.2+). Zero trust network design. No long-term access keys — all access via IAM roles. GuardDuty, CloudTrail, and Config provide continuous detection and compliance.</li>
+          <li><strong>Operational Excellence:</strong> All infrastructure in Terraform (reproducible, version-controlled). Automated deployments via CodePipeline, no manual changes to production. CloudWatch dashboards for proactive monitoring.</li>
+          <li><strong>Security:</strong> All data encrypted at rest (KMS CMK) and in transit (TLS 1.2+). Zero trust network design. No long-term access keys, all access via IAM roles. GuardDuty, CloudTrail, and Config provide continuous detection and compliance.</li>
           <li><strong>Reliability:</strong> Multi-AZ eliminates single AZ as a single point of failure. RDS Multi-AZ provides automatic database failover in 60–120 seconds. Auto Scaling restores capacity after instance failure automatically. Route 53 health checks enable cross-region failover under 15 minutes.</li>
           <li><strong>Performance Efficiency:</strong> CloudFront reduces origin load by caching static assets globally. ElastiCache reduces database query load for read-heavy operations. Graviton2 RDS instances provide better price/performance than x86.</li>
           <li><strong>Cost Optimization:</strong> Auto Scaling ensures compute cost scales with actual demand. Reserved Instances for predictable baseline capacity. S3 lifecycle rules automatically tier infrequently accessed data.</li>
@@ -225,11 +225,11 @@
         </ul>
 
         <h2>Key Lessons for Solutions Architects</h2>
-        <p><strong>1. Multi-AZ vs Multi-Region are fundamentally different problems.</strong> Multi-AZ protects against hardware failures within one data center campus. Multi-Region protects against regional events. Most workloads need Multi-AZ. Far fewer need Multi-Region. The business cost of the RTO/RPO requirement should drive the DR tier choice — not what looks most impressive on a diagram.</p>
+        <p><strong>1. Multi-AZ vs Multi-Region are fundamentally different problems.</strong> Multi-AZ protects against hardware failures within one data center campus. Multi-Region protects against regional events. Most workloads need Multi-AZ. Far fewer need Multi-Region. The business cost of the RTO/RPO requirement should drive the DR tier choice, not what looks most impressive on a diagram.</p>
         <p><strong>2. The database is always the hardest part of DR.</strong> Compute and networking fail over quickly with automation. The database requires special handling: promoting a read replica, re-pointing connection strings, handling in-flight transactions. Plan this before you need it, and practice it quarterly.</p>
-        <p><strong>3. Security groups are stateful — use them like firewalls, not rules.</strong> The most common misconfiguration I see is overly permissive security groups with 0.0.0.0/0 on ports that should only accept traffic from specific sources. Every security group in this design references another security group as the source, not a CIDR.</p>
+        <p><strong>3. Security groups are stateful, use them like firewalls, not rules.</strong> The most common misconfiguration I see is overly permissive security groups with 0.0.0.0/0 on ports that should only accept traffic from specific sources. Every security group in this design references another security group as the source, not a CIDR.</p>
         <p><strong>4. NAT Gateway costs surprise every team eventually.</strong> NAT Gateway data processing charges ($0.045/GB) add up fast. Use VPC Gateway Endpoints for S3 and DynamoDB (free) and VPC Interface Endpoints for SSM and Secrets Manager to eliminate the majority of NAT data charges.</p>
-        <p><strong>5. Test your DR plan — regularly.</strong> An untested DR plan is not a DR plan. This architecture includes a quarterly DR exercise where the team actually simulates a failover and validates that RTO/RPO targets are met. Finding gaps during an exercise is far better than discovering them at 2 AM during an actual incident.</p>
+        <p><strong>5. Test your DR plan, regularly.</strong> An untested DR plan is not a DR plan. This architecture includes a quarterly DR exercise where the team actually simulates a failover and validates that RTO/RPO targets are met. Finding gaps during an exercise is far better than discovering them at 2 AM during an actual incident.</p>
 
         <div style="background:rgba(0,180,216,0.07);border:1px solid rgba(0,180,216,0.2);border-radius:10px;padding:20px 24px;margin-top:36px;">
           <p style="margin:0 0 10px;font-weight:600;color:var(--accent,#00b4d8);">Explore the full architecture</p>

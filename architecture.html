@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Architecture diagrams for all 6 portfolio projects by Vanessa Awo — Solutions Architect. Draw.io diagrams using AWS Well-Architected icons.">
+  <meta name="description" content="Architecture diagrams for all 6 portfolio projects by Vanessa Awo, Solutions Architect. Draw.io diagrams using AWS Well-Architected icons.">
   <title>Architecture Diagrams | Vanessa Awo</title>
   <link rel="stylesheet" href="style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -237,7 +237,7 @@
   <div class="page-hero page-hero--projects">
     <div class="container">
       <h1 class="page-hero-title">Architecture Diagrams</h1>
-      <p class="page-hero-subtitle">AWS Well-Architected reference designs for all 6 portfolio projects — built with Draw.io using official AWS icons</p>
+      <p class="page-hero-subtitle">AWS Well-Architected reference designs for all 6 portfolio projects, built with Draw.io using official AWS icons</p>
     </div>
   </div>
 
@@ -247,7 +247,7 @@
 
       <!-- Info banner -->
       <div style="background:rgba(0,180,216,0.07);border:1px solid rgba(0,180,216,0.2);border-radius:10px;padding:16px 22px;margin-bottom:28px;font-size:0.97rem;line-height:1.6;color:var(--text-secondary,#94a3b8);">
-        <strong style="color:var(--accent,#00b4d8);">AWS Well-Architected Framework:</strong> Every diagram is designed against all 6 pillars — Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimisation, and Sustainability. Each includes defence-in-depth security layers, quantified cost trade-offs, and zero-SPOF reliability patterns.
+        <strong style="color:var(--accent,#00b4d8);">AWS Well-Architected Framework:</strong> Every diagram is designed against all 6 pillars, Operational Excellence, Security, Reliability, Performance Efficiency, Cost Optimisation, and Sustainability. Each includes defence-in-depth security layers, quantified cost trade-offs, and zero-SPOF reliability patterns.
       </div>
 
       <!-- TABS -->
@@ -260,7 +260,7 @@
       </div>
 
       <!-- ══════════════════════════════════════════════
-           PANEL 1 — HA WordPress
+           PANEL 1, HA WordPress
       ══════════════════════════════════════════════ -->
       <div class="arch-panel active" id="panel-wp">
 
@@ -273,7 +273,7 @@
         </div>
 
         <div class="arch-desc-box">
-          <p>3-AZ, zero-SPOF architecture with EC2 Auto Scaling, RDS Multi-AZ failover (&lt;2 min RTO), CloudFront CDN, WAF (OWASP/SQLi rules), KMS CMK encryption at rest, IMDSv2, and SSM Session Manager — no bastion hosts, no SSH. Survives the loss of any single Availability Zone with no manual intervention.</p>
+          <p>3-AZ, zero-SPOF architecture with EC2 Auto Scaling, RDS Multi-AZ failover (&lt;2 min RTO), CloudFront CDN, WAF (OWASP/SQLi rules), KMS CMK encryption at rest, IMDSv2, and SSM Session Manager (no bastion hosts, no SSH). Survives the loss of any single Availability Zone with no manual intervention.</p>
           <div class="arch-panel-meta">
             <span class="tag tag-aws">AWS</span>
             <span class="tag">Terraform</span>
@@ -282,7 +282,7 @@
           </div>
         </div>
 
-        <div class="arch-section-label">Legend — AWS Service Color Coding</div>
+        <div class="arch-section-label">Legend: AWS Service Color Coding</div>
         <div class="arch-legend-pills">
           <span class="legend-pill" style="background:#8C4FFF18;color:#8C4FFF;border:1px solid #8C4FFF35;"><span class="legend-dot" style="background:#8C4FFF;"></span>Networking (VPC, ALB, Route 53, CloudFront)</span>
           <span class="legend-pill" style="background:#E7157B18;color:#E7157B;border:1px solid #E7157B35;"><span class="legend-dot" style="background:#E7157B;"></span>Compute (EC2, Auto Scaling, AMI)</span>
@@ -313,11 +313,11 @@
         <div class="arch-pillars">
           <div class="arch-pillar">
             <h4>Reliability</h4>
-            <p>3 AZs, RDS Multi-AZ failover &lt;2 min, Auto Scaling on CPU + request metrics — survives any single AZ loss</p>
+            <p>3 AZs, RDS Multi-AZ failover &lt;2 min, Auto Scaling on CPU + request metrics. Survives any single AZ loss.</p>
           </div>
           <div class="arch-pillar">
             <h4>Security</h4>
-            <p>WAF (OWASP/SQLi), KMS CMK, IMDSv2, SSM (no SSH), S3 OAC — zero public S3 ACLs</p>
+            <p>WAF (OWASP/SQLi), KMS CMK, IMDSv2, SSM (no SSH), S3 OAC, zero public S3 ACLs</p>
           </div>
           <div class="arch-pillar">
             <h4>Cost Optimisation</h4>
@@ -331,7 +331,7 @@
       </div>
 
       <!-- ══════════════════════════════════════════════
-           PANEL 2 — Multi-Account Landing Zone
+           PANEL 2, Multi-Account Landing Zone
       ══════════════════════════════════════════════ -->
       <div class="arch-panel" id="panel-lz">
 
@@ -353,7 +353,7 @@
           </div>
         </div>
 
-        <div class="arch-section-label">Legend — AWS Service Color Coding</div>
+        <div class="arch-section-label">Legend: AWS Service Color Coding</div>
         <div class="arch-legend-pills">
           <span class="legend-pill" style="background:#1565C018;color:#1565C0;border:1px solid #1565C035;"><span class="legend-dot" style="background:#1565C0;"></span>AWS Organizations (Root, OUs, Accounts)</span>
           <span class="legend-pill" style="background:#8C4FFF18;color:#8C4FFF;border:1px solid #8C4FFF35;"><span class="legend-dot" style="background:#8C4FFF;"></span>Networking (Transit Gateway, VPCs)</span>
@@ -383,11 +383,11 @@
         <div class="arch-pillars">
           <div class="arch-pillar">
             <h4>Security</h4>
-            <p>SCPs are the primary guardrail — deny root API calls, block public S3 ACLs, require IMDSv2, enforce region boundaries</p>
+            <p>SCPs are the primary guardrail: deny root API calls, block public S3 ACLs, require IMDSv2, enforce region boundaries</p>
           </div>
           <div class="arch-pillar">
             <h4>Reliability</h4>
-            <p>Transit Gateway with non-overlapping CIDRs; network account owns all routing — single failure domain for routing changes</p>
+            <p>Transit Gateway with non-overlapping CIDRs; network account owns all routing (single failure domain for routing changes)</p>
           </div>
           <div class="arch-pillar">
             <h4>Operational Excellence</h4>
@@ -401,7 +401,7 @@
       </div>
 
       <!-- ══════════════════════════════════════════════
-           PANEL 3 — Serverless Task API
+           PANEL 3, Serverless Task API
       ══════════════════════════════════════════════ -->
       <div class="arch-panel" id="panel-api">
 
@@ -414,7 +414,7 @@
         </div>
 
         <div class="arch-desc-box">
-          <p>Full CRUD REST API at 90% lower cost than EC2+RDS. Five Lambda functions on Graviton2/arm64 (−20% cost vs x86), API Gateway HTTP API, DynamoDB PAY_PER_REQUEST with GSI, AWS X-Ray distributed tracing, and GitHub Actions OIDC CI/CD — eliminating all long-lived secrets. CloudWatch alarms on Duration P99, error rate, and throttle count.</p>
+          <p>Full CRUD REST API at 90% lower cost than EC2+RDS. Five Lambda functions on Graviton2/arm64 (−20% cost vs x86), API Gateway HTTP API, DynamoDB PAY_PER_REQUEST with GSI, AWS X-Ray distributed tracing, and GitHub Actions OIDC CI/CD, eliminating all long-lived secrets. CloudWatch alarms on Duration P99, error rate, and throttle count.</p>
           <div class="arch-panel-meta">
             <span class="tag tag-aws">Lambda</span>
             <span class="tag">Python</span>
@@ -423,7 +423,7 @@
           </div>
         </div>
 
-        <div class="arch-section-label">Legend — AWS Service Color Coding</div>
+        <div class="arch-section-label">Legend: AWS Service Color Coding</div>
         <div class="arch-legend-pills">
           <span class="legend-pill" style="background:#8C4FFF18;color:#8C4FFF;border:1px solid #8C4FFF35;"><span class="legend-dot" style="background:#8C4FFF;"></span>API Layer (API Gateway HTTP API)</span>
           <span class="legend-pill" style="background:#E7157B18;color:#E7157B;border:1px solid #E7157B35;"><span class="legend-dot" style="background:#E7157B;"></span>Compute (Lambda Graviton2, CloudWatch, X-Ray)</span>
@@ -471,7 +471,7 @@
       </div>
 
       <!-- ══════════════════════════════════════════════
-           PANEL 4 — ML Customer Segmentation
+           PANEL 4, ML Customer Segmentation
       ══════════════════════════════════════════════ -->
       <div class="arch-panel" id="panel-ml">
 
@@ -484,7 +484,7 @@
         </div>
 
         <div class="arch-desc-box">
-          <p>End-to-end ML pipeline analysing 500K+ retail transactions. RFM (Recency, Frequency, Monetary) feature engineering with Pandas, StandardScaler normalisation, K-Means clustering (k=4 via elbow method), Silhouette Score 0.68 — producing four actionable customer segments with specific marketing recommendations per cluster.</p>
+          <p>End-to-end ML pipeline analysing 500K+ retail transactions. RFM (Recency, Frequency, Monetary) feature engineering with Pandas, StandardScaler normalisation, K-Means clustering (k=4 via elbow method), Silhouette Score 0.68, producing four actionable customer segments with specific marketing recommendations per cluster.</p>
           <div class="arch-panel-meta">
             <span class="tag">Python</span>
             <span class="tag">scikit-learn</span>
@@ -493,7 +493,7 @@
           </div>
         </div>
 
-        <div class="arch-section-label">Legend — Pipeline Stage Color Coding</div>
+        <div class="arch-section-label">Legend: Pipeline Stage Color Coding</div>
         <div class="arch-legend-pills">
           <span class="legend-pill" style="background:#1565C018;color:#1565C0;border:1px solid #1565C035;"><span class="legend-dot" style="background:#1565C0;"></span>1 · Data Ingestion (CSV/Parquet, 500K+ rows)</span>
           <span class="legend-pill" style="background:#E6510018;color:#E65100;border:1px solid #E6510035;"><span class="legend-dot" style="background:#E65100;"></span>2 · Preprocessing (Pandas ETL, cleaning)</span>
@@ -520,19 +520,19 @@
           <a href="https://viewer.diagrams.net/?lightbox=1&highlight=0077ff&edit=_blank&nav=1&fit=1&url=https%3A%2F%2Fraw.githubusercontent.com%2Fvanessa9373%2Fportfolio%2Fmain%2Fdiagrams%2Fml-customer-segmentation.drawio" target="_blank" rel="noopener" class="arch-btn arch-btn-secondary">Open Full-Screen →</a>
         </div>
 
-        <div class="arch-section-label">Cluster Profiles — Output Segments</div>
+        <div class="arch-section-label">Cluster Profiles: Output Segments</div>
         <div class="arch-pillars">
           <div class="arch-pillar" style="border-color:rgba(46,125,50,0.3);">
             <h4 style="color:#2E7D32;">Champions (Cluster 0)</h4>
-            <p>High frequency + monetary, low recency — action: loyalty rewards, premium upsell, early access</p>
+            <p>High frequency + monetary, low recency. Action: loyalty rewards, premium upsell, early access</p>
           </div>
           <div class="arch-pillar" style="border-color:rgba(198,40,40,0.3);">
             <h4 style="color:#C62828;">At Risk (Cluster 1)</h4>
-            <p>High recency (dormant), was active — action: win-back campaign, discount offer, re-engagement email</p>
+            <p>High recency (dormant), was active. Action: win-back campaign, discount offer, re-engagement email</p>
           </div>
           <div class="arch-pillar" style="border-color:rgba(2,119,189,0.3);">
             <h4 style="color:#0277BD;">Promising (Cluster 2)</h4>
-            <p>Low recency, growing F + M — action: onboarding sequence, nurture track, referral programme</p>
+            <p>Low recency, growing F + M. Action: onboarding sequence, nurture track, referral programme</p>
           </div>
           <div class="arch-pillar" style="border-color:rgba(106,27,154,0.3);">
             <h4 style="color:#6A1B9A;">AWS Scale-Up Path</h4>
@@ -542,7 +542,7 @@
       </div>
 
       <!-- ══════════════════════════════════════════════
-           PANEL 5 — Cloud Security Baseline
+           PANEL 5, Cloud Security Baseline
       ══════════════════════════════════════════════ -->
       <div class="arch-panel" id="panel-sec">
 
@@ -564,7 +564,7 @@
           </div>
         </div>
 
-        <div class="arch-section-label">Legend — Defence Layer Color Coding</div>
+        <div class="arch-section-label">Legend: Defence Layer Color Coding</div>
         <div class="arch-legend-pills">
           <span class="legend-pill" style="background:#8C4FFF18;color:#8C4FFF;border:1px solid #8C4FFF35;"><span class="legend-dot" style="background:#8C4FFF;"></span>Layer 1 · Perimeter (WAF, CloudFront, SGs, NACLs)</span>
           <span class="legend-pill" style="background:#DD344C18;color:#DD344C;border:1px solid #DD344C35;"><span class="legend-dot" style="background:#DD344C;"></span>Layer 2 · Identity (IAM, IMDSv2, SSM, Secrets Manager)</span>

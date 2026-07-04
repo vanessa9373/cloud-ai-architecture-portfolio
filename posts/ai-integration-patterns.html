@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="AI Integration Patterns Every Solutions Architect Should Know — RAG, fine-tuning, agentic workflows, and when to use each.">
+  <meta name="description" content="AI Integration Patterns Every Solutions Architect Should Know, RAG, fine-tuning, agentic workflows, and when to use each.">
   <title>AI Integration Patterns Every Solutions Architect Should Know | Vanessa Awo</title>
   <link rel="stylesheet" href="../style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -50,7 +50,7 @@
       </div>
 
       <div class="post-body">
-        <p>Every enterprise customer I talk to is asking the same question right now: <em>how do we actually integrate AI into our products and workflows?</em> As a Solutions Architect, you're now expected to have a clear, opinionated answer — not just "it depends." Here's how I frame the core AI integration patterns and when to use each.</p>
+        <p>Every enterprise customer I talk to is asking the same question right now: <em>how do we actually integrate AI into our products and workflows?</em> As a Solutions Architect, you're now expected to have a clear, opinionated answer, not just "it depends." Here's how I frame the core AI integration patterns and when to use each.</p>
 
         <h2>Pattern 1: Retrieval-Augmented Generation (RAG)</h2>
         <p>RAG is the most widely applicable enterprise AI pattern and the one you'll be asked about most. The core idea: instead of fine-tuning a model on your private data, you give a foundation model access to a retrieval system that fetches relevant documents at inference time.</p>
@@ -61,16 +61,16 @@
           <li>Use <strong>Amazon Bedrock Knowledge Bases</strong> to manage this pipeline with minimal custom code</li>
         </ul>
         <p><strong>When to use RAG:</strong> When the customer has a large, frequently updated corpus of proprietary information (internal docs, product manuals, support tickets, contracts) and wants the AI to answer questions grounded in that data. RAG is the right default for most enterprise Q&A, search, and summarization use cases.</p>
-        <p><strong>Limitations:</strong> RAG adds latency (retrieval round-trip) and requires careful chunking and embedding strategy. It doesn't help when the problem is about behavior or reasoning style — for that, you need fine-tuning.</p>
+        <p><strong>Limitations:</strong> RAG adds latency (retrieval round-trip) and requires careful chunking and embedding strategy. It doesn't help when the problem is about behavior or reasoning style, for that, you need fine-tuning.</p>
 
         <h2>Pattern 2: Fine-Tuning</h2>
-        <p>Fine-tuning adapts a pre-trained model's weights on your own labeled dataset to change how it behaves — its tone, format, domain vocabulary, or task-specific reasoning. Unlike RAG, fine-tuning changes the model itself.</p>
-        <p><strong>On AWS:</strong> Amazon SageMaker JumpStart provides one-click fine-tuning for many foundation models. Amazon Bedrock custom model import supports fine-tuned models from SageMaker. For lightweight adaptation, consider LoRA (Low-Rank Adaptation) — it requires far less compute than full fine-tuning and works well for domain adaptation.</p>
+        <p>Fine-tuning adapts a pre-trained model's weights on your own labeled dataset to change how it behaves, its tone, format, domain vocabulary, or task-specific reasoning. Unlike RAG, fine-tuning changes the model itself.</p>
+        <p><strong>On AWS:</strong> Amazon SageMaker JumpStart provides one-click fine-tuning for many foundation models. Amazon Bedrock custom model import supports fine-tuned models from SageMaker. For lightweight adaptation, consider LoRA (Low-Rank Adaptation), it requires far less compute than full fine-tuning and works well for domain adaptation.</p>
         <p><strong>When to use fine-tuning:</strong> When you need consistent output format (e.g., always return structured JSON), domain-specific language the base model doesn't know well, or a specific persona or tone that prompt engineering can't reliably achieve. Fine-tuning is also worth considering when you have high query volume and want to distill a large, expensive model into a smaller, cheaper one.</p>
         <p><strong>The hidden cost:</strong> Fine-tuning requires high-quality labeled training data, which is usually the bottleneck. Before recommending fine-tuning, ask the customer: do you have 1,000+ high-quality examples you can label? If not, start with RAG and revisit.</p>
 
         <h2>Pattern 3: Agentic Workflows</h2>
-        <p>Agents take AI from question-answering to action-taking. An AI agent can reason over a task, use tools (APIs, databases, code execution), and complete multi-step workflows autonomously. This is where the most transformative enterprise use cases live — and also where the most architectural complexity exists.</p>
+        <p>Agents take AI from question-answering to action-taking. An AI agent can reason over a task, use tools (APIs, databases, code execution), and complete multi-step workflows autonomously. This is where the most transformative enterprise use cases live, and also where the most architectural complexity exists.</p>
         <p><strong>On AWS:</strong> Amazon Bedrock Agents is the managed service for building agentic applications. You define the tools (Lambda functions) the agent can invoke, the knowledge bases it can query, and the foundation model that drives its reasoning. Bedrock handles the ReAct (Reason + Act) loop automatically.</p>
         <p>Common enterprise agent use cases:</p>
         <ul>
@@ -79,7 +79,7 @@
           <li><strong>Customer onboarding:</strong> Agent orchestrates account provisioning across multiple downstream systems via API calls</li>
         </ul>
         <p><strong>When to use agents:</strong> When the task requires multiple steps, decision branching, or calls to external systems. The key qualification question: does this workflow currently require a human to make judgment calls at multiple points? If yes, an agent might be able to handle the routine cases and escalate the edge cases.</p>
-        <p><strong>The risk pattern to watch:</strong> Agents can fail in hard-to-predict ways when given too much autonomy too quickly. I always recommend starting with human-in-the-loop mode — the agent proposes actions and a human approves before execution — then gradually expanding automation as confidence builds.</p>
+        <p><strong>The risk pattern to watch:</strong> Agents can fail in hard-to-predict ways when given too much autonomy too quickly. I always recommend starting with human-in-the-loop mode, the agent proposes actions and a human approves before execution, then gradually expanding automation as confidence builds.</p>
 
         <h2>Pattern 4: Prompt Engineering & Model Selection</h2>
         <p>Before reaching for fine-tuning or agentic frameworks, exhaust what prompt engineering can do. Systematic prompt design can solve a surprising percentage of enterprise AI use cases at a fraction of the cost.</p>
