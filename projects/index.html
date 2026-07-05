@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="AWS architecture projects by Vanessa Awo: a Highly Available WordPress infrastructure and a Multi-Account AWS Landing Zone, both built with Terraform and documented to Well-Architected standards.">
+  <title>Projects | Vanessa Awo</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body><script>if(localStorage.getItem('theme')==='light')document.body.classList.add('light-mode')</script>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo"><svg class="logo-badge" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.28)" stroke-width="1"/><text x="14" y="19" text-anchor="middle" fill="#00b4d8" font-size="11" font-weight="800" font-family="monospace">VA</text></svg><span class="logo-name-text">Vanessa Awo</span></a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/#skills" class="nav-link">Skills</a></li>
+        <li><a href="/projects/" class="nav-link active">Projects</a></li>
+        <li><a href="/#experience" class="nav-link">Experience</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
+        <li><a href="/architecture/" class="nav-link">Architecture</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle theme"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <a href="/#contact" class="nav-cta">Hire Me</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero page-hero--projects">
+    <div class="container">
+      <h1 class="page-hero-title">Featured Projects</h1>
+      <p class="page-hero-subtitle">Two flagship AWS architecture projects built to production standards, with full IaC, architecture diagrams, and Well-Architected documentation.</p>
+    </div>
+  </div>
+
+  <!-- PROJECTS SECTION -->
+  <section class="section section-decorated" id="projects">
+    <div class="container">
+
+      <!-- Hiring Manager Banner -->
+      <div style="background:rgba(0,180,216,0.07);border:1px solid rgba(0,180,216,0.2);border-radius:10px;padding:16px 22px;margin-bottom:28px;font-size:0.97rem;line-height:1.6;color:var(--text-secondary,#94a3b8);">
+        <strong style="color:var(--accent,#00b4d8);">For hiring managers:</strong> Each project includes full Terraform IaC, Draw.io architecture diagrams with AWS icons, Well-Architected trade-off analysis, and quantified cost/reliability metrics. Click <strong>View Diagram</strong> on any card, or visit <a href="/architecture/" style="color:var(--accent,#00b4d8);font-weight:600;">Architecture Diagrams</a> to explore all 6 interactive diagrams in one place.
+      </div>
+
+      <!-- Filter -->
+      <div class="project-filters">
+        <button class="filter-btn active" data-filter="all">All</button>
+        <button class="filter-btn" data-filter="architecture">Architecture</button>
+      </div>
+
+      <div class="projects-grid">
+
+        <!-- FEATURED 1: HA WordPress -->
+        <div class="project-card" data-category="architecture">
+          <div class="project-image">
+            <img src="/assets/img-multicloud.svg" alt="Highly Available WordPress on AWS" class="project-img" loading="lazy">
+            <div class="project-overlay">
+              <a href="https://github.com/vanessa9373/my-portfolio-projects/tree/main/ha-wordpress-terraform" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span class="tag tag-aws">AWS</span>
+              <span class="tag">Terraform</span>
+              <span class="tag">Multi-AZ</span>
+              <span class="tag">Well-Architected</span>
+            </div>
+            <h3>Highly Available WordPress Infrastructure on AWS</h3>
+            <p>A media or content business running WordPress on a single server risks losing revenue every time that server goes down. This project solves that by deploying a zero-single-point-of-failure architecture across three Availability Zones: EC2 Auto Scaling behind an Application Load Balancer absorbs traffic spikes, RDS Multi-AZ with automatic failover keeps the database available in under two minutes, and CloudFront with S3 origin access control reduces origin load while cutting global latency. WAF protects against OWASP Top 10 threats, KMS CMK handles encryption at rest, and SSM Session Manager eliminates bastion hosts entirely. Alarms on p99 latency and 5xx error rate fire before users notice problems.</p>
+            <div class="project-results">
+              <div class="result"><strong>3</strong><span>AZs</span></div>
+              <div class="result"><strong>&lt;2 min</strong><span>DB Failover</span></div>
+              <div class="result"><strong>6</strong><span>WAF pillars</span></div>
+            </div>
+            <div class="project-tools">
+              <strong>Tools:</strong> Terraform, EC2 ASG, ALB, RDS Multi-AZ, CloudFront, WAF, KMS, SSM, CloudWatch
+            </div>
+            <p class="project-role"><strong>SA angle:</strong> Well-Architected design across all 6 pillars &nbsp;|&nbsp; <strong>SE angle:</strong> Quantified reliability and cost metrics for stakeholder discussions</p>
+            <a href="https://github.com/vanessa9373/my-portfolio-projects/blob/main/ha-wordpress-terraform/docs/architecture-deep-dive.md" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:0.85rem;color:var(--accent,#00b4d8);text-decoration:none;">Architecture Doc &rarr;</a>
+            <a href="/architecture/#wp" style="display:inline-block;margin-top:6px;font-size:0.85rem;color:var(--accent,#00b4d8);text-decoration:none;margin-left:16px;">View Diagram &rarr;</a>
+          </div>
+        </div>
+
+        <!-- FEATURED 2: Multi-Account Landing Zone -->
+        <div class="project-card" data-category="architecture">
+          <div class="project-image">
+            <img src="/assets/img-security.svg" alt="Multi-Account AWS Landing Zone" class="project-img" loading="lazy">
+            <div class="project-overlay">
+              <a href="https://github.com/vanessa9373/my-portfolio-projects/tree/main/multi-account-landing-zone" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
+            </div>
+          </div>
+          <div class="project-content">
+            <div class="project-tags">
+              <span class="tag tag-aws">AWS Organizations</span>
+              <span class="tag">Terraform</span>
+              <span class="tag">SCPs</span>
+              <span class="tag">SSO</span>
+            </div>
+            <h3>Multi-Account AWS Landing Zone</h3>
+            <p>As organizations scale on AWS, a single account becomes a governance and blast-radius problem. This project builds an enterprise landing zone from the ground up: AWS Organizations with four OUs and ten-plus accounts enforced by eight Service Control Policies, blocking root user access, mandating IMDSv2, restricting regions, and preventing public S3 buckets. A Transit Gateway hub-and-spoke topology gives production and non-production workloads network isolation without VPC peering sprawl. IAM Identity Center provides SAML 2.0 single sign-on, and GuardDuty with Security Hub aggregates threat findings centrally. The result is a foundation that a compliance or security team can build on without renegotiating baseline controls.</p>
+            <div class="project-results">
+              <div class="result"><strong>10+</strong><span>Accounts</span></div>
+              <div class="result"><strong>8</strong><span>SCPs</span></div>
+              <div class="result"><strong>4</strong><span>OUs</span></div>
+            </div>
+            <div class="project-tools">
+              <strong>Tools:</strong> AWS Organizations, Terraform, Transit Gateway, IAM Identity Center, GuardDuty, Security Hub
+            </div>
+            <p class="project-role"><strong>SA angle:</strong> Enterprise governance, SCPs, and hub-and-spoke networking &nbsp;|&nbsp; <strong>SE angle:</strong> Reference architecture for enterprise cloud adoption conversations</p>
+            <a href="https://github.com/vanessa9373/my-portfolio-projects/tree/main/multi-account-landing-zone" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:0.85rem;color:var(--accent,#00b4d8);text-decoration:none;">Architecture Doc &rarr;</a>
+            <a href="/architecture/#lz" style="display:inline-block;margin-top:6px;font-size:0.85rem;color:var(--accent,#00b4d8);text-decoration:none;margin-left:16px;">View Diagram &rarr;</a>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-logo"><svg class="logo-badge" width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.28)" stroke-width="1"/><text x="14" y="19" text-anchor="middle" fill="#00b4d8" font-size="11" font-weight="800" font-family="monospace">VA</text></svg> Vanessa Awo</p>
+        <p>&copy; 2026 Vanessa Awo. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/vanessajen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://github.com/vanessa9373/my-portfolio-projects" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a href="mailto:vanessa93730@gmail.com" aria-label="Email"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><svg class="icon" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+  <script src="/script.js"></script>
+</body>
+</html>

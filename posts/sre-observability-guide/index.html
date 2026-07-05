@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Building an Observability Stack from Scratch - A practical guide to Prometheus, Grafana, and OpenTelemetry for SRE teams.">
+  <title>Building an Observability Stack from Scratch | Vanessa Awo</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body><script>if(localStorage.getItem('theme')==='light')document.body.classList.add('light-mode')</script>
+
+  <!-- READING PROGRESS -->
+  <div class="reading-progress"></div>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo"><svg class="logo-badge" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.28)" stroke-width="1"/><text x="14" y="19" text-anchor="middle" fill="#00b4d8" font-size="11" font-weight="800" font-family="monospace">VA</text></svg><span class="logo-name-text">Vanessa Awo</span></a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/#skills" class="nav-link">Skills</a></li>
+        <li><a href="/projects/" class="nav-link">Projects</a></li>
+        <li><a href="/#experience" class="nav-link">Experience</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle theme"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <a href="/#contact" class="nav-cta">Hire Me</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- POST -->
+  <section class="section" style="padding-top: 140px;">
+    <div class="container">
+      <a href="/blog/" class="post-back"><svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Blog</a>
+
+      <div class="post-header">
+        <h1>Building an Observability Stack from Scratch</h1>
+        <div class="post-meta">
+          <span>Jan 15, 2026</span>
+          <span>9 min read</span>
+          <span class="tag">SRE</span>
+          <span class="tag">Prometheus</span>
+          <span class="tag">Observability</span>
+        </div>
+      </div>
+
+      <div class="post-body">
+        <p>Observability is not monitoring with a fancier name. Monitoring tells you <em>when</em> something is broken. Observability tells you <em>why</em>. After building observability platforms for production environments spanning 50+ microservices, I've learned that the difference between a team that resolves incidents in 5 minutes and one that takes 2 hours often comes down to how well their observability stack is designed.</p>
+
+        <h2>The Three Pillars</h2>
+        <p>A production-grade observability stack rests on three pillars: <strong>metrics</strong>, <strong>logs</strong>, and <strong>traces</strong>. Each serves a different purpose, and you need all three to diagnose issues effectively.</p>
+        <ul>
+          <li><strong>Metrics</strong> tell you what is happening at a high level - request rates, error rates, latency percentiles, CPU usage, memory consumption. They're cheap to collect, fast to query, and perfect for dashboards and alerts.</li>
+          <li><strong>Logs</strong> tell you the details - the specific error message, the request payload that caused a failure, the stack trace. They're expensive to store at scale but essential for root cause analysis.</li>
+          <li><strong>Traces</strong> show you the journey of a single request across multiple services. When a checkout request is slow, traces tell you whether the bottleneck is in the payment service, the inventory service, or the database.</li>
+        </ul>
+
+        <h2>Metrics: Prometheus + Grafana</h2>
+        <p>Prometheus is the industry standard for metrics collection in cloud-native environments. I deploy it using the <strong>kube-prometheus-stack</strong> Helm chart, which bundles Prometheus, Grafana, Alertmanager, and a curated set of recording rules and dashboards.</p>
+        <p>Key architectural decisions:</p>
+        <ul>
+          <li><strong>Federation for scale:</strong> Each Kubernetes cluster runs its own Prometheus instance. A central Thanos or Cortex instance aggregates metrics across clusters for global dashboards and long-term storage.</li>
+          <li><strong>Recording rules for performance:</strong> Instead of running expensive PromQL queries at dashboard load time, I pre-compute common aggregations (e.g., 5-minute error rates) as recording rules. This makes dashboards load in milliseconds instead of seconds.</li>
+          <li><strong>Alert routing:</strong> Alertmanager routes critical alerts to PagerDuty, warnings to Slack, and informational alerts to email. I use inhibition rules to prevent alert storms - if an entire node is down, I don't need 50 separate pod alerts.</li>
+        </ul>
+
+        <h2>Logs: Fluent Bit + CloudWatch / Loki</h2>
+        <p>For log collection, I deploy <strong>Fluent Bit</strong> as a DaemonSet on every node. It's lightweight (10-15MB memory per node), fast, and supports hundreds of output plugins. Logs flow from containers to Fluent Bit, get enriched with Kubernetes metadata (pod name, namespace, labels), and are shipped to the storage backend.</p>
+        <p>For AWS-native stacks, I use <strong>CloudWatch Logs</strong> with Insights for querying. For multi-cloud or cost-sensitive environments, <strong>Grafana Loki</strong> offers a Prometheus-like experience for logs at a fraction of the cost - it indexes only labels, not the full log content, which dramatically reduces storage costs.</p>
+        <p>The most important log engineering decision: <strong>structured logging</strong>. Every application should emit JSON logs with consistent fields - <code>timestamp</code>, <code>level</code>, <code>service</code>, <code>trace_id</code>, <code>message</code>. This makes querying, filtering, and correlating across services trivial. Unstructured logs are effectively unsearchable at scale.</p>
+
+        <h2>Traces: OpenTelemetry</h2>
+        <p><strong>OpenTelemetry</strong> has become the de facto standard for distributed tracing (and increasingly for metrics and logs too). I instrument applications with the OpenTelemetry SDK, which auto-instruments HTTP clients, database drivers, and messaging libraries with minimal code changes.</p>
+        <p>Traces are collected by the <strong>OpenTelemetry Collector</strong>, which runs as a sidecar or DaemonSet. The Collector handles sampling, batching, and exporting to backends like <strong>Jaeger</strong>, <strong>AWS X-Ray</strong>, or <strong>Grafana Tempo</strong>. I use <strong>tail-based sampling</strong> to keep 100% of error traces and slow traces while sampling 10% of healthy traces - this gives full visibility into problems without the storage cost of capturing everything.</p>
+
+        <h2>SLOs: Tying It All Together</h2>
+        <p>Metrics, logs, and traces are raw ingredients. <strong>Service Level Objectives</strong> (SLOs) turn them into actionable reliability targets. I define SLOs for every production service based on two key indicators:</p>
+        <ul>
+          <li><strong>Availability SLI:</strong> Percentage of requests that return a non-5xx response. Target: 99.95% (allows ~22 minutes of downtime per month).</li>
+          <li><strong>Latency SLI:</strong> Percentage of requests completed within the target latency. Target: 99% of requests under 200ms.</li>
+        </ul>
+        <p>I build <strong>error budget dashboards</strong> in Grafana that show how much of the error budget has been consumed over the current window. When the error budget is healthy, teams ship features aggressively. When the budget is nearly exhausted, the team shifts focus to reliability work. This replaces subjective arguments about "should we ship or stabilize?" with data-driven decisions.</p>
+
+        <h2>Alerting Philosophy</h2>
+        <p>Most alerting is broken because it's based on symptoms rather than user impact. I follow this hierarchy:</p>
+        <ol>
+          <li><strong>Page-worthy (PagerDuty):</strong> SLO burn rate exceeds threshold - real users are being affected right now.</li>
+          <li><strong>Urgent (Slack):</strong> Leading indicators suggest an SLO breach is likely within hours - disk filling up, certificate expiring soon.</li>
+          <li><strong>Informational (email/dashboard):</strong> Trends that need attention this sprint - increasing latency p99, growing queue depth.</li>
+        </ol>
+        <p>The goal is that every page results in a meaningful action. If an alert fires regularly and gets ignored, it's either misconfigured or not worth alerting on. I review alert fatigue metrics monthly and aggressively prune noisy alerts.</p>
+
+        <h2>Getting Started</h2>
+        <p>You don't need to build all of this at once. Start with metrics and dashboards (week 1), add structured logging (week 2), implement SLOs for your most critical service (week 3), and add tracing (week 4). Each layer compounds the value of the others. A trace ID that appears in both your logs and your traces transforms a 2-hour debugging session into a 5-minute investigation.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-logo"><svg class="logo-badge" width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.28)" stroke-width="1"/><text x="14" y="19" text-anchor="middle" fill="#00b4d8" font-size="11" font-weight="800" font-family="monospace">VA</text></svg> Vanessa Awo</p>
+        <p>&copy; 2026 Vanessa Awo. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/vanessajen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://github.com/vanessa9373/my-portfolio-projects" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a href="mailto:vanessa93730@gmail.com" aria-label="Email"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><svg class="icon" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+  <script src="/script.js"></script>
+</body>
+</html>

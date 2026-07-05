@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="From POC to Production: Delivering Technical Demos That Win Deals, the SE framework for scoping, building, and presenting POCs that convert.">
+  <title>From POC to Production: Delivering Technical Demos That Win Deals | Vanessa Awo</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body><script>if(localStorage.getItem('theme')==='light')document.body.classList.add('light-mode')</script>
+
+  <div class="reading-progress"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo"><svg class="logo-badge" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.28)" stroke-width="1"/><text x="14" y="19" text-anchor="middle" fill="#00b4d8" font-size="11" font-weight="800" font-family="monospace">VA</text></svg><span class="logo-name-text">Vanessa Awo</span></a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/#skills" class="nav-link">Skills</a></li>
+        <li><a href="/projects/" class="nav-link">Projects</a></li>
+        <li><a href="/#experience" class="nav-link">Experience</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle theme"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <a href="/#contact" class="nav-cta">Hire Me</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="section" style="padding-top: 140px;">
+    <div class="container">
+      <a href="/blog/" class="post-back"><svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Blog</a>
+
+      <div class="post-header">
+        <h1>From POC to Production: Delivering Technical Demos That Win Deals</h1>
+        <div class="post-meta">
+          <span>May 20, 2026</span>
+          <span>7 min read</span>
+          <span class="tag tag-aws">SE</span>
+          <span class="tag">POC</span>
+          <span class="tag">Strategy</span>
+        </div>
+      </div>
+
+      <div class="post-body">
+        <p>A POC is not a prototype. It's not a sales tool. It's not a chance to show off everything your platform can do. A POC is a structured experiment designed to answer one specific question: <em>can this solution solve this customer's specific problem?</em> Get that wrong, and you'll build impressive demos that don't close deals.</p>
+
+        <h2>Step 1: Scope Before You Build, Get It in Writing</h2>
+        <p>The most common POC failure is building the wrong thing. It happens when the SE starts building immediately after a discovery call without locking down the success criteria first.</p>
+        <p>Before any code is written, agree on and document:</p>
+        <ul>
+          <li><strong>The specific question the POC is answering</strong> (not "does AWS work for us", that's too broad. Instead: "can Lambda handle our peak load of 50,000 requests/minute with p99 latency under 200ms?")</li>
+          <li><strong>Success criteria</strong>, exact, measurable thresholds. If you can't define done, you can't win</li>
+          <li><strong>What's in scope and out of scope</strong>, explicitly. This prevents scope creep that kills timelines</li>
+          <li><strong>Timeline</strong>, 2–4 weeks is usually right for a well-scoped POC. More than 6 weeks is almost always a sign of scope creep or weak qualification</li>
+          <li><strong>Resources</strong>, who from the customer's side will be involved? If no one is committed, the POC won't be taken seriously</li>
+        </ul>
+        <p>I send a one-page POC scope document before starting any work. If the customer won't sign off on it, that tells me something important about deal health.</p>
+
+        <h2>Step 2: Build for Clarity, Not Completeness</h2>
+        <p>A POC doesn't need to be production-ready. It needs to be convincing and comprehensible to the people who will evaluate it. Those are very different requirements.</p>
+        <p>Build principles I follow:</p>
+        <ul>
+          <li><strong>Use their data, not sample data.</strong> A demo with the customer's actual data is 10x more compelling than the same demo with synthetic data. It removes the "but would this work for our data?" objection before it's raised.</li>
+          <li><strong>Show the journey, not just the outcome.</strong> A working result is good. Showing the architecture diagram, walking through the key design decisions, and explaining the trade-offs is what demonstrates SA/SE depth.</li>
+          <li><strong>Make it interactive.</strong> If you can put something in the evaluator's hands, even a read-only dashboard or a sandboxed environment, you're in a much stronger position than a recorded demo.</li>
+          <li><strong>Document what you built.</strong> A brief README or architecture doc that explains the key decisions signals that this is a serious, production-minded approach, not a throwaway script.</li>
+        </ul>
+
+        <h2>Step 3: The Demo Narrative, Lead with the Problem</h2>
+        <p>The biggest technical demo mistake: leading with features. Features are answers to questions no one has asked yet. Lead with the problem instead.</p>
+        <p>The structure that works:</p>
+        <ol>
+          <li><strong>Restate the problem</strong>, "You told us you were losing $X per month to checkout failures under peak load." This shows you were listening and grounds the demo in their reality.</li>
+          <li><strong>Show the current-state pain</strong>, if you have data or logs from their existing system, show what failure looks like. Contrast creates impact.</li>
+          <li><strong>Walk through the solution</strong>, now introduce the architecture. Narrate the data flow. "When a request comes in, it hits the API Gateway, which triggers this Lambda function..."</li>
+          <li><strong>Show it working at the success criteria you agreed on</strong>, don't skip this. Hit the exact metric you scoped. If you said p99 under 200ms, show the latency graph.</li>
+          <li><strong>Address the obvious questions preemptively</strong>, security, cost, scalability. SAs who bring up the hard questions before being asked build enormous credibility.</li>
+        </ol>
+
+        <h2>Step 4: The POC Readout, Set Up the Next Step</h2>
+        <p>The POC presentation meeting is not the end of the evaluation, it's the beginning of the close. Come prepared with:</p>
+        <ul>
+          <li>A written summary of what was built, what was tested, and what the results were</li>
+          <li>A clear recommendation, don't hedge. "Based on the POC results, we recommend this architecture for production. Here's what the next 90 days would look like."</li>
+          <li>A path to production, timeline, resources needed, next steps with owners assigned</li>
+        </ul>
+        <p>If the POC succeeded, ask for the business. If there were gaps, address them directly and propose a follow-on scope. Ambiguity at the readout is how deals stall.</p>
+
+        <h2>What Makes the Difference</h2>
+        <p>The SEs who consistently win POCs aren't the ones who build the most impressive demos. They're the ones who build the most relevant demos, because they spent more time on discovery, scoped tighter, and used the customer's own language and data to tell the story. Technical excellence in service of the customer's specific problem is the formula. Everything else is just noise.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-logo"><svg class="logo-badge" width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.28)" stroke-width="1"/><text x="14" y="19" text-anchor="middle" fill="#00b4d8" font-size="11" font-weight="800" font-family="monospace">VA</text></svg> Vanessa Awo</p>
+        <p>&copy; 2026 Vanessa Awo. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/vanessajen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://github.com/vanessa9373/my-portfolio-projects" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a href="mailto:vanessa93730@gmail.com" aria-label="Email"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><svg class="icon" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+  <script src="/script.js"></script>
+</body>
+</html>

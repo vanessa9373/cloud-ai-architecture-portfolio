@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<mxfile host="app.diagrams.net" version="21.0.0">
+  <diagram name="Three-Tier HA DR v2" id="va-arch-v2">
+    <mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="3400" pageHeight="2000" math="0" shadow="0" background="#0F172A">
+      <root>
+        <mxCell id="0"/>
+        <mxCell id="1" parent="0"/>
+        <mxCell id="2" value="Three-Tier Highly Available Web Application with Multi-Region Disaster Recovery" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontColor=#FFFFFF;fontSize=26;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="100" y="18" width="3100" height="46" as="geometry"/></mxCell>
+        <mxCell id="3" value="Primary Region: us-east-1  ·  3 Availability Zones  ·  99.99% Availability  ·  RTO &lt; 15 min  ·  RPO &lt; 5 min  ·  DR Warm Standby: us-west-2" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontColor=#94A3B8;fontSize=14;" vertex="1" parent="1"><mxGeometry x="100" y="68" width="3100" height="30" as="geometry"/></mxCell>
+        <mxCell id="4" value="🌐  Internet Users
+(Global Traffic)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0F172A;strokeColor=#64748B;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="1410" y="115" width="180" height="70" as="geometry"/></mxCell>
+        <mxCell id="5" value="EDGE LAYER — Global (AWS Network)" style="text;html=1;strokeColor=#334155;fillColor=#080e1c;align=left;verticalAlign=top;fontColor=#64748B;fontSize=13;fontStyle=1;rounded=1;arcSize=2;spacingTop=8;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="60" y="218" width="2160" height="170" as="geometry"/></mxCell>
+        <mxCell id="6" value="Route 53
+Failover Routing
+Health Check: 10s
+DNS TTL: 60s" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1628;strokeColor=#FF9900;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="90" y="255" width="225" height="120" as="geometry"/></mxCell>
+        <mxCell id="7" value="CloudFront CDN
+450+ Edge Locations
+Origin: ALB + S3 (OAC)
+TLS 1.2+" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1628;strokeColor=#FF9900;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="355" y="255" width="225" height="120" as="geometry"/></mxCell>
+        <mxCell id="8" value="AWS WAF
+OWASP Top 10
+SQL Injection Rules
+Rate Limit: 2k/5min" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1628;strokeColor=#E53E3E;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="620" y="255" width="225" height="120" as="geometry"/></mxCell>
+        <mxCell id="9" value="ACM
+TLS Certificate
+Auto-Renewal
+SAN Support" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1628;strokeColor=#48BB78;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="885" y="255" width="200" height="120" as="geometry"/></mxCell>
+        <mxCell id="10" value="Shield Standard
+DDoS Protection
+Included w/ CloudFront" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1628;strokeColor=#9F7AEA;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="1115" y="255" width="200" height="120" as="geometry"/></mxCell>
+        <mxCell id="11" value="Internet Gateway
+VPC Attachment
+(1 per VPC)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1628;strokeColor=#64748B;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="1345" y="255" width="195" height="120" as="geometry"/></mxCell>
+        <mxCell id="12" value="PRIMARY VPC — us-east-1   ·   CIDR: 10.0.0.0/16" style="text;html=1;strokeColor=#1E40AF;fillColor=#0a1628;align=left;verticalAlign=top;fontColor=#93C5FD;fontSize=15;fontStyle=1;rounded=1;arcSize=2;spacingTop=8;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="60" y="420" width="2160" height="1480" as="geometry"/></mxCell>
+        <mxCell id="13" value="PUBLIC SUBNETS   us-east-1a · us-east-1b · us-east-1c   |   10.0.1-3.0/24" style="text;html=1;strokeColor=#22543D;fillColor=#0a2010;align=left;verticalAlign=top;fontColor=#68D391;fontSize=13;fontStyle=1;rounded=1;arcSize=2;spacingTop=8;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="90" y="455" width="2100" height="210" as="geometry"/></mxCell>
+        <mxCell id="14" value="Application Load Balancer
+HTTPS:443 → EC2 targets
+HTTP:80 → redirect HTTPS
+Cross-Zone LB enabled
+Security: CloudFront prefix only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d2e18;strokeColor=#22543D;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="120" y="490" width="350" height="155" as="geometry"/></mxCell>
+        <mxCell id="15" value="NAT Gateway
+us-east-1a
+0.045/hr + $0.045/GB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d2e18;strokeColor=#22543D;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="520" y="490" width="200" height="155" as="geometry"/></mxCell>
+        <mxCell id="16" value="NAT Gateway
+us-east-1b
+0.045/hr + $0.045/GB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d2e18;strokeColor=#22543D;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="740" y="490" width="200" height="155" as="geometry"/></mxCell>
+        <mxCell id="17" value="NAT Gateway
+us-east-1c
+0.045/hr + $0.045/GB" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0d2e18;strokeColor=#22543D;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="960" y="490" width="200" height="155" as="geometry"/></mxCell>
+        <mxCell id="18" value="PRIVATE APP SUBNETS   us-east-1a · us-east-1b · us-east-1c   |   10.0.11-13.0/24   |   Outbound: NAT Gateway only" style="text;html=1;strokeColor=#553C9A;fillColor=#100a30;align=left;verticalAlign=top;fontColor=#C3B1E1;fontSize=13;fontStyle=1;rounded=1;arcSize=2;spacingTop=8;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="90" y="700" width="2100" height="220" as="geometry"/></mxCell>
+        <mxCell id="19" value="Auto Scaling Group — min: 2  ·  desired: 3  ·  max: 10  ·  Scale policy: ALBRequestCountPerTarget = 1,000  ·  Scale-in cooldown: 300s" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontColor=#C3B1E1;fontSize=12;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="90" y="700" width="2100" height="28" as="geometry"/></mxCell>
+        <mxCell id="20" value="EC2 (t3.medium)
+us-east-1a
+IMDSv2 Required
+SSM Agent
+IAM Role (no keys)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a0f3a;strokeColor=#553C9A;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="120" y="738" width="260" height="160" as="geometry"/></mxCell>
+        <mxCell id="21" value="EC2 (t3.medium)
+us-east-1b
+IMDSv2 Required
+SSM Agent
+IAM Role (no keys)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a0f3a;strokeColor=#553C9A;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="500" y="738" width="260" height="160" as="geometry"/></mxCell>
+        <mxCell id="22" value="EC2 (t3.medium)
+us-east-1c
+IMDSv2 Required
+SSM Agent
+IAM Role (no keys)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#1a0f3a;strokeColor=#553C9A;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="880" y="738" width="260" height="160" as="geometry"/></mxCell>
+        <mxCell id="23" value="PRIVATE DB SUBNETS   us-east-1a · us-east-1b · us-east-1c   |   10.0.21-23.0/24   |   No internet route — DB-SG: port 3306 from App-SG only" style="text;html=1;strokeColor=#9B2C2C;fillColor=#1a0808;align=left;verticalAlign=top;fontColor=#FEB2B2;fontSize=13;fontStyle=1;rounded=1;arcSize=2;spacingTop=8;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="90" y="960" width="2100" height="240" as="geometry"/></mxCell>
+        <mxCell id="24" value="RDS MySQL (Primary)
+db.r6g.large — Graviton2
+500 GB gp3 autoscale → 2TB
+KMS CMK Encrypted
+Auto Backup: 7 days
+Performance Insights ON" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2a0a0a;strokeColor=#9B2C2C;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="120" y="1000" width="310" height="180" as="geometry"/></mxCell>
+        <mxCell id="25" value="RDS MySQL (Standby)
+Synchronous Replication
+Different AZ from Primary
+Auto Failover: 60-120s
+Passive — Not Readable
+Same Endpoint (DNS flip)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2a0a0a;strokeColor=#9B2C2C;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="490" y="1000" width="310" height="180" as="geometry"/></mxCell>
+        <mxCell id="26" value="ElastiCache Redis (Primary)
+cache.t4g.medium — Graviton2
+Port 6379
+Session Storage + Query Cache
+Rate Limiting Counters
+Cache-SG: 6379 from App-SG" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2a1000;strokeColor=#DD6B20;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="880" y="1000" width="310" height="180" as="geometry"/></mxCell>
+        <mxCell id="27" value="ElastiCache (Replica)
+Different AZ from Primary
+Auto Failover Enabled
+Read traffic optional
+Same cluster endpoint" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2a1000;strokeColor=#DD6B20;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="1250" y="1000" width="290" height="180" as="geometry"/></mxCell>
+        <mxCell id="28" value="Synchronous
+Replication" style="edgeStyle=orthogonalEdgeStyle;html=1;strokeColor=#E53E3E;strokeWidth=2;fontColor=#FEB2B2;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=block;startFill=1;" edge="1" source="24" target="25" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="29" value="SHARED SERVICES — Security · Storage · Observability · CI/CD" style="text;html=1;strokeColor=#1E3A5F;fillColor=#060e1c;align=left;verticalAlign=top;fontColor=#7DD3FC;fontSize=13;fontStyle=1;rounded=1;arcSize=2;spacingTop=8;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="90" y="1200" width="2100" height="480" as="geometry"/></mxCell>
+        <mxCell id="30" value="S3
+(Static Assets)
+Versioning ON
+SSE-KMS
+Lifecycle: Glacier 90d
+OAC → CloudFront only" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="110" y="1240" width="240" height="160" as="geometry"/></mxCell>
+        <mxCell id="31" value="Secrets Manager
+DB Credentials
+30-day Auto-Rotate
+No hardcoded keys
+App reads at startup" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="370" y="1240" width="240" height="160" as="geometry"/></mxCell>
+        <mxCell id="32" value="KMS (CMK)
+Encrypts: RDS · S3
+ElastiCache · SSM
+Key Rotation: Annual
+All usage → CloudTrail" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="630" y="1240" width="235" height="160" as="geometry"/></mxCell>
+        <mxCell id="33" value="SSM
+Parameter Store
+Session Manager
+(No SSH — no Bastion)
+Patch Manager" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="885" y="1240" width="225" height="160" as="geometry"/></mxCell>
+        <mxCell id="34" value="CloudWatch
+Metrics + Alarms
+Logs: 90d retention
+Dashboards
+AnomalyDetector" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="1120" y="1240" width="235" height="160" as="geometry"/></mxCell>
+        <mxCell id="35" value="GuardDuty
+ML Threat Detection
+VPC Flow + CloudTrail
+Findings → SNS
+Auto-Isolate Lambda" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="1365" y="1240" width="235" height="160" as="geometry"/></mxCell>
+        <mxCell id="36" value="CloudTrail
+All API Events
+MFA-Delete Bucket
+Object Lock
+Immutable Audit Log" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="1610" y="1240" width="230" height="160" as="geometry"/></mxCell>
+        <mxCell id="37" value="AWS Config
+Continuous Audit
+CIS Benchmark
+Auto-Remediation
+SSM Runbooks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="1850" y="1240" width="230" height="160" as="geometry"/></mxCell>
+        <mxCell id="38" value="CodePipeline
+Source → Build → Test
+→ Deploy (Rolling)
+20% min healthy
+Auto-Rollback" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="110" y="1430" width="230" height="160" as="geometry"/></mxCell>
+        <mxCell id="39" value="AWS Backup
+Centralized Policy
+Cross-Region Copy
+Vault Lock
+35-day retention" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="360" y="1430" width="230" height="160" as="geometry"/></mxCell>
+        <mxCell id="40" value="Security Group Chain:   ALB-SG → inbound 443 from CloudFront managed prefix list only   ·   App-SG → inbound 8080 from ALB-SG only   ·   DB-SG → inbound 3306 from App-SG only   ·   Cache-SG → inbound 6379 from App-SG only" style="text;html=1;strokeColor=#E53E3E;fillColor=rgba(229,62,62,0.08);align=center;fontColor=#FEB2B2;fontSize=13;fontStyle=1;rounded=1;" vertex="1" parent="1"><mxGeometry x="90" y="1615" width="2100" height="44" as="geometry"/></mxCell>
+        <mxCell id="41" value="VPC Endpoints:   S3 Gateway Endpoint (free)   ·   DynamoDB Gateway Endpoint (free)   ·   SSM Interface Endpoint   ·   Secrets Manager Interface Endpoint   →   Eliminates NAT Gateway charges for AWS service traffic" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontColor=#7DD3FC;fontSize=12;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="90" y="1666" width="2100" height="28" as="geometry"/></mxCell>
+        <mxCell id="42" value="DR REGION — us-west-2 (Oregon)   ·   VPC: 10.1.0.0/16   ·   WARM STANDBY" style="text;html=1;strokeColor=#9C4221;fillColor=#160800;align=left;verticalAlign=top;fontColor=#FBBF24;fontSize=15;fontStyle=1;rounded=1;arcSize=2;spacingTop=8;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="2280" y="420" width="1040" height="1280" as="geometry"/></mxCell>
+        <mxCell id="43" value="STRATEGY: Warm Standby
+• RTO: &lt; 15 minutes
+• RPO: &lt; 5 minutes
+• Cost: ~30% of primary (~$200/mo)
+• DNS Failover: Automated
+• Failback: Manual (planned operation)
+• Quarterly DR drill exercise" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2d1200;strokeColor=#9C4221;fontColor=#FCD34D;fontSize=13;fontStyle=0;align=left;" vertex="1" parent="1"><mxGeometry x="2305" y="462" width="990" height="170" as="geometry"/></mxCell>
+        <mxCell id="44" value="DR Application
+Load Balancer
+HTTPS:443
+Route 53 Failover Target
+(Health check: primary fail)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2a1200;strokeColor=#D97706;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="2305" y="670" width="440" height="145" as="geometry"/></mxCell>
+        <mxCell id="45" value="DR EC2 ASG
+min=1 · max=6
+Same AMI as primary
+Scales on failover load
+(warm, not hot)" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2a1200;strokeColor=#D97706;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="2835" y="670" width="440" height="145" as="geometry"/></mxCell>
+        <mxCell id="46" value="RDS Read Replica
+(Promotable to Primary)
+Async Cross-Region Replication
+Lag typically &lt; 1 sec
+~1 min to promote on failover" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2a0808;strokeColor=#9B2C2C;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="2305" y="855" width="440" height="155" as="geometry"/></mxCell>
+        <mxCell id="47" value="ElastiCache Redis
+(Cold — restored from snapshot)
+Lower priority on failover
+Built from DB if needed" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#2a1000;strokeColor=#DD6B20;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="2835" y="855" width="440" height="155" as="geometry"/></mxCell>
+        <mxCell id="48" value="S3 CRR Replica Bucket
+Cross-Region Replication
+All objects mirrored (mins lag)
+DR CloudFront uses this origin" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="2305" y="1050" width="440" height="145" as="geometry"/></mxCell>
+        <mxCell id="49" value="DR CloudFront
+Pointed at DR ALB + S3 CRR
+Activated by Route 53
+on primary health fail" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#0a1525;strokeColor=#1E3A5F;fontColor=#E2E8F0;fontSize=13;fontStyle=0;arcSize=10;align=center;verticalAlign=middle;" vertex="1" parent="1"><mxGeometry x="2835" y="1050" width="440" height="145" as="geometry"/></mxCell>
+        <mxCell id="50" value="FAILOVER SEQUENCE:
+T+0s:   Primary failure detected
+T+30s: Route 53 health checks fail (3 consecutive)
+T+60s: Route 53 activates DR failover record
+T+90s: DNS propagates — traffic hits DR ALB
+T+120s: On-call promotes RDS Read Replica → Primary
+T+300s: ASG scales to full capacity · DR fully operational" style="rounded=1;whiteSpace=wrap;html=1;fillColor=rgba(251,191,36,0.08);strokeColor=#FBBF24;fontColor=#FCD34D;fontSize=13;fontStyle=0;align=left;" vertex="1" parent="1"><mxGeometry x="2305" y="1240" width="970" height="200" as="geometry"/></mxCell>
+        <mxCell id="51" value="FAILBACK: Planned operation — sync DR DB → primary → switch DNS → demote DR replica" style="text;html=1;strokeColor=none;fillColor=none;align=center;fontColor=#94A3B8;fontSize=12;fontStyle=2;" vertex="1" parent="1"><mxGeometry x="2305" y="1460" width="970" height="26" as="geometry"/></mxCell>
+        <mxCell id="52" value="DNS Query" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;strokeColor=#FF9900;strokeWidth=2;dashed=0;fontColor=#FF9900;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="4" target="6" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="53" value="Routes to Origin" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;strokeColor=#FF9900;strokeWidth=2;dashed=0;fontColor=#FF9900;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="6" target="7" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="54" value="Inspects Traffic" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;strokeColor=#FF9900;strokeWidth=2;dashed=0;fontColor=#FF9900;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="7" target="8" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="55" value="Filtered to ALB" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;strokeColor=#FF9900;strokeWidth=2;dashed=0;fontColor=#FF9900;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="8" target="14" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="56" value="Distributes Requests" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;strokeColor=#C3B1E1;strokeWidth=2;dashed=0;fontColor=#C3B1E1;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="14" target="20" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="57" value="Distributes Requests" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;strokeColor=#C3B1E1;strokeWidth=2;dashed=0;fontColor=#C3B1E1;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="14" target="21" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="58" value="Distributes Requests" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;strokeColor=#C3B1E1;strokeWidth=2;dashed=0;fontColor=#C3B1E1;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="14" target="22" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="59" value="DB Reads/Writes
+Port 3306" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;strokeColor=#FEB2B2;strokeWidth=2;dashed=0;fontColor=#FEB2B2;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="21" target="24" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="60" value="Session + Cache
+Port 6379" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;strokeColor=#FBBF24;strokeWidth=2;dashed=0;fontColor=#FBBF24;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="21" target="26" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="61" value="Route 53 Failover
+(Primary health check fails)
+DNS TTL 60s → DR ALB" style="edgeStyle=elbowEdgeStyle;html=1;strokeColor=#FBBF24;strokeWidth=2;dashed=1;fontColor=#FBBF24;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="6" target="44" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="62" value="Async Replication
+Cross-Region · Lag &lt;1s typical" style="edgeStyle=elbowEdgeStyle;html=1;strokeColor=#E53E3E;strokeWidth=2;dashed=1;fontColor=#E53E3E;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="24" target="46" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="63" value="S3 Cross-Region
+Replication (CRR)" style="edgeStyle=elbowEdgeStyle;html=1;strokeColor=#3182CE;strokeWidth=2;dashed=1;fontColor=#3182CE;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" source="30" target="48" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="64" value="Traffic" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;strokeColor=#D97706;strokeWidth=2;dashed=0;fontColor=#D97706;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="44" target="45" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="65" value="DB Connection" style="edgeStyle=elbowEdgeStyle;elbow=vertical;html=1;strokeColor=#E53E3E;strokeWidth=2;dashed=0;fontColor=#E53E3E;fontSize=11;fontStyle=1;endArrow=block;endFill=1;startArrow=none;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" source="45" target="46" parent="1"><mxGeometry relative="1" as="geometry"/></mxCell>
+        <mxCell id="66" value="LEGEND" style="text;html=1;strokeColor=#334155;fillColor=#080e1c;align=left;verticalAlign=top;fontColor=#64748B;fontSize=14;fontStyle=1;rounded=1;arcSize=2;spacingTop=8;spacingLeft=10;" vertex="1" parent="1"><mxGeometry x="60" y="1730" width="3260" height="200" as="geometry"/></mxCell>
+        <mxCell id="67" value="▬ Public Subnets — ALB · NAT Gateways" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#68D391;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="90" y="1760" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="68" value="▬ Private App Subnets — EC2 Auto Scaling Group" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#C3B1E1;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="90" y="1794" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="69" value="▬ Private DB Subnets — RDS · ElastiCache" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#FEB2B2;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="90" y="1828" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="70" value="▬ Shared Services — S3 · KMS · Secrets · Monitor" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#7DD3FC;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="90" y="1862" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="71" value="▬ DR Region — Warm Standby us-west-2" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#FBBF24;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="90" y="1896" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="72" value="━━ Primary traffic flow (HTTPS)" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#FF9900;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="590" y="1760" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="73" value="- - Route 53 failover to DR" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#FBBF24;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="590" y="1794" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="74" value="- - RDS async cross-region replication" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#E53E3E;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="590" y="1828" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="75" value="- - S3 Cross-Region Replication (CRR)" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#90CDF4;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="590" y="1862" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="76" value="━━ Synchronous RDS standby replication" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#E53E3E;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="590" y="1896" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="77" value="COST: ~$750/mo primary · ~$200/mo DR · Total ~$950/mo" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#94A3B8;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1090" y="1760" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="78" value="ENCRYPTION: KMS CMK — RDS · S3 · ElastiCache · SSM · Secrets Manager" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#94A3B8;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1090" y="1794" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="79" value="COMPLIANCE: PCI DSS · Defense in Depth · Micro-segmented Security Groups" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#94A3B8;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1090" y="1828" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="80" value="MONITORING: CloudWatch · GuardDuty · CloudTrail · Config · X-Ray (optional)" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#94A3B8;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1090" y="1862" width="460" height="28" as="geometry"/></mxCell>
+        <mxCell id="81" value="DEPLOY: CodePipeline · Rolling (20% min healthy) · Auto-Rollback on failure" style="text;html=1;strokeColor=none;fillColor=none;fontColor=#94A3B8;fontSize=13;fontStyle=1;" vertex="1" parent="1"><mxGeometry x="1090" y="1896" width="460" height="28" as="geometry"/></mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

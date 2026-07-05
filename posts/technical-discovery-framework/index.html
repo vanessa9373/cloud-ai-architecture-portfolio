@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="How to Run a Winning Technical Discovery Session, structuring discovery calls to uncover real requirements and set up the solution design phase.">
+  <title>How to Run a Winning Technical Discovery Session | Vanessa Awo</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body><script>if(localStorage.getItem('theme')==='light')document.body.classList.add('light-mode')</script>
+
+  <div class="reading-progress"></div>
+
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo"><svg class="logo-badge" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.28)" stroke-width="1"/><text x="14" y="19" text-anchor="middle" fill="#00b4d8" font-size="11" font-weight="800" font-family="monospace">VA</text></svg><span class="logo-name-text">Vanessa Awo</span></a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/#skills" class="nav-link">Skills</a></li>
+        <li><a href="/projects/" class="nav-link">Projects</a></li>
+        <li><a href="/#experience" class="nav-link">Experience</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle theme"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <a href="/#contact" class="nav-cta">Hire Me</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <section class="section" style="padding-top: 140px;">
+    <div class="container">
+      <a href="/blog/" class="post-back"><svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="19" y1="12" x2="5" y2="12"/><polyline points="12 19 5 12 12 5"/></svg> Back to Blog</a>
+
+      <div class="post-header">
+        <h1>How to Run a Winning Technical Discovery Session</h1>
+        <div class="post-meta">
+          <span>Jun 15, 2026</span>
+          <span>6 min read</span>
+          <span class="tag tag-aws">SA</span>
+          <span class="tag">Strategy</span>
+          <span class="tag">Discovery</span>
+        </div>
+      </div>
+
+      <div class="post-body">
+        <p>The discovery call is where deals are won or lost, and where the wrong solution design gets locked in before anyone notices. As a Solutions Architect and SE, the quality of your discovery determines the quality of everything that follows: the architecture, the POC, the proposal, and ultimately whether the customer buys.</p>
+        <p>Here's the framework I use to run technical discovery sessions that actually uncover what the customer needs, not just what they say they want.</p>
+
+        <h2>Why Most Discovery Calls Fail</h2>
+        <p>Most technical discovery sessions fail because they turn into product demos in disguise. The SA walks in with a mental solution already formed, asks surface-level questions that confirm their existing assumptions, and leaves without understanding the real constraints. The customer nods along, the proposal doesn't fit, and everyone wonders why the deal stalled.</p>
+        <p>Good discovery is uncomfortable. You're asking questions you don't know the answers to, surfacing problems the customer hasn't clearly articulated, and sometimes telling people their stated requirements aren't actually their real problem.</p>
+
+        <h2>Phase 1: Business Context Before Technical Requirements</h2>
+        <p>Always start at the business level before going anywhere near technology. The questions that matter:</p>
+        <ul>
+          <li><strong>What business outcome are you trying to achieve in the next 6–12 months?</strong></li>
+          <li>Who owns this initiative, is it engineering-led or a board-level priority?</li>
+          <li>What happens if you don't solve this problem? (Surfaces urgency and pain severity)</li>
+          <li>How is success measured? What metric changes when this works?</li>
+        </ul>
+        <p>The business context tells you the real priority hierarchy. A CTO who says "we need to reduce infrastructure costs" and then reveals their company is burning through runway and has 9 months of cash, that's a very different conversation than the same request from a stable enterprise optimizing margins. The technical solution may look identical; the risk tolerance, timeline, and tradeoffs are completely different.</p>
+
+        <h2>Phase 2: Technical Landscape and Constraints</h2>
+        <p>Once you have business context, map the technical environment. I work through a structured set of questions:</p>
+        <ul>
+          <li><strong>Current state:</strong> What does your existing architecture look like? What's on-prem vs. cloud? Which cloud providers are you already using?</li>
+          <li><strong>Integration points:</strong> What does this system need to connect to? What are the data flows?</li>
+          <li><strong>Scale and performance:</strong> What are your peak load characteristics? What SLA do you need to hit?</li>
+          <li><strong>Compliance and regulatory constraints:</strong> Are there data residency, HIPAA, SOC 2, or PCI requirements?</li>
+          <li><strong>Team and operational constraints:</strong> Who will own this in production? What's the team's cloud maturity?</li>
+        </ul>
+        <p>The constraints are more valuable than the requirements. Constraints tell you what's actually off the table, and they narrow the solution space in a way that prevents you from proposing something that can never be approved.</p>
+
+        <h2>Phase 3: Qualification, Is This Real?</h2>
+        <p>This is where many SAs get uncomfortable, but it's essential: you need to qualify whether this opportunity has real legs. Ask directly:</p>
+        <ul>
+          <li>What's your timeline for making a decision?</li>
+          <li>Is budget approved or still in planning?</li>
+          <li>Who else is involved in this evaluation? (Watch for undisclosed stakeholders)</li>
+          <li>Are you evaluating other vendors or approaches?</li>
+          <li>What would cause you not to move forward with this?</li>
+        </ul>
+        <p>That last question is the most important one in the entire session. Asking "what would stop this?" surfaces the real objections early, before you've spent 3 weeks building a POC for a deal that was never going to close.</p>
+
+        <h2>Phase 4: Close the Discovery, Set Up the Next Step</h2>
+        <p>Every discovery session should end with a clear next step that both sides commit to. I always summarize what I heard, confirm I understood it correctly, and then propose a specific next action, not a vague "we'll be in touch."</p>
+        <p>A strong close sounds like: <em>"Based on what you've shared, I think the right next step is a 2-hour architecture review where I walk through a proposed design addressing your latency requirements and compliance constraints. Can we schedule that for next week?"</em></p>
+        <p>The confirmation step matters too. Send a follow-up email within 24 hours that summarizes the key pain points, requirements, and constraints you captured. This builds trust, catches misunderstandings early, and gives you a reference document for the architecture proposal.</p>
+
+        <h2>The Mindset Shift</h2>
+        <p>The best technical discovery sessions feel less like an interview and more like a collaborative diagnosis. You're not extracting information to fill out a checklist, you're building a shared understanding of a problem so that you can design a solution that actually fits.</p>
+        <p>Customers remember the SA who asked the questions no one else thought to ask. That's the one who gets the deal.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-logo"><svg class="logo-badge" width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.28)" stroke-width="1"/><text x="14" y="19" text-anchor="middle" fill="#00b4d8" font-size="11" font-weight="800" font-family="monospace">VA</text></svg> Vanessa Awo</p>
+        <p>&copy; 2026 Vanessa Awo. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/vanessajen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://github.com/vanessa9373/my-portfolio-projects" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a href="mailto:vanessa93730@gmail.com" aria-label="Email"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><svg class="icon" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+  <script src="/script.js"></script>
+</body>
+</html>

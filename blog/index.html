@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Blog by Vanessa Awo. Solutions Architecture, Solutions Engineering, AI integration, and cloud strategy insights from the field.">
+  <title>Blog | Vanessa Awo</title>
+  <link rel="stylesheet" href="/style.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+</head>
+<body><script>if(localStorage.getItem('theme')==='light')document.body.classList.add('light-mode')</script>
+
+  <!-- NAVIGATION -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="/" class="nav-logo"><svg class="logo-badge" width="28" height="28" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.28)" stroke-width="1"/><text x="14" y="19" text-anchor="middle" fill="#00b4d8" font-size="11" font-weight="800" font-family="monospace">VA</text></svg><span class="logo-name-text">Vanessa Awo</span></a>
+      <ul class="nav-menu" id="nav-menu">
+        <li><a href="/" class="nav-link">Home</a></li>
+        <li><a href="/#about" class="nav-link">About</a></li>
+        <li><a href="/#skills" class="nav-link">Skills</a></li>
+        <li><a href="/projects/" class="nav-link">Projects</a></li>
+        <li><a href="/#experience" class="nav-link">Experience</a></li>
+        <li><a href="/#contact" class="nav-link">Contact</a></li>
+        <li><a href="/blog/" class="nav-link">Blog</a></li>
+        <li><a href="/architecture/" class="nav-link">Architecture</a></li>
+      </ul>
+      <button class="theme-toggle" aria-label="Toggle theme"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <a href="/#contact" class="nav-cta">Hire Me</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- PAGE HERO -->
+  <div class="page-hero page-hero--blog">
+    <div class="container">
+      <h1 class="page-hero-title">Blog</h1>
+      <p class="page-hero-subtitle">Cloud architecture, AI integration, and technical strategy from the field</p>
+    </div>
+  </div>
+
+  <!-- BLOG SECTION -->
+  <section class="section section-decorated" id="blog">
+    <div class="container">
+
+      <!-- Blog Tag Filter -->
+      <div class="project-filters">
+        <button class="blog-filter-btn filter-btn active" data-filter="all">All</button>
+        <button class="blog-filter-btn filter-btn" data-filter="architecture">Architecture</button>
+        <button class="blog-filter-btn filter-btn" data-filter="ai">AI</button>
+        <button class="blog-filter-btn filter-btn" data-filter="strategy">Strategy</button>
+        <button class="blog-filter-btn filter-btn" data-filter="cloud">Cloud</button>
+        <button class="blog-filter-btn filter-btn" data-filter="migration">Migration</button>
+      </div>
+
+      <div class="blog-grid">
+
+        <!-- Post, Three-Tier HA DR -->
+        <a href="/posts/three-tier-ha-dr/" class="blog-card" data-category="architecture">
+          <img src="/assets/img-security.svg" alt="Three-Tier HA Web Application with Multi-Region DR" class="project-img blog-img" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>Jun 29, 2026</span>
+              <span>18 min read</span>
+            </div>
+            <div class="project-tags">
+              <span class="tag tag-aws">AWS</span>
+              <span class="tag">Architecture</span>
+              <span class="tag">High Availability</span>
+              <span class="tag">Disaster Recovery</span>
+            </div>
+            <h3>Three-Tier HA Web Application with Multi-Region Disaster Recovery on AWS</h3>
+            <p class="blog-excerpt">A complete Solutions Architect walkthrough: 99.99% availability, RTO &lt;15 min, RPO &lt;5 min. Every decision explained, networking, compute, data, security, DR strategy, cost, and Well-Architected review.</p>
+            <span class="blog-read-more">Read More <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+        <!-- Post 0, Multi-Account Landing Zone -->
+        <a href="/posts/multi-account-landing-zone/" class="blog-card" data-category="architecture">
+          <img src="/assets/img-security.svg" alt="How I Built a Multi-Account AWS Landing Zone" class="project-img blog-img" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>Jun 27, 2026</span>
+              <span>10 min read</span>
+            </div>
+            <div class="project-tags">
+              <span class="tag tag-aws">AWS</span>
+              <span class="tag">Architecture</span>
+              <span class="tag">Governance</span>
+              <span class="tag">Terraform</span>
+            </div>
+            <h3>How I Built a Multi-Account AWS Landing Zone from Scratch</h3>
+            <p class="blog-excerpt">SCPs, Transit Gateway, IAM Identity Center, centralized security, and three things that surprised me about enterprise cloud governance at scale.</p>
+            <span class="blog-read-more">Read More <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+        <!-- Post 1 -->
+        <a href="/posts/technical-discovery-framework/" class="blog-card" data-category="strategy">
+          <img src="/assets/img-terraform.svg" alt="Technical Discovery Framework" class="project-img blog-img" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>Jun 15, 2026</span>
+              <span>6 min read</span>
+            </div>
+            <div class="project-tags">
+              <span class="tag tag-aws">SA</span>
+              <span class="tag">Strategy</span>
+              <span class="tag">Discovery</span>
+            </div>
+            <h3>How to Run a Winning Technical Discovery Session</h3>
+            <p class="blog-excerpt">How I structure technical discovery calls to uncover real requirements, qualify opportunities, and set up the solution design phase for success.</p>
+            <span class="blog-read-more">Read More <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+        <!-- Post 2 -->
+        <a href="/posts/ai-integration-patterns/" class="blog-card" data-category="ai">
+          <img src="/assets/img-observability.svg" alt="AI Integration Patterns for Enterprise Architects" class="project-img blog-img" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>Jun 5, 2026</span>
+              <span>8 min read</span>
+            </div>
+            <div class="project-tags">
+              <span class="tag tag-aws">AI/ML</span>
+              <span class="tag">Architecture</span>
+              <span class="tag">AWS</span>
+            </div>
+            <h3>AI Integration Patterns Every Solutions Architect Should Know</h3>
+            <p class="blog-excerpt">A practical guide to the most common enterprise AI integration patterns: RAG, fine-tuning, agentic workflows, and when to use each one.</p>
+            <span class="blog-read-more">Read More <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+        <!-- Post 3 -->
+        <a href="/posts/poc-to-production-demos/" class="blog-card" data-category="strategy">
+          <img src="/assets/img-migration.svg" alt="From POC to Production: Technical Demos" class="project-img blog-img" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>May 20, 2026</span>
+              <span>7 min read</span>
+            </div>
+            <div class="project-tags">
+              <span class="tag tag-aws">SE</span>
+              <span class="tag">POC</span>
+              <span class="tag">Strategy</span>
+            </div>
+            <h3>From POC to Production: Delivering Technical Demos That Win Deals</h3>
+            <p class="blog-excerpt">The exact framework I use to scope, build, and present technical POCs that convert to pipeline: from whiteboard to working demo.</p>
+            <span class="blog-read-more">Read More <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+        <!-- Post 4 -->
+        <a href="/posts/well-architected-deep-dive/" class="blog-card" data-category="architecture">
+          <img src="/assets/img-kubernetes.svg" alt="AWS Well-Architected Framework Deep Dive" class="project-img blog-img" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>May 8, 2026</span>
+              <span>9 min read</span>
+            </div>
+            <div class="project-tags">
+              <span class="tag tag-aws">AWS</span>
+              <span class="tag">Architecture</span>
+              <span class="tag">Well-Architected</span>
+            </div>
+            <h3>AWS Well-Architected Framework: Going Beyond the Checklist</h3>
+            <p class="blog-excerpt">How to use the 6 pillars not as a compliance exercise, but as a living design tool that drives real trade-off conversations with stakeholders.</p>
+            <span class="blog-read-more">Read More <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+        <!-- Post 5 -->
+        <a href="/posts/cloud-migration-6r-model/" class="blog-card" data-category="migration">
+          <img src="/assets/img-migration.svg" alt="Cloud Migration 6R Decision Model" class="project-img blog-img" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>Apr 18, 2026</span>
+              <span>6 min read</span>
+            </div>
+            <div class="project-tags">
+              <span class="tag tag-aws">AWS</span>
+              <span class="tag">Migration</span>
+              <span class="tag">Cloud</span>
+            </div>
+            <h3>The 6R Cloud Migration Model in Practice</h3>
+            <p class="blog-excerpt">A practical walkthrough of how I apply Rehost, Replatform, Refactor, Repurchase, Retire, and Retain strategies to real-world enterprise workloads.</p>
+            <span class="blog-read-more">Read More <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+        <!-- Post 6 -->
+        <a href="/posts/multi-cloud-vs-single-cloud/" class="blog-card" data-category="architecture">
+          <img src="/assets/img-terraform.svg" alt="Multi-Cloud vs Single Cloud Strategy" class="project-img blog-img" loading="lazy">
+          <div class="blog-content">
+            <div class="blog-meta">
+              <span>Mar 30, 2026</span>
+              <span>5 min read</span>
+            </div>
+            <div class="project-tags">
+              <span class="tag">Architecture</span>
+              <span class="tag">Multi-Cloud</span>
+              <span class="tag">Strategy</span>
+            </div>
+            <h3>Multi-Cloud vs. Single Cloud: How to Frame the Conversation</h3>
+            <p class="blog-excerpt">The questions, trade-offs, and TCO considerations I use when a customer asks whether to go all-in on AWS or hedge across multiple cloud providers.</p>
+            <span class="blog-read-more">Read More <svg class="icon icon-sm" viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></span>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-logo"><svg class="logo-badge" width="22" height="22" viewBox="0 0 28 28" fill="none" aria-hidden="true"><rect width="28" height="28" rx="6" fill="rgba(0,180,216,0.12)" stroke="rgba(0,180,216,0.28)" stroke-width="1"/><text x="14" y="19" text-anchor="middle" fill="#00b4d8" font-size="11" font-weight="800" font-family="monospace">VA</text></svg> Vanessa Awo</p>
+        <p>&copy; 2026 Vanessa Awo. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/vanessajen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://github.com/vanessa9373/my-portfolio-projects" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a href="mailto:vanessa93730@gmail.com" aria-label="Email"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><svg class="icon" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+  <script src="/script.js"></script>
+</body>
+</html>
