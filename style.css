@@ -304,23 +304,15 @@ ul { list-style: none; }
   display: flex;
   align-items: center;
   position: relative;
-  background: var(--gradient-hero);
+  background:
+    linear-gradient(to right, rgba(10,15,30,0.88) 38%, rgba(10,15,30,0.35) 100%),
+    url('assets/hero-bg.png') center center / cover no-repeat;
   overflow: hidden;
   padding-top: 80px;
 }
 
 .hero::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 55%;
-  height: 100%;
-  background: url('assets/IMG_4870.jpeg') center top / cover no-repeat;
-  opacity: 0.08;
-  z-index: 0;
-  mask-image: linear-gradient(to left, rgba(0,0,0,0.6) 0%, transparent 100%);
-  -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.6) 0%, transparent 100%);
+  display: none;
 }
 
 .hero-bg-grid {
