@@ -1,5 +1,5 @@
 /* ============================================================
-   Jenella Awo — Portfolio JavaScript
+   Vanessa Awo - Portfolio JavaScript
    Solutions Architect, Cloud & DevOps Engineer, SRE
    Hybrid single-page + separate pages version
    ============================================================ */
@@ -61,7 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ---------- BUTTON RIPPLE — removed ---------- */
+  /* ---------- BUTTON RIPPLE - removed ---------- */
 
 
   /* ---------- MOBILE NAVIGATION ---------- */
@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ---------- ACTIVE NAV LINK — PATHNAME-BASED ---------- */
+  /* ---------- ACTIVE NAV LINK - PATHNAME-BASED ---------- */
   const navLinks = document.querySelectorAll('.nav-link');
   const path = window.location.pathname;
 
@@ -202,7 +202,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ---------- TYPED TEXT — static display ---------- */
+  /* ---------- TYPED TEXT - static display ---------- */
   // Static role title; no animation loop needed
 
 

@@ -1,4 +1,4 @@
-# jenellavan.com — Portfolio Site
+# jenellavan.com - Portfolio Site
 
 > **Vanessa Awo** · Solutions Architect · Solutions Engineer · Pre-Sales SE
 
@@ -11,7 +11,7 @@
 
 ## About
 
-Personal portfolio site for **[jenellavan.com](https://jenellavan.com)** — built to demonstrate cloud architecture depth, pre-sales communication skills, and hands-on technical delivery for SA, SE, and cloud engineering roles.
+Personal portfolio site for **[jenellavan.com](https://jenellavan.com)**, built to demonstrate cloud architecture depth, pre-sales communication skills, and hands-on technical delivery for SA, SE, and cloud engineering roles.
 
 **What's inside:**
 - 6 production-grade AWS architecture projects with Terraform IaC and Draw.io diagrams
@@ -38,11 +38,11 @@ Personal portfolio site for **[jenellavan.com](https://jenellavan.com)** — bui
 
 | Page | Description |
 |------|-------------|
-| [`index.html`](index.html) | Home — hero, about, skills, experience, certifications, contact |
+| [`index.html`](index.html) | Home: hero, about, skills, experience, certifications, contact |
 | [`projects.html`](projects.html) | 6 AWS cloud projects with architecture links and GitHub |
-| [`architecture.html`](architecture.html) | Interactive architecture diagrams — 6 tabbed panels with legends |
+| [`architecture.html`](architecture.html) | Interactive architecture diagrams: 6 tabbed panels with legends |
 | [`demo.html`](demo.html) | 7-slide interactive stakeholder presentation |
-| [`blog.html`](blog.html) | Technical blog — SA, AI, Pre-Sales, migration strategy |
+| [`blog.html`](blog.html) | Technical blog: SA, AI, Pre-Sales, migration strategy |
 | [`resume.html`](resume.html) | Printable/downloadable resume |
 | `posts/` | Full blog post pages |
 | `diagrams/` | Draw.io source files for all 6 architecture diagrams |
@@ -53,7 +53,7 @@ Personal portfolio site for **[jenellavan.com](https://jenellavan.com)** — bui
 
 The cloud projects referenced in this portfolio live in a dedicated repo:
 
-**[vanessa9373/my-portfolio-projects](https://github.com/vanessa9373/my-portfolio-projects)** — 6 production-grade AWS projects with full Terraform IaC, Well-Architected documentation, and architecture diagrams:
+**[vanessa9373/my-portfolio-projects](https://github.com/vanessa9373/my-portfolio-projects)**: 6 production-grade AWS projects with full Terraform IaC, Well-Architected documentation, and architecture diagrams:
 
 | # | Project | Key Services |
 |---|---------|-------------|

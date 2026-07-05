@@ -1,5 +1,5 @@
 /* ============================================================
-   JENELLA V. — Portfolio Stylesheet
+   Vanessa Awo - Portfolio Stylesheet
    Solutions Architect & Cloud Engineer
    ============================================================ */
 
@@ -1396,7 +1396,7 @@ ul { list-style: none; }
 
 
 /* ============================================================
-   VISUAL ENHANCEMENTS — Decorated sections
+   VISUAL ENHANCEMENTS - Decorated sections
    ============================================================ */
 
 /* Card cyan glow on hover */
@@ -1449,7 +1449,7 @@ ul { list-style: none; }
 
 
 /* ============================================================
-   RESPONSIVE — New elements
+   RESPONSIVE - New elements
    ============================================================ */
 @media (max-width: 768px) {
   .page-hero { padding: 120px 0 48px; }
@@ -1475,7 +1475,7 @@ body {
 
 
 /* ============================================================
-   ANIMATED GRADIENT TEXT — Hero Name
+   ANIMATED GRADIENT TEXT - Hero Name
    ============================================================ */
 .hero-name {
   background: linear-gradient(90deg, var(--accent), var(--primary-lighter), #6c47ff, var(--accent));
@@ -1921,13 +1921,13 @@ body.light-mode .nav-toggle span {
 
 
 /* ============================================================
-   HERO FLOATING ORBS — disabled
+   HERO FLOATING ORBS - disabled
    ============================================================ */
 .hero-orb { display: none; }
 
 
 /* ============================================================
-   HERO ENTRANCE ANIMATIONS — simplified
+   HERO ENTRANCE ANIMATIONS - simplified
    ============================================================ */
 .hero-animate-1,
 .hero-animate-2,
@@ -1941,7 +1941,7 @@ body.light-mode .nav-toggle span {
 
 
 /* ============================================================
-   BUTTON RIPPLE — removed
+   BUTTON RIPPLE - removed
    ============================================================ */
 .ripple-btn {}
 
