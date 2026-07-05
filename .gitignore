@@ -39,3 +39,9 @@ npm-debug.log
 # Compiled
 *.o
 *.out
+
+# Claude worktrees
+.claude/worktrees/
+
+# Unrelated project directories
+sre-Projects/
