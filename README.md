@@ -1,6 +1,6 @@
 # jenellavan.com - Portfolio Site
 
-> **Vanessa Awo** · Solutions Architect · Solutions Engineer · Pre-Sales SE
+> **Vanessa Awo** · Solutions Architect · Solutions Engineer
 
 [![Live Site](https://img.shields.io/badge/Live_Site-jenellavan.com-00b4d8?style=flat&logo=githubpages&logoColor=white)](https://jenellavan.com)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-vanessajen-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/vanessajen)
@@ -11,14 +11,14 @@
 
 ## About
 
-Personal portfolio site for **[jenellavan.com](https://jenellavan.com)**, built to demonstrate cloud architecture depth, pre-sales communication skills, and hands-on technical delivery for SA, SE, and cloud engineering roles.
+Personal portfolio site for **[jenellavan.com](https://jenellavan.com)**, built to demonstrate cloud architecture depth, technical communication skills, and hands-on delivery for SA, SE, and cloud engineering roles.
 
 **What's inside:**
 - 6 production-grade AWS architecture projects with Terraform IaC and Draw.io diagrams
 - Interactive architecture viewer with 6 panels (HA WordPress, Multi-Account Landing Zone, Serverless API, Hub-and-Spoke Network, ML Pipeline, Security)
-- Blog with 7 technical articles on Solutions Architecture, AI integration, and Pre-Sales strategy
+- Blog with 7 technical articles on Solutions Architecture, AI integration, and technical strategy
 - Interactive demo presentation (7 slides) for technical stakeholder walkthroughs
-- Printable resume with SA/SE/Pre-Sales framing
+- Printable resume with SA/SE framing
 
 ---
 
@@ -42,7 +42,7 @@ Personal portfolio site for **[jenellavan.com](https://jenellavan.com)**, built 
 | [`projects.html`](projects.html) | 6 AWS cloud projects with architecture links and GitHub |
 | [`architecture.html`](architecture.html) | Interactive architecture diagrams: 6 tabbed panels with legends |
 | [`demo.html`](demo.html) | 7-slide interactive stakeholder presentation |
-| [`blog.html`](blog.html) | Technical blog: SA, AI, Pre-Sales, migration strategy |
+| [`blog.html`](blog.html) | Technical blog: SA, AI, cloud strategy, migration |
 | [`resume.html`](resume.html) | Printable/downloadable resume |
 | `posts/` | Full blog post pages |
 | `diagrams/` | Draw.io source files for all 6 architecture diagrams |
