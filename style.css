@@ -94,7 +94,7 @@ ul { list-style: none; }
   left: 0;
   right: 0;
   z-index: 1000;
-  padding: 16px 0;
+  padding: 10px 0;
   background: transparent;
   transition: background var(--transition), padding var(--transition), box-shadow var(--transition);
 }
@@ -102,7 +102,7 @@ ul { list-style: none; }
 .navbar.scrolled {
   background: rgba(10, 22, 40, 0.95);
   backdrop-filter: blur(12px);
-  padding: 10px 0;
+  padding: 8px 0;
   box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -118,29 +118,49 @@ ul { list-style: none; }
 .nav-logo {
   display: flex;
   align-items: center;
-  gap: 10px;
-  color: var(--accent);
+  padding: 4px 0;
   text-decoration: none;
+  flex-shrink: 0;
 }
 
-.nav-logo:hover { color: var(--white); }
-.nav-logo:hover .logo-name-text { color: var(--white); }
-
-.logo-badge { flex-shrink: 0; transition: opacity var(--transition); }
-.nav-logo:hover .logo-badge { opacity: 0.8; }
-
-.logo-name-text {
-  font-family: var(--font);
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text-heading);
-  transition: color var(--transition);
-  white-space: nowrap;
+/* Nav logo image — desktop */
+.nav-logo-img {
+  height: 64px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+  transition: opacity var(--transition);
 }
 
-/* Hide name text on very small screens */
+.nav-logo:hover .nav-logo-img { opacity: 0.85; }
+
+/* Tablet */
+@media (max-width: 1024px) {
+  .nav-logo-img { height: 56px; }
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .nav-logo-img { height: 48px; }
+}
+
+/* Small mobile */
 @media (max-width: 480px) {
-  .logo-name-text { display: none; }
+  .nav-logo-img { height: 40px; }
+}
+
+/* Footer logo image */
+.footer-logo-img {
+  height: 80px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
+}
+
+@media (max-width: 600px) {
+  .footer-logo-img { height: 64px; }
 }
 
 .nav-menu {
@@ -1893,6 +1913,14 @@ body.light-mode .nav-toggle span {
   font-size: 2rem;
   font-weight: 700;
   color: var(--accent);
+}
+
+.loader-logo-img {
+  height: 80px;
+  width: auto;
+  display: block;
+  object-fit: contain;
+  image-rendering: -webkit-optimize-contrast;
 }
 
 .loader-bar {
