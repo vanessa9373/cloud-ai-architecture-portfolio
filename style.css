@@ -306,7 +306,7 @@ ul { list-style: none; }
   position: relative;
   background:
     linear-gradient(to right, rgba(10,15,30,0.88) 38%, rgba(10,15,30,0.35) 100%),
-    url('assets/hero-bg.png') center center / cover no-repeat;
+    url('assets/hero.png') center center / cover no-repeat;
   overflow: hidden;
   padding-top: 80px;
 }
