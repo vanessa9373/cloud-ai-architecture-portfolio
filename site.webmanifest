@@ -1,0 +1,21 @@
+{
+  "name": "Vanessa Awo | Solutions Architect",
+  "short_name": "Vanessa Awo",
+  "description": "Cloud infrastructure professional open to Solutions Architect, Solutions Engineer, and Cloud Engineering roles.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#0a0a0a",
+  "theme_color": "#5d8a36",
+  "icons": [
+    {
+      "src": "/assets/LOGO.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/LOGO.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
