@@ -2052,3 +2052,635 @@ body.light-mode .nav-toggle span {
   width: 72px;
 }
 
+
+/* ============================================================
+   ACCESSIBILITY UTILITIES
+   ============================================================ */
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
+
+/* ============================================================
+   CAPABILITIES (TIER) GRID
+   ============================================================ */
+.capabilities-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 2.5rem;
+}
+
+.capability-tier {
+  background: var(--dark-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.75rem 2rem;
+}
+
+.capability-tier-header {
+  margin-bottom: 1.25rem;
+}
+
+.tier-badge {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.3em 0.9em;
+  border-radius: 20px;
+  margin-bottom: 0.6rem;
+}
+
+.tier-core   { background: rgba(0, 180, 216, 0.15); color: var(--accent); border: 1px solid rgba(0,180,216,0.3); }
+.tier-hands-on { background: rgba(74, 158, 218, 0.12); color: var(--primary-lighter); border: 1px solid rgba(74,158,218,0.3); }
+.tier-foundational { background: rgba(136,150,176,0.12); color: var(--text-muted); border: 1px solid rgba(136,150,176,0.2); }
+
+.tier-desc {
+  font-size: 0.88rem;
+  color: var(--text-muted);
+  margin: 0;
+}
+
+.capability-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.cap-tag {
+  font-size: 0.83rem;
+  padding: 0.3em 0.85em;
+  border-radius: 6px;
+  font-weight: 500;
+}
+
+.cap-core  { background: rgba(0,180,216,0.1); color: var(--accent); border: 1px solid rgba(0,180,216,0.2); }
+.cap-hands { background: rgba(74,158,218,0.1); color: var(--primary-lighter); border: 1px solid rgba(74,158,218,0.2); }
+.cap-found { background: rgba(136,150,176,0.08); color: var(--text-muted); border: 1px solid rgba(136,150,176,0.15); }
+
+.capability-subheading {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin: 1rem 0 0.5rem;
+}
+
+.capabilities-cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+
+/* ============================================================
+   PROJECT STATUS BADGES
+   ============================================================ */
+.project-status-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  padding: 0.3em 0.85em;
+  border-radius: 20px;
+  z-index: 2;
+}
+
+.status-designed   { background: rgba(0,180,216,0.85); color: #fff; }
+.status-poc        { background: rgba(74,158,218,0.85); color: #fff; }
+.status-completed  { background: rgba(40,167,69,0.85); color: #fff; }
+.status-lab        { background: rgba(255,193,7,0.85); color: #0a1628; }
+
+.project-image { position: relative; }
+
+.project-section {
+  margin-bottom: 1.25rem;
+}
+.project-section h3 {
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.project-section ul {
+  list-style: disc;
+  padding-left: 1.4rem;
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 0.92rem;
+}
+.project-section ul li { margin-bottom: 0.2rem; }
+
+.project-meta {
+  margin: 1rem 0;
+  font-size: 0.83rem;
+  color: var(--text-muted);
+}
+.project-status-inline {
+  background: var(--dark-surface);
+  padding: 0.25em 0.75em;
+  border-radius: 4px;
+  font-weight: 600;
+}
+
+.project-intro {
+  max-width: 720px;
+  margin: 0 auto 2rem;
+  text-align: center;
+  color: var(--text-muted);
+}
+
+.project-links {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  margin-top: 1.25rem;
+}
+
+.btn-sm {
+  padding: 0.4em 1.1em;
+  font-size: 0.85rem;
+}
+
+.project-card--full .project-image img {
+  max-height: 220px;
+  object-fit: cover;
+  width: 100%;
+}
+
+.projects-cta {
+  text-align: center;
+  margin-top: 2.5rem;
+}
+
+.project-problem {
+  font-size: 0.95rem;
+  color: var(--text);
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+
+.project-architecture ul {
+  list-style: disc;
+  padding-left: 1.4rem;
+  color: var(--text);
+  line-height: 1.8;
+  font-size: 0.92rem;
+}
+.project-architecture strong { color: var(--text-heading); }
+
+
+/* ============================================================
+   TIMELINE SA RELEVANCE TAGS
+   ============================================================ */
+.timeline-sa-relevance {
+  margin-top: 1rem;
+  padding: 0.9rem 1rem;
+  background: rgba(0,180,216,0.05);
+  border-radius: 8px;
+  border-left: 3px solid rgba(0,180,216,0.3);
+}
+.timeline-sa-relevance h3 {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.relevance-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+}
+.rel-tag {
+  font-size: 0.78rem;
+  padding: 0.2em 0.7em;
+  background: rgba(0,180,216,0.1);
+  border: 1px solid rgba(0,180,216,0.2);
+  color: var(--accent);
+  border-radius: 4px;
+  font-weight: 500;
+}
+
+.timeline-sa-note {
+  font-size: 0.87rem;
+  color: var(--text-muted);
+  margin-top: 0.75rem;
+  font-style: italic;
+}
+
+.timeline-bullets {
+  list-style: disc;
+  padding-left: 1.4rem;
+  color: var(--text);
+  line-height: 1.9;
+  font-size: 0.93rem;
+}
+.timeline-bullets li { margin-bottom: 0.2rem; }
+
+.exp-context { max-width: 760px; }
+
+.experience-cta { margin-top: 2rem; }
+
+
+/* ============================================================
+   CERTIFICATIONS SUMMARY (HOME PAGE)
+   ============================================================ */
+.cert-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.cert-summary-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  background: var(--dark-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  transition: border-color var(--transition);
+}
+.cert-summary-card:hover { border-color: rgba(0,180,216,0.3); }
+.cert-summary-card.cert-highlight { border-color: rgba(0,180,216,0.4); }
+
+.cert-icon svg { color: var(--accent); }
+
+.cert-info h3 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 0.25rem;
+}
+.cert-info p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+.certs-cta { text-align: center; margin-top: 1.5rem; }
+
+.subsection-label {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1.25rem;
+}
+
+
+/* ============================================================
+   CONTACT PAGE
+   ============================================================ */
+.contact-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+@media (max-width: 768px) {
+  .contact-layout { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+.contact-channels {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+}
+
+.contact-channel {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+  padding: 0.85rem 1rem;
+  background: var(--dark-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  text-decoration: none;
+  transition: border-color var(--transition), background var(--transition);
+}
+.contact-channel:hover {
+  border-color: rgba(0,180,216,0.4);
+  background: var(--dark-surface);
+  color: var(--text-heading);
+}
+.contact-channel i {
+  font-size: 1.3rem;
+  color: var(--accent);
+  width: 24px;
+  text-align: center;
+}
+.contact-channel strong { display: block; font-size: 0.9rem; color: var(--text-heading); }
+.contact-channel span  { font-size: 0.82rem; color: var(--text-muted); }
+
+.contact-form-wrap {
+  background: var(--dark-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2rem;
+}
+
+.contact-form .form-group {
+  margin-bottom: 1.1rem;
+}
+.contact-form label {
+  display: block;
+  font-size: 0.87rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin-bottom: 0.4rem;
+}
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  background: var(--dark-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 0.92rem;
+  padding: 0.7rem 1rem;
+  transition: border-color var(--transition);
+}
+.contact-form input:focus,
+.contact-form textarea:focus {
+  outline: none;
+  border-color: var(--accent);
+}
+.contact-form textarea { resize: vertical; min-height: 120px; }
+
+
+/* ============================================================
+   RESUME PAGE
+   ============================================================ */
+.resume-download-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background: var(--dark-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 2.5rem;
+  flex-wrap: wrap;
+}
+
+.web-resume {
+  background: var(--dark-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 2.5rem;
+  max-width: 860px;
+  margin: 0 auto;
+}
+
+.resume-section {
+  margin-bottom: 2.5rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid var(--border);
+}
+.resume-section:last-child { border-bottom: none; margin-bottom: 0; padding-bottom: 0; }
+
+.resume-section-title {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: 1rem;
+}
+
+.resume-job {
+  margin-bottom: 1.5rem;
+}
+.resume-job:last-child { margin-bottom: 0; }
+
+.resume-job-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 1rem;
+  margin-bottom: 0.5rem;
+}
+.resume-job-header h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 0;
+}
+.resume-company {
+  font-size: 0.87rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+.resume-date {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  margin-left: auto;
+}
+
+.resume-list {
+  list-style: disc;
+  padding-left: 1.4rem;
+  color: var(--text);
+  line-height: 1.9;
+  font-size: 0.91rem;
+}
+.resume-list li { margin-bottom: 0.15rem; }
+
+.resume-caps-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+}
+.resume-caps-label {
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 0.5rem;
+}
+
+@media (max-width: 600px) {
+  .resume-caps-grid { grid-template-columns: 1fr; }
+  .web-resume { padding: 1.5rem; }
+}
+
+
+/* ============================================================
+   FOOTER
+   ============================================================ */
+.footer {
+  background: var(--dark-card);
+  border-top: 1px solid var(--border);
+  padding: 3rem 0 1.5rem;
+  margin-top: auto;
+}
+
+.footer-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+  text-align: center;
+}
+
+.footer-name {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-heading);
+}
+.footer-tagline {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.25rem 1.25rem;
+  margin: 0.5rem 0;
+}
+.footer-links a {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  transition: color var(--transition);
+}
+.footer-links a:hover { color: var(--accent); }
+
+.footer-social {
+  display: flex;
+  gap: 1rem;
+  margin: 0.25rem 0;
+}
+.footer-social a {
+  font-size: 1.2rem;
+  color: var(--text-muted);
+  transition: color var(--transition);
+}
+.footer-social a:hover { color: var(--accent); }
+
+.footer-copy {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  margin-top: 0.5rem;
+}
+.footer-copy a { color: var(--text-muted); }
+.footer-copy a:hover { color: var(--accent); }
+
+
+/* ============================================================
+   CONTACT CTA SECTION (HOME)
+   ============================================================ */
+.contact-cta-section {
+  background: var(--dark-surface);
+}
+.text-center { text-align: center; }
+.cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+
+/* ============================================================
+   HERO PROOF CHIP UPDATE (no bullet prefix needed — already inline)
+   ============================================================ */
+.hero-proof-chip::before { display: none; }
+
+
+/* ============================================================
+   ABOUT PAGE DETAIL ROWS
+   ============================================================ */
+.about-detail { margin-bottom: 1.25rem; }
+.about-detail p { margin: 0.15rem 0 0; font-size: 0.9rem; color: var(--text); }
+
+
+/* ============================================================
+   CERTIFICATIONS PAGE GRID FIX
+   ============================================================ */
+.certs-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+}
+
+.edu-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1rem;
+}
+
+
+/* ============================================================
+   TIMELINE UPDATES
+   ============================================================ */
+.timeline-company {
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 500;
+}
+
+.timeline-date {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+}
+
+.timeline-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.4rem 1rem;
+  margin-bottom: 0.75rem;
+}
+.timeline-header h2,
+.timeline-header h3 {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-heading);
+  margin: 0;
+}
+
+.experience-cta,
+.projects-cta,
+.capabilities-cta,
+.certs-cta {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+

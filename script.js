@@ -1,7 +1,6 @@
 /* ============================================================
    Vanessa Awo - Portfolio JavaScript
-   Solutions Architect, Cloud & DevOps Engineer, SRE
-   Hybrid single-page + separate pages version
+   Solutions Architect | Solutions Engineer | Cloud Solutions Professional
    ============================================================ */
 
 if (location.hash === '#home') {
@@ -202,53 +201,47 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ---------- TYPED TEXT - static display ---------- */
-  // Static role title; no animation loop needed
+  /* ---------- TYPED TEXT (Hero role rotation) ---------- */
+  const typedEl = document.getElementById('typed-text');
+  if (typedEl) {
+    const roles = [
+      'Cloud Solutions Professional',
+      'Solutions Architect',
+      'Solutions Engineer',
+      'Cloud Consultant'
+    ];
+    let roleIndex = 0;
+    let charIndex = 0;
+    let deleting = false;
+    const typingSpeed = 70;
+    const deletingSpeed = 40;
+    const pauseAfterWord = 2200;
+    const pauseBeforeType = 350;
 
-
-  /* ---------- COUNTER ANIMATION (Home page only) ---------- */
-  const statNumbers = document.querySelectorAll('.stat-number');
-  let countersAnimated = false;
-
-  function animateCounters() {
-    if (countersAnimated) return;
-
-    statNumbers.forEach(stat => {
-      const target = parseInt(stat.getAttribute('data-target'));
-      const duration = 600;
-      const start = performance.now();
-
-      function updateCounter(now) {
-        const elapsed = now - start;
-        const progress = Math.min(elapsed / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        stat.textContent = Math.floor(eased * target);
-
-        if (progress < 1) {
-          requestAnimationFrame(updateCounter);
-        } else {
-          stat.textContent = target;
+    function typeRole() {
+      const current = roles[roleIndex];
+      if (!deleting) {
+        typedEl.textContent = current.substring(0, charIndex + 1);
+        charIndex++;
+        if (charIndex === current.length) {
+          deleting = true;
+          setTimeout(typeRole, pauseAfterWord);
+          return;
         }
+        setTimeout(typeRole, typingSpeed);
+      } else {
+        typedEl.textContent = current.substring(0, charIndex - 1);
+        charIndex--;
+        if (charIndex === 0) {
+          deleting = false;
+          roleIndex = (roleIndex + 1) % roles.length;
+          setTimeout(typeRole, pauseBeforeType);
+          return;
+        }
+        setTimeout(typeRole, deletingSpeed);
       }
-
-      requestAnimationFrame(updateCounter);
-    });
-
-    countersAnimated = true;
-  }
-
-  const heroStats = document.querySelector('.hero-stats');
-  if (heroStats) {
-    const observer = new IntersectionObserver(entries => {
-      entries.forEach(entry => {
-        if (entry.isIntersecting) {
-          animateCounters();
-          observer.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
-
-    observer.observe(heroStats);
+    }
+    setTimeout(typeRole, 800);
   }
 
 

@@ -3,147 +3,302 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architecture Projects | Vanessa Awo — AWS Solutions Architect</title>
+  <meta name="description" content="AWS architecture projects by Vanessa Awo: a Highly Available WordPress infrastructure, a Serverless Three-Tier Application, and an AWS Forage Solutions Architecture virtual experience.">
+  <meta name="keywords" content="Vanessa Awo projects, AWS architecture, highly available WordPress, serverless application, AWS Well-Architected, Forage Solutions Architect, cloud architecture projects">
+  <link rel="canonical" href="https://jenellavan.com/projects/">
   <link rel="icon" type="image/png" href="/assets/LOGO.png">
   <link rel="apple-touch-icon" href="/assets/LOGO.png">
-  <meta name="description" content="AWS architecture projects by Vanessa Awo: a Highly Available WordPress infrastructure and a Multi-Account AWS Landing Zone, both built with Terraform and documented to Well-Architected standards.">
-  <title>Projects | Vanessa Awo</title>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://jenellavan.com/projects/">
+  <meta property="og:title" content="Architecture Projects | Vanessa Awo">
+  <meta property="og:description" content="Hands-on AWS architecture projects including HA WordPress, Serverless Three-Tier Application, and AWS Forage virtual experience.">
+  <meta property="og:image" content="https://jenellavan.com/assets/LOGO.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Projects | Vanessa Awo — AWS Solutions Architect">
+  <meta name="twitter:image" content="https://jenellavan.com/assets/LOGO.png">
   <link rel="stylesheet" href="/style.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" crossorigin="anonymous">
 </head>
 <body><script>if(localStorage.getItem('theme')==='light')document.body.classList.add('light-mode')</script>
 
-  <!-- NAVIGATION -->
   <nav class="navbar" id="navbar">
     <div class="nav-container">
-      <a href="/" class="nav-logo"><img src="/assets/LOGO.png" alt="Vanessa Awo" class="nav-logo-img"></a>
+      <a href="/" class="nav-logo"><img src="/assets/LOGO.png" alt="Vanessa Awo home" class="nav-logo-img"></a>
       <ul class="nav-menu" id="nav-menu">
         <li><a href="/" class="nav-link">Home</a></li>
         <li><a href="/about/" class="nav-link">About</a></li>
-        <li><a href="/skills/" class="nav-link">Skills</a></li>
+        <li><a href="/skills/" class="nav-link">Capabilities</a></li>
         <li><a href="/projects/" class="nav-link active">Projects</a></li>
         <li><a href="/experience/" class="nav-link">Experience</a></li>
         <li><a href="/certifications/" class="nav-link">Certifications</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
+        <li><a href="/resume/" class="nav-link">Resume</a></li>
         <li><a href="/contact/" class="nav-link">Contact</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle theme"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
-      <a href="/contact/" class="nav-cta">Hire Me</a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <button class="theme-toggle" aria-label="Toggle light/dark theme"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <a href="/contact/" class="nav-cta">Let's Connect</a>
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open navigation menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
-  <!-- PAGE HERO -->
-  <div class="page-hero page-hero--projects">
+  <div class="page-hero page-hero--projects" role="banner">
     <div class="container">
-      <h1 class="page-hero-title">Featured Projects</h1>
-      <p class="page-hero-subtitle">Two flagship AWS architecture projects built to production standards, with full IaC, architecture diagrams, and Well-Architected documentation.</p>
+      <h1 class="page-hero-title">Architecture Projects</h1>
+      <p class="page-hero-subtitle">Hands-on AWS architecture work I can explain and defend in an interview</p>
     </div>
   </div>
 
-  <!-- PROJECTS SECTION -->
-  <section class="section section-decorated" id="projects">
-    <div class="container">
+  <main>
+    <section class="section section-decorated" id="projects" aria-labelledby="projects-heading">
+      <div class="container">
+        <h2 class="section-title visually-hidden" id="projects-heading">Featured Architecture Projects</h2>
 
-      <!-- Hiring Manager Banner -->
-      <div style="background:rgba(0,180,216,0.07);border:1px solid rgba(0,180,216,0.2);border-radius:10px;padding:16px 22px;margin-bottom:28px;font-size:0.97rem;line-height:1.6;color:var(--text-secondary,#94a3b8);">
-        <strong style="color:var(--accent,#00b4d8);">For hiring managers:</strong> Each project includes full Terraform IaC, Draw.io architecture diagrams with AWS icons, Well-Architected trade-off analysis, and quantified cost/reliability metrics. Click <strong>View Diagram</strong> on any card, or visit <a href="/architecture/" style="color:var(--accent,#00b4d8);font-weight:600;">Architecture Diagrams</a> to explore all 6 interactive diagrams in one place.
-      </div>
-
-      <!-- Filter -->
-      <div class="project-filters">
-        <button class="filter-btn active" data-filter="all">All</button>
-        <button class="filter-btn" data-filter="architecture">Architecture</button>
-      </div>
-
-      <div class="projects-grid">
-
-        <!-- FEATURED 1: HA WordPress -->
-        <div class="project-card" data-category="architecture">
-          <div class="project-image">
-            <img src="/assets/img-multicloud.svg" alt="Highly Available WordPress on AWS" class="project-img" loading="lazy">
-            <div class="project-overlay">
-              <a href="https://github.com/vanessa9373/portfolio" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
-            </div>
-          </div>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="tag tag-aws">AWS</span>
-              <span class="tag">Terraform</span>
-              <span class="tag">Multi-AZ</span>
-              <span class="tag">Well-Architected</span>
-            </div>
-            <h3>Highly Available WordPress Infrastructure on AWS</h3>
-            <p>A media or content business running WordPress on a single server risks losing revenue every time that server goes down. This project solves that by deploying a zero-single-point-of-failure architecture across three Availability Zones: EC2 Auto Scaling behind an Application Load Balancer absorbs traffic spikes, RDS Multi-AZ with automatic failover keeps the database available in under two minutes, and CloudFront with S3 origin access control reduces origin load while cutting global latency. WAF protects against OWASP Top 10 threats, KMS CMK handles encryption at rest, and SSM Session Manager eliminates bastion hosts entirely. Alarms on p99 latency and 5xx error rate fire before users notice problems.</p>
-            <div class="project-results">
-              <div class="result"><strong>3</strong><span>AZs</span></div>
-              <div class="result"><strong>&lt;2 min</strong><span>DB Failover</span></div>
-              <div class="result"><strong>6</strong><span>WAF pillars</span></div>
-            </div>
-            <div class="project-tools">
-              <strong>Tools:</strong> Terraform, EC2 ASG, ALB, RDS Multi-AZ, CloudFront, WAF, KMS, SSM, CloudWatch
-            </div>
-            <p class="project-role"><strong>SA angle:</strong> Well-Architected design across all 6 pillars &nbsp;|&nbsp; <strong>SE angle:</strong> Quantified reliability and cost metrics for stakeholder discussions</p>
-            <a href="https://github.com/vanessa9373/portfolio" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:0.85rem;color:var(--accent,#00b4d8);text-decoration:none;">Architecture Doc &rarr;</a>
-            <a href="/architecture/#wp" style="display:inline-block;margin-top:6px;font-size:0.85rem;color:var(--accent,#00b4d8);text-decoration:none;margin-left:16px;">View Diagram &rarr;</a>
-          </div>
+        <div class="project-intro" data-aos="fade-up">
+          <p>Each project below includes a business problem statement, architecture rationale, AWS service selection decisions, and documentation. Status labels accurately reflect the current state of each project.</p>
         </div>
 
-        <!-- FEATURED 2: Multi-Account Landing Zone -->
-        <div class="project-card" data-category="architecture">
-          <div class="project-image">
-            <img src="/assets/img-security.svg" alt="Multi-Account AWS Landing Zone" class="project-img" loading="lazy">
-            <div class="project-overlay">
-              <a href="https://github.com/vanessa9373/portfolio" target="_blank" rel="noopener" class="project-link">View on GitHub</a>
+        <div class="projects-grid">
+
+          <!-- PROJECT 1: HA WordPress -->
+          <article class="project-card project-card--full" data-aos="fade-up" aria-label="Highly Available WordPress on AWS project">
+            <div class="project-image">
+              <img src="/assets/img-multicloud.svg" alt="Multi-AZ architecture diagram representing the HA WordPress design" class="project-img" loading="lazy" width="600" height="280">
+              <span class="project-status-badge status-designed">Architecture Design</span>
             </div>
-          </div>
-          <div class="project-content">
-            <div class="project-tags">
-              <span class="tag tag-aws">AWS Organizations</span>
-              <span class="tag">Terraform</span>
-              <span class="tag">SCPs</span>
-              <span class="tag">SSO</span>
+            <div class="project-content">
+              <div class="project-tags">
+                <span class="tag tag-aws">AWS</span>
+                <span class="tag">High Availability</span>
+                <span class="tag">Multi-AZ</span>
+                <span class="tag">Well-Architected</span>
+                <span class="tag">Terraform Fundamentals</span>
+              </div>
+              <h2>Highly Available WordPress on AWS</h2>
+
+              <div class="project-section">
+                <h3>Business Problem</h3>
+                <p>A content platform running on a single server loses availability during traffic spikes or infrastructure failures. The goal was to design a fault-tolerant, scalable architecture that eliminates single points of failure and keeps the platform accessible during common AWS infrastructure events.</p>
+              </div>
+
+              <div class="project-section">
+                <h3>Requirements &amp; Constraints</h3>
+                <ul>
+                  <li>High availability across multiple Availability Zones</li>
+                  <li>Automatic scaling in response to traffic changes</li>
+                  <li>Secure access to EC2 instances without exposing bastion hosts</li>
+                  <li>Shared file storage accessible by all application instances</li>
+                  <li>Cost-conscious design using managed services where appropriate</li>
+                </ul>
+              </div>
+
+              <div class="project-section">
+                <h3>Architecture &amp; Service Selection</h3>
+                <ul>
+                  <li><strong>Multi-AZ VPC with public and private subnets</strong> — network isolation keeps database and application layers off the public internet</li>
+                  <li><strong>Application Load Balancer</strong> — distributes traffic across healthy EC2 instances and performs health checks</li>
+                  <li><strong>EC2 Auto Scaling Group</strong> — automatically adjusts capacity based on demand, without manual intervention</li>
+                  <li><strong>RDS Multi-AZ (MySQL)</strong> — automatic failover to a standby replica if the primary database fails</li>
+                  <li><strong>Amazon EFS</strong> — shared WordPress files (plugins, uploads, themes) accessible across all EC2 instances</li>
+                  <li><strong>CloudFront + S3</strong> — CDN delivery of static assets reduces origin load and improves global response times</li>
+                  <li><strong>IAM roles + SSM Session Manager</strong> — least-privilege access without bastion host exposure</li>
+                  <li><strong>CloudWatch alarms</strong> — monitoring for availability and error rate signals</li>
+                </ul>
+              </div>
+
+              <div class="project-section">
+                <h3>Security Considerations</h3>
+                <ul>
+                  <li>EC2 instances placed in private subnets — no direct internet exposure</li>
+                  <li>IAM roles scoped to least privilege for each component</li>
+                  <li>SSM Session Manager used for secure shell access without opening port 22</li>
+                  <li>S3 bucket access restricted via bucket policy and CloudFront origin access control</li>
+                </ul>
+              </div>
+
+              <div class="project-section">
+                <h3>Trade-offs Considered</h3>
+                <ul>
+                  <li>EFS adds shared storage cost but is necessary for WordPress file consistency across multiple instances</li>
+                  <li>Multi-AZ RDS increases database cost but is essential for automatic failover without manual intervention</li>
+                  <li>CloudFront adds complexity but reduces origin traffic and improves performance for geographically distributed users</li>
+                </ul>
+              </div>
+
+              <div class="project-section">
+                <h3>My Role &amp; What I Learned</h3>
+                <p>I designed the architecture, created the architecture diagram, documented service selection rationale aligned with the Well-Architected Framework, and practiced foundational Terraform provisioning for selected components. This project deepened my understanding of how the Reliability and Security pillars translate into specific AWS service decisions.</p>
+              </div>
+
+              <div class="project-meta">
+                <span class="project-status-inline">Status: Architecture Design &amp; Lab Implementation</span>
+              </div>
+
+              <div class="project-links">
+                <a href="https://github.com/vanessa9373/aws-solutions-architect-portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary" aria-label="View HA WordPress repository on GitHub">View Repository</a>
+              </div>
             </div>
-            <h3>Multi-Account AWS Landing Zone</h3>
-            <p>As organizations scale on AWS, a single account becomes a governance and blast-radius problem. This project builds an enterprise landing zone from the ground up: AWS Organizations with four OUs and ten-plus accounts enforced by eight Service Control Policies, blocking root user access, mandating IMDSv2, restricting regions, and preventing public S3 buckets. A Transit Gateway hub-and-spoke topology gives production and non-production workloads network isolation without VPC peering sprawl. IAM Identity Center provides SAML 2.0 single sign-on, and GuardDuty with Security Hub aggregates threat findings centrally. The result is a foundation that a compliance or security team can build on without renegotiating baseline controls.</p>
-            <div class="project-results">
-              <div class="result"><strong>10+</strong><span>Accounts</span></div>
-              <div class="result"><strong>8</strong><span>SCPs</span></div>
-              <div class="result"><strong>4</strong><span>OUs</span></div>
+          </article>
+
+          <!-- PROJECT 2: Serverless Three-Tier -->
+          <article class="project-card project-card--full" data-aos="fade-up" aria-label="Serverless Three-Tier Application project">
+            <div class="project-image">
+              <img src="/assets/img-serverless.svg" alt="Serverless three-tier application architecture diagram" class="project-img" loading="lazy" width="600" height="280">
+              <span class="project-status-badge status-poc">Proof of Concept</span>
             </div>
-            <div class="project-tools">
-              <strong>Tools:</strong> AWS Organizations, Terraform, Transit Gateway, IAM Identity Center, GuardDuty, Security Hub
+            <div class="project-content">
+              <div class="project-tags">
+                <span class="tag tag-aws">AWS</span>
+                <span class="tag">Serverless</span>
+                <span class="tag">Lambda</span>
+                <span class="tag">API Gateway</span>
+                <span class="tag">DynamoDB</span>
+              </div>
+              <h2>Serverless Three-Tier Application</h2>
+
+              <div class="project-section">
+                <h3>Business Problem</h3>
+                <p>Many workloads do not require always-on servers but still need a reliable, scalable backend. Managing and patching servers adds operational overhead that can be eliminated with a serverless approach. The goal was to design an event-driven backend that scales automatically and reduces the operational burden on a small team.</p>
+              </div>
+
+              <div class="project-section">
+                <h3>Requirements &amp; Constraints</h3>
+                <ul>
+                  <li>No server management — fully managed compute layer</li>
+                  <li>Scales to zero when not in use to minimize cost</li>
+                  <li>Secure API access with proper identity controls</li>
+                  <li>Reliable data persistence without managing database infrastructure</li>
+                </ul>
+              </div>
+
+              <div class="project-section">
+                <h3>Architecture &amp; Service Selection</h3>
+                <ul>
+                  <li><strong>API Gateway</strong> — managed HTTP front door; handles routing, throttling, and authorization</li>
+                  <li><strong>AWS Lambda</strong> — stateless business logic execution; scales automatically with no server management</li>
+                  <li><strong>Amazon DynamoDB</strong> — fully managed NoSQL data layer; serverless scaling with no database administration</li>
+                  <li><strong>IAM roles</strong> — least-privilege execution roles scoped to each Lambda function</li>
+                  <li><strong>Amazon CloudWatch</strong> — log capture and basic operational monitoring for Lambda functions</li>
+                </ul>
+              </div>
+
+              <div class="project-section">
+                <h3>Security Considerations</h3>
+                <ul>
+                  <li>Lambda execution roles scoped to minimum required DynamoDB actions</li>
+                  <li>API Gateway configured with appropriate authorization for protected endpoints</li>
+                  <li>No server access to manage reduces attack surface compared to EC2-based alternatives</li>
+                </ul>
+              </div>
+
+              <div class="project-section">
+                <h3>Trade-offs Considered</h3>
+                <ul>
+                  <li>Lambda cold starts can add latency for infrequently invoked functions — acceptable for this use case</li>
+                  <li>DynamoDB requires careful schema design upfront; changes are more complex than relational models</li>
+                  <li>Serverless is cost-effective at low to moderate usage but may be less cost-efficient at very high sustained throughput compared to reserved EC2</li>
+                </ul>
+              </div>
+
+              <div class="project-section">
+                <h3>My Role &amp; What I Learned</h3>
+                <p>I designed the application tier architecture, documented the service selection rationale, created an architecture diagram, and built a proof of concept demonstrating the Lambda and API Gateway integration. This project developed my ability to explain serverless trade-offs in business terms and gave me hands-on Lambda and DynamoDB experience.</p>
+              </div>
+
+              <div class="project-meta">
+                <span class="project-status-inline">Status: Proof of Concept</span>
+              </div>
+
+              <div class="project-links">
+                <a href="https://github.com/vanessa9373/aws-solutions-architect-portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary" aria-label="View Serverless project repository on GitHub">View Repository</a>
+              </div>
             </div>
-            <p class="project-role"><strong>SA angle:</strong> Enterprise governance, SCPs, and hub-and-spoke networking &nbsp;|&nbsp; <strong>SE angle:</strong> Reference architecture for enterprise cloud adoption conversations</p>
-            <a href="https://github.com/vanessa9373/portfolio" target="_blank" rel="noopener" style="display:inline-block;margin-top:10px;font-size:0.85rem;color:var(--accent,#00b4d8);text-decoration:none;">Architecture Doc &rarr;</a>
-            <a href="/architecture/#lz" style="display:inline-block;margin-top:6px;font-size:0.85rem;color:var(--accent,#00b4d8);text-decoration:none;margin-left:16px;">View Diagram &rarr;</a>
-          </div>
+          </article>
+
+          <!-- PROJECT 3: Forage Virtual Experience -->
+          <article class="project-card project-card--full" data-aos="fade-up" aria-label="AWS APAC Solutions Architecture Virtual Experience">
+            <div class="project-image">
+              <img src="/assets/img-ecommerce.svg" alt="Cloud architecture diagram for the AWS Forage virtual experience" class="project-img" loading="lazy" width="600" height="280">
+              <span class="project-status-badge status-completed">Completed Exercise</span>
+            </div>
+            <div class="project-content">
+              <div class="project-tags">
+                <span class="tag tag-aws">AWS</span>
+                <span class="tag">Elastic Beanstalk</span>
+                <span class="tag">Virtual Experience</span>
+                <span class="tag">Solution Design</span>
+                <span class="tag">Forage</span>
+              </div>
+              <h2>AWS APAC Solutions Architecture — Forage Virtual Experience</h2>
+
+              <div class="project-section">
+                <h3>Context</h3>
+                <p>This is a structured virtual work simulation through Forage that mirrors an entry-level Solutions Architect engagement. It is not professional employment — it is a real architecture exercise in a simulated customer context, completed to develop and demonstrate SA communication skills.</p>
+              </div>
+
+              <div class="project-section">
+                <h3>Customer Scenario</h3>
+                <p>A growing company needed guidance on improving their application's performance and scalability as their user base expanded. The challenge was to recommend an architecture that would allow them to scale without increasing operational complexity.</p>
+              </div>
+
+              <div class="project-section">
+                <h3>What I Completed</h3>
+                <ul>
+                  <li>Reviewed the customer scenario and identified the core scalability requirements</li>
+                  <li>Recommended an <strong>Elastic Beanstalk architecture</strong> to provide managed deployment, auto-scaling, and health monitoring without requiring the customer to manage underlying infrastructure</li>
+                  <li>Created an architecture diagram illustrating the proposed solution</li>
+                  <li>Considered scalability and cost trade-offs in the recommendation</li>
+                  <li>Communicated the recommendation in business-focused language appropriate for a non-technical stakeholder</li>
+                </ul>
+              </div>
+
+              <div class="project-section">
+                <h3>What I Learned</h3>
+                <p>This exercise developed my ability to move from a customer requirement to an architecture recommendation, document the decision rationale, and communicate a technical solution in clear language. It reinforced the importance of matching service selection to a customer's operational maturity rather than choosing the most technically complex option.</p>
+              </div>
+
+              <div class="project-meta">
+                <span class="project-status-inline">Status: Completed Architecture Exercise</span>
+              </div>
+
+              <div class="project-links">
+                <a href="https://github.com/vanessa9373/aws-solutions-architect-portfolio" target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-primary" aria-label="View Forage project documentation on GitHub">View Documentation</a>
+              </div>
+            </div>
+          </article>
+
         </div>
-
-
       </div>
-    </div>
-  </section>
+    </section>
+  </main>
 
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-content">
-        <p class="footer-logo"><img src="/assets/LOGO.png" alt="Vanessa Awo" class="footer-logo-img"></p>
-        <p>&copy; 2026 Vanessa Awo. All rights reserved.</p>
-        <div class="footer-socials">
-          <a href="https://www.linkedin.com/in/vanessajen/" target="_blank" rel="noopener" aria-label="LinkedIn"><svg class="icon" viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
-          <a href="https://github.com/vanessa9373/portfolio" target="_blank" rel="noopener" aria-label="GitHub"><svg class="icon" viewBox="0 0 24 24"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
-          <a href="mailto:vanessa93730@gmail.com" aria-label="Email"><svg class="icon" viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
-        </div>
+  <footer class="footer" role="contentinfo">
+    <div class="container footer-inner">
+      <p class="footer-name">Vanessa Awo</p>
+      <p class="footer-tagline">Solutions Architect &nbsp;&middot;&nbsp; Solutions Engineer &nbsp;&middot;&nbsp; Cloud Solutions Professional</p>
+      <nav class="footer-links" aria-label="Footer navigation">
+        <a href="/about/">About</a>
+        <a href="/skills/">Capabilities</a>
+        <a href="/projects/">Projects</a>
+        <a href="/experience/">Experience</a>
+        <a href="/certifications/">Certifications</a>
+        <a href="/resume/">Resume</a>
+        <a href="/contact/">Contact</a>
+      </nav>
+      <div class="footer-social" aria-label="Social links">
+        <a href="https://www.linkedin.com/in/vanessajen/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile"><i class="fab fa-linkedin" aria-hidden="true"></i></a>
+        <a href="https://github.com/vanessa9373/portfolio" target="_blank" rel="noopener noreferrer" aria-label="GitHub portfolio"><i class="fab fa-github" aria-hidden="true"></i></a>
       </div>
+      <p class="footer-copy">&copy; 2026 Vanessa Awo &nbsp;&middot;&nbsp; <a href="https://jenellavan.com">jenellavan.com</a></p>
     </div>
   </footer>
 
-  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><svg class="icon" viewBox="0 0 24 24"><polyline points="18 15 12 9 6 15"/></svg></button>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.min.js" crossorigin="anonymous"></script>
   <script src="/script.js"></script>
 </body>
 </html>
