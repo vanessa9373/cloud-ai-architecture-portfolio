@@ -1,8 +1,8 @@
 /* ============================================================
-   Vanessa Awo - Portfolio JavaScript
-   Solutions Architect, Cloud & DevOps Engineer, SRE
-   Hybrid single-page + separate pages version
+   Vanessa Awo — Portfolio JavaScript
    ============================================================ */
+
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 if (location.hash === '#home') {
   history.replaceState(null, '', location.pathname + location.search);
@@ -13,11 +13,11 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- AOS (ANIMATE ON SCROLL) ---------- */
   if (typeof AOS !== 'undefined') {
     AOS.init({
-      duration: 400,
+      duration: prefersReducedMotion ? 0 : 400,
       easing: 'ease-out',
       once: true,
       offset: 60,
-      disable: 'mobile'
+      disable: prefersReducedMotion ? true : 'mobile'
     });
   }
 
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
   /* ---------- PAGE LOADER ---------- */
   const pageLoader = document.getElementById('page-loader');
   if (pageLoader) {
-    const minTime = 400;
+    const minTime = 300;
     const startTime = performance.now();
     let dismissed = false;
 
@@ -34,24 +34,27 @@ document.addEventListener('DOMContentLoaded', () => {
       dismissed = true;
       const elapsed = performance.now() - startTime;
       const remaining = Math.max(0, minTime - elapsed);
-      setTimeout(() => pageLoader.classList.add('hidden'), remaining);
+      setTimeout(() => {
+        pageLoader.classList.add('hidden');
+        pageLoader.setAttribute('aria-hidden', 'true');
+      }, remaining);
     }
 
-    // Hard cap: dismiss after 600ms even if CDN resources are still loading
-    const hardCap = setTimeout(dismissLoader, 600);
+    const hardCap = setTimeout(dismissLoader, 800);
 
     if (document.readyState === 'complete') {
       clearTimeout(hardCap);
       dismissLoader();
     } else {
       window.addEventListener('load', () => { clearTimeout(hardCap); dismissLoader(); });
+      setTimeout(dismissLoader, 1200);
     }
   }
 
 
   /* ---------- SCROLL PROGRESS BAR ---------- */
   const scrollProgress = document.getElementById('scroll-progress');
-  if (scrollProgress) {
+  if (scrollProgress && !prefersReducedMotion) {
     window.addEventListener('scroll', () => {
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       if (docHeight > 0) {
@@ -61,30 +64,44 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ---------- BUTTON RIPPLE - removed ---------- */
-
-
   /* ---------- MOBILE NAVIGATION ---------- */
   const navToggle = document.getElementById('nav-toggle');
   const navMenu = document.getElementById('nav-menu');
 
+  function openMenu() {
+    navMenu.classList.add('open');
+    navToggle.classList.add('open');
+    navToggle.setAttribute('aria-expanded', 'true');
+    navToggle.setAttribute('aria-label', 'Close menu');
+  }
+
+  function closeMenu() {
+    navMenu.classList.remove('open');
+    navToggle.classList.remove('open');
+    navToggle.setAttribute('aria-expanded', 'false');
+    navToggle.setAttribute('aria-label', 'Open menu');
+  }
+
   if (navToggle && navMenu) {
     navToggle.addEventListener('click', () => {
-      navMenu.classList.toggle('open');
-      navToggle.classList.toggle('open');
+      const isOpen = navMenu.classList.contains('open');
+      if (isOpen) { closeMenu(); } else { openMenu(); }
     });
 
-    // Close menu when a link is clicked (including anchor links)
     document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-        navToggle.classList.remove('open');
-      });
+      link.addEventListener('click', closeMenu);
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && navMenu.classList.contains('open')) {
+        closeMenu();
+        navToggle.focus();
+      }
     });
   }
 
 
-  /* ---------- CLEAN HASH URLS: intercept all anchor clicks ---------- */
+  /* ---------- CLEAN HASH URLS ---------- */
   document.querySelectorAll('a[href^="#"]').forEach(link => {
     link.addEventListener('click', e => {
       const hash = link.getAttribute('href');
@@ -92,7 +109,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const target = document.querySelector(hash);
       if (target) {
         e.preventDefault();
-        target.scrollIntoView({ behavior: 'smooth' });
+        target.scrollIntoView({ behavior: prefersReducedMotion ? 'auto' : 'smooth' });
         history.replaceState(null, '', location.pathname + location.search);
       }
     });
@@ -104,7 +121,6 @@ document.addEventListener('DOMContentLoaded', () => {
   const backToTop = document.getElementById('back-to-top');
   const isInteriorPage = !document.querySelector('.hero');
 
-  // On interior pages, always show the scrolled navbar style
   if (isInteriorPage && navbar) {
     navbar.classList.add('scrolled');
   }
@@ -117,51 +133,47 @@ document.addEventListener('DOMContentLoaded', () => {
         navbar.classList.remove('scrolled');
       }
     }
-
     if (backToTop) {
-      if (window.scrollY > 500) {
-        backToTop.classList.add('visible');
-      } else {
-        backToTop.classList.remove('visible');
-      }
+      backToTop.classList.toggle('visible', window.scrollY > 500);
     }
-  });
+  }, { passive: true });
 
   if (backToTop) {
     backToTop.addEventListener('click', () => {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.scrollTo({ top: 0, behavior: prefersReducedMotion ? 'auto' : 'smooth' });
     });
   }
 
 
-  /* ---------- ACTIVE NAV LINK - PATHNAME-BASED ---------- */
+  /* ---------- ACTIVE NAV LINK — PATHNAME-BASED ---------- */
   const navLinks = document.querySelectorAll('.nav-link');
   const path = window.location.pathname;
 
-  // Map page filenames to nav labels (only separate pages)
-  const pageMap = {
-    'index.html': 'Home',
-    'projects.html': 'Projects',
-    'blog.html': 'Blog'
+  const routeMap = {
+    '/': 'Home',
+    '/about/': 'About',
+    '/projects/': 'Projects',
+    '/experience/': 'Experience',
+    '/certifications/': 'Certifications',
+    '/blog/': 'Blog',
+    '/architecture/': 'Architecture',
+    '/contact/': 'Contact',
+    '/skills/': 'Skills',
+    '/demo/': 'Demo'
   };
 
-  // Determine current page
-  let currentPage = 'Home';
-  for (const [file, label] of Object.entries(pageMap)) {
-    if (path.endsWith(file)) {
-      currentPage = label;
-      break;
-    }
-  }
-  // Handle bare directory (/) as Home
-  if (path.endsWith('/') || path === '') currentPage = 'Home';
-  // Post pages → highlight Blog
-  if (path.includes('/posts/')) currentPage = 'Blog';
+  const normalizedPath = path.endsWith('/') ? path : path + '/';
+  let currentPage = routeMap[normalizedPath] || '';
+
+  if (!currentPage && path.includes('/posts/')) currentPage = 'Blog';
+  if (!currentPage && (path === '/' || path === '' || normalizedPath === '/')) currentPage = 'Home';
 
   navLinks.forEach(link => {
     link.classList.remove('active');
+    link.removeAttribute('aria-current');
     if (link.textContent.trim() === currentPage) {
       link.classList.add('active');
+      link.setAttribute('aria-current', 'page');
     }
   });
 
@@ -174,7 +186,7 @@ document.addEventListener('DOMContentLoaded', () => {
       'about': 'About',
       'skills': 'Skills',
       'experience': 'Experience',
-      'certifications': 'Experience',
+      'certifications': 'Certifications',
       'contact': 'Contact'
     };
 
@@ -188,8 +200,10 @@ document.addEventListener('DOMContentLoaded', () => {
             if (navLabel) {
               navLinks.forEach(link => {
                 link.classList.remove('active');
+                link.removeAttribute('aria-current');
                 if (link.textContent.trim() === navLabel) {
                   link.classList.add('active');
+                  link.setAttribute('aria-current', 'page');
                 }
               });
             }
@@ -202,19 +216,16 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ---------- TYPED TEXT - static display ---------- */
-  // Static role title; no animation loop needed
-
-
   /* ---------- COUNTER ANIMATION (Home page only) ---------- */
   const statNumbers = document.querySelectorAll('.stat-number');
   let countersAnimated = false;
 
   function animateCounters() {
-    if (countersAnimated) return;
+    if (countersAnimated || prefersReducedMotion) return;
 
     statNumbers.forEach(stat => {
       const target = parseInt(stat.getAttribute('data-target'));
+      if (isNaN(target)) return;
       const duration = 600;
       const start = performance.now();
 
@@ -223,7 +234,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const progress = Math.min(elapsed / duration, 1);
         const eased = 1 - Math.pow(1 - progress, 3);
         stat.textContent = Math.floor(eased * target);
-
         if (progress < 1) {
           requestAnimationFrame(updateCounter);
         } else {
@@ -238,7 +248,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   const heroStats = document.querySelector('.hero-stats');
-  if (heroStats) {
+  if (heroStats && statNumbers.length > 0) {
     const observer = new IntersectionObserver(entries => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -247,7 +257,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, { threshold: 0.5 });
-
     observer.observe(heroStats);
   }
 
@@ -261,14 +270,18 @@ document.addEventListener('DOMContentLoaded', () => {
       tab.addEventListener('click', () => {
         const target = tab.getAttribute('data-tab');
 
-        skillTabs.forEach(t => t.classList.remove('active'));
+        skillTabs.forEach(t => {
+          t.classList.remove('active');
+          t.setAttribute('aria-selected', 'false');
+        });
         tab.classList.add('active');
+        tab.setAttribute('aria-selected', 'true');
 
         skillPanels.forEach(panel => {
           panel.classList.remove('active');
           if (panel.id === `panel-${target}`) {
             panel.classList.add('active');
-            animateSkillBars(panel);
+            if (!prefersReducedMotion) animateSkillBars(panel);
           }
         });
       });
@@ -276,6 +289,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function animateSkillBars(container) {
+    if (prefersReducedMotion) return;
     const fills = container.querySelectorAll('.skill-fill');
     fills.forEach(fill => {
       fill.style.width = '0';
@@ -297,12 +311,11 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
     }, { threshold: 0.2 });
-
     observer.observe(skillsSection);
   }
 
 
-  /* ---------- PROJECT FILTERS (Projects page only) ---------- */
+  /* ---------- PROJECT FILTERS ---------- */
   const filterBtns = document.querySelectorAll('.filter-btn:not(.blog-filter-btn)');
   const projectCards = document.querySelectorAll('.project-card');
 
@@ -310,15 +323,13 @@ document.addEventListener('DOMContentLoaded', () => {
     filterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.getAttribute('data-filter');
-
         filterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
         projectCards.forEach(card => {
           const category = card.getAttribute('data-category');
-          if (filter === 'all' || category === filter) {
+          if (filter === 'all' || category === filter || (card.getAttribute('data-tags') || '').includes(filter)) {
             card.classList.remove('hidden');
-            card.style.animation = 'fadeIn 0.4s ease forwards';
+            if (!prefersReducedMotion) card.style.animation = 'fadeIn 0.4s ease forwards';
           } else {
             card.classList.add('hidden');
           }
@@ -326,42 +337,38 @@ document.addEventListener('DOMContentLoaded', () => {
       });
     });
 
-    // Add fadeIn keyframes dynamically
-    const style = document.createElement('style');
-    style.textContent = `
-      @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(10px); }
-        to { opacity: 1; transform: translateY(0); }
-      }
-    `;
-    document.head.appendChild(style);
+    if (!prefersReducedMotion) {
+      const style = document.createElement('style');
+      style.textContent = `@keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }`;
+      document.head.appendChild(style);
+    }
   }
 
 
   /* ---------- SCROLL REVEAL ANIMATION ---------- */
-  const revealElements = document.querySelectorAll(
-    '.about-grid, .skill-card, .project-card, .timeline-item, .cert-card, .contact-grid, .blog-card'
-  );
+  if (!prefersReducedMotion) {
+    const revealElements = document.querySelectorAll(
+      '.about-grid, .skill-card, .project-card, .timeline-item, .cert-card, .contact-grid, .blog-card'
+    );
+    revealElements.forEach(el => el.classList.add('reveal'));
 
-  revealElements.forEach(el => el.classList.add('reveal'));
+    const revealObserver = new IntersectionObserver(entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
 
-  const revealObserver = new IntersectionObserver(entries => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add('visible');
-        revealObserver.unobserve(entry.target);
-      }
-    });
-  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
-
-  revealElements.forEach(el => revealObserver.observe(el));
+    revealElements.forEach(el => revealObserver.observe(el));
+  }
 
 
   /* ---------- CONTACT FORM ---------- */
   const contactForm = document.getElementById('contact-form');
   if (contactForm) {
     const submitBtn = contactForm.querySelector('button[type="submit"]');
-
     contactForm.addEventListener('submit', () => {
       if (submitBtn) {
         submitBtn.textContent = 'Sending...';
@@ -371,25 +378,27 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
 
-  /* ---------- PARTICLE NETWORK CANVAS (Hero only) ---------- */
+  /* ---------- PARTICLE NETWORK CANVAS ---------- */
   const heroSection = document.querySelector('.hero');
-  if (heroSection) {
+  if (heroSection && !prefersReducedMotion) {
     const canvas = document.createElement('canvas');
     canvas.id = 'particle-canvas';
+    canvas.style.pointerEvents = 'none';
+    canvas.setAttribute('aria-hidden', 'true');
     heroSection.appendChild(canvas);
     const ctx = canvas.getContext('2d');
 
     let particles = [];
     const isMobile = window.innerWidth < 768;
-    const PARTICLE_COUNT = isMobile ? 25 : 55;
-    const CONNECT_DIST = 120;
+    const PARTICLE_COUNT = isMobile ? 20 : 45;
+    const CONNECT_DIST = 110;
 
     function resizeCanvas() {
       canvas.width = heroSection.offsetWidth;
       canvas.height = heroSection.offsetHeight;
     }
     resizeCanvas();
-    window.addEventListener('resize', resizeCanvas);
+    window.addEventListener('resize', resizeCanvas, { passive: true });
 
     function createParticles() {
       particles = [];
@@ -397,14 +406,15 @@ document.addEventListener('DOMContentLoaded', () => {
         particles.push({
           x: Math.random() * canvas.width,
           y: Math.random() * canvas.height,
-          vx: (Math.random() - 0.5) * 0.6,
-          vy: (Math.random() - 0.5) * 0.6,
-          r: Math.random() * 2 + 1
+          vx: (Math.random() - 0.5) * 0.5,
+          vy: (Math.random() - 0.5) * 0.5,
+          r: Math.random() * 1.5 + 1
         });
       }
     }
     createParticles();
 
+    let animationId;
     function animateParticles() {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       particles.forEach((p, i) => {
@@ -415,7 +425,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         ctx.beginPath();
         ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-        ctx.fillStyle = 'rgba(0, 180, 216, 0.5)';
+        ctx.fillStyle = 'rgba(0, 180, 216, 0.4)';
         ctx.fill();
 
         for (let j = i + 1; j < particles.length; j++) {
@@ -426,13 +436,13 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.beginPath();
             ctx.moveTo(p.x, p.y);
             ctx.lineTo(particles[j].x, particles[j].y);
-            ctx.strokeStyle = `rgba(0, 180, 216, ${0.15 * (1 - dist / CONNECT_DIST)})`;
-            ctx.lineWidth = 0.6;
+            ctx.strokeStyle = `rgba(0, 180, 216, ${0.12 * (1 - dist / CONNECT_DIST)})`;
+            ctx.lineWidth = 0.5;
             ctx.stroke();
           }
         }
       });
-      requestAnimationFrame(animateParticles);
+      animationId = requestAnimationFrame(animateParticles);
     }
     animateParticles();
   }
@@ -442,7 +452,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const tiltTargets = document.querySelectorAll('.project-card, .skill-card, .cert-card');
   const isTouchDevice = 'ontouchstart' in window;
 
-  if (!isTouchDevice) {
+  if (!isTouchDevice && !prefersReducedMotion) {
     tiltTargets.forEach(card => {
       card.classList.add('tilt-card');
       card.addEventListener('mousemove', (e) => {
@@ -451,9 +461,9 @@ document.addEventListener('DOMContentLoaded', () => {
         const y = e.clientY - rect.top;
         const centerX = rect.width / 2;
         const centerY = rect.height / 2;
-        const rotateX = ((y - centerY) / centerY) * -6;
-        const rotateY = ((x - centerX) / centerX) * 6;
-        card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+        const rotateX = ((y - centerY) / centerY) * -5;
+        const rotateY = ((x - centerX) / centerX) * 5;
+        card.style.transform = `perspective(600px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-3px)`;
       });
       card.addEventListener('mouseleave', () => {
         card.style.transform = '';
@@ -463,51 +473,54 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   /* ---------- STAGGERED SCROLL REVEAL ---------- */
-  const staggerContainers = document.querySelectorAll('.skills-grid, .projects-grid, .certs-grid, .blog-grid');
-  staggerContainers.forEach(container => {
-    const children = container.children;
-    for (let i = 0; i < children.length; i++) {
-      const delay = Math.min(i, 4) + 1;
-      children[i].classList.add(`reveal-delay-${delay}`);
-    }
-  });
+  if (!prefersReducedMotion) {
+    const staggerContainers = document.querySelectorAll('.skills-grid, .projects-grid, .certs-grid, .blog-grid');
+    staggerContainers.forEach(container => {
+      const children = container.children;
+      for (let i = 0; i < children.length; i++) {
+        const delay = Math.min(i, 4) + 1;
+        children[i].classList.add(`reveal-delay-${delay}`);
+      }
+    });
+  }
 
 
   /* ---------- PARALLAX ON HERO ---------- */
   const heroText = document.querySelector('.hero-text');
   const heroVisual = document.querySelector('.hero-visual');
-  if (heroText && heroVisual) {
+  if (heroText && heroVisual && !prefersReducedMotion) {
     window.addEventListener('scroll', () => {
       const scrollY = window.scrollY;
       if (scrollY < window.innerHeight) {
-        heroText.style.transform = `translateY(${scrollY * 0.15}px)`;
-        heroVisual.style.transform = `translateY(${scrollY * 0.08}px)`;
+        heroText.style.transform = `translateY(${scrollY * 0.12}px)`;
+        heroVisual.style.transform = `translateY(${scrollY * 0.06}px)`;
       }
-    });
+    }, { passive: true });
   }
 
 
   /* ---------- DARK / LIGHT MODE TOGGLE ---------- */
   const themeToggle = document.querySelector('.theme-toggle');
   if (themeToggle) {
-    const moonSVG = '<svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
-    const sunSVG = '<svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
+    const moonSVG = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';
+    const sunSVG = '<svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>';
 
-    // Sync icon with current state
     if (document.body.classList.contains('light-mode')) {
       themeToggle.innerHTML = sunSVG;
+      themeToggle.setAttribute('aria-label', 'Switch to dark theme');
     }
 
     themeToggle.addEventListener('click', () => {
       document.body.classList.toggle('light-mode');
       const isLight = document.body.classList.contains('light-mode');
       themeToggle.innerHTML = isLight ? sunSVG : moonSVG;
+      themeToggle.setAttribute('aria-label', isLight ? 'Switch to dark theme' : 'Switch to light theme');
       localStorage.setItem('theme', isLight ? 'light' : 'dark');
     });
   }
 
 
-  /* ---------- BLOG TAG FILTER (Blog page only) ---------- */
+  /* ---------- BLOG TAG FILTER ---------- */
   const blogFilterBtns = document.querySelectorAll('.blog-filter-btn');
   const blogCards = document.querySelectorAll('.blog-card');
 
@@ -515,15 +528,13 @@ document.addEventListener('DOMContentLoaded', () => {
     blogFilterBtns.forEach(btn => {
       btn.addEventListener('click', () => {
         const filter = btn.getAttribute('data-filter');
-
         blogFilterBtns.forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-
         blogCards.forEach(card => {
           const category = card.getAttribute('data-category');
           if (filter === 'all' || category === filter) {
             card.classList.remove('hidden');
-            card.style.animation = 'fadeIn 0.4s ease forwards';
+            if (!prefersReducedMotion) card.style.animation = 'fadeIn 0.4s ease forwards';
           } else {
             card.classList.add('hidden');
           }
@@ -542,7 +553,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const scrolled = Math.min((window.scrollY / docHeight) * 100, 100);
         progressBar.style.width = scrolled + '%';
       }
-    });
+    }, { passive: true });
   }
 
 });

@@ -3,9 +3,9 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Solutions Architect | Solutions Engineer | Vanessa Awo</title>
-  <meta name="description" content="Portfolio of Vanessa Awo, a Solutions Architect and Solutions Engineer designing scalable, secure, and customer-focused technology solutions for complex business challenges.">
-  <meta name="keywords" content="Solutions Architect, Solutions Engineer, Cloud Architecture, Solution Design, Technical Consulting, Enterprise Architecture, Infrastructure Design, AI Solutions, Automation, System Integration, AWS, Azure, Google Cloud, Linux, Terraform, Python">
+  <title>Vanessa Awo | Solutions Architect · Solutions Engineer · Cloud Engineer</title>
+  <meta name="description" content="AWS-certified cloud professional pursuing Solutions Architect, Solutions Engineer, and Cloud Engineer opportunities. Based in Seattle, WA. 3+ years client-facing experience plus hands-on AWS architecture projects.">
+  <meta name="keywords" content="Solutions Architect, Solutions Engineer, Cloud Engineer, AWS, Cloud Architecture, Customer Discovery, Solution Design, Serverless Architecture, Seattle, Remote, Vanessa Awo">
   <link rel="canonical" href="https://jenellavan.com/">
   <!-- Favicon -->
   <link rel="icon" type="image/png" href="/assets/LOGO.png">
@@ -13,12 +13,12 @@
   <!-- Open Graph -->
   <meta property="og:type" content="website">
   <meta property="og:url" content="https://jenellavan.com/">
-  <meta property="og:title" content="Solutions Architect | Solutions Engineer | Vanessa Awo">
-  <meta property="og:description" content="Designing scalable, secure, and customer-focused technology solutions that solve complex business challenges.">
+  <meta property="og:title" content="Vanessa Awo | Solutions Architect · Solutions Engineer · Cloud Engineer">
+  <meta property="og:description" content="AWS-certified cloud professional combining hands-on architecture projects with 3+ years of client-facing experience. Open to entry-level and associate opportunities in Seattle and remote.">
   <meta property="og:image" content="https://jenellavan.com/assets/LOGO.png">
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Solutions Architect | Solutions Engineer | Vanessa Awo">
+  <meta name="twitter:title" content="Vanessa Awo | Solutions Architect · Solutions Engineer · Cloud Engineer">
   <meta name="twitter:image" content="https://jenellavan.com/assets/LOGO.png">
   <link rel="stylesheet" href="style.css">
   <!-- Google Fonts -->
@@ -36,13 +36,11 @@
     "name": "Vanessa Awo",
     "url": "https://jenellavan.com",
     "image": "https://jenellavan.com/assets/LOGO.png",
-    "jobTitle": "Solutions Architect",
-    "alternateName": "Solutions Engineer",
-    "description": "Solutions Architect and Solutions Engineer designing scalable, secure, and customer-focused technology solutions that solve complex business challenges.",
-    "knowsAbout": ["Cloud Architecture","Solution Design","Enterprise Architecture","Infrastructure Design","AI Solutions","Automation","System Integration","AWS","Azure","Google Cloud","Python","Terraform","Linux"],
+    "description": "AWS-certified cloud professional pursuing Solutions Architect, Solutions Engineer, and Cloud Engineer opportunities.",
+    "knowsAbout": ["Cloud Architecture","Solution Design","AWS","Amazon EC2","Amazon S3","Amazon VPC","AWS IAM","AWS Lambda","Amazon API Gateway","Amazon DynamoDB","Amazon RDS","Amazon CloudFront","Amazon Route 53","Auto Scaling","Elastic Load Balancing","Amazon CloudWatch","Terraform","Linux","Python","Technical Documentation","Architecture Diagrams","Customer Discovery","Requirements Gathering","Stakeholder Communication"],
     "sameAs": [
-      "https://linkedin.com/in/vanessajen",
-      "https://github.com/vanessa9373/portfolio"
+      "https://www.linkedin.com/in/vanessajen/",
+      "https://github.com/vanessa9373"
     ],
     "address": {
       "@type": "PostalAddress",
@@ -55,90 +53,97 @@
 </head>
 <body><script>if(localStorage.getItem('theme')==='light')document.body.classList.add('light-mode')</script>
 
+  <!-- Skip to main content -->
+  <a href="#main-content" class="skip-link">Skip to main content</a>
+
   <!-- Page Loader -->
-  <div id="page-loader" class="page-loader">
+  <div id="page-loader" class="page-loader" aria-hidden="true">
     <div class="loader-inner">
-      <img src="/assets/LOGO.png" alt="Vanessa Awo" class="loader-logo-img">
+      <img src="/assets/LOGO.png" alt="" class="loader-logo-img">
       <div class="loader-bar"><div class="loader-fill"></div></div>
     </div>
   </div>
 
   <!-- Scroll Progress Bar -->
-  <div id="scroll-progress" class="scroll-progress"></div>
+  <div id="scroll-progress" class="scroll-progress" aria-hidden="true"></div>
 
   <!-- ===================== NAVIGATION ===================== -->
-  <nav class="navbar" id="navbar">
+  <nav class="navbar" id="navbar" aria-label="Main navigation">
     <div class="nav-container">
-      <a href="/" class="nav-logo"><img src="/assets/LOGO.png" alt="Vanessa Awo" class="nav-logo-img"></a>
-      <ul class="nav-menu" id="nav-menu">
-        <li><a href="/" class="nav-link active">Home</a></li>
-        <li><a href="/about/" class="nav-link">About</a></li>
-        <li><a href="/skills/" class="nav-link">Skills</a></li>
-        <li><a href="/projects/" class="nav-link">Projects</a></li>
-        <li><a href="/experience/" class="nav-link">Experience</a></li>
-        <li><a href="/certifications/" class="nav-link">Certifications</a></li>
-        <li><a href="/blog/" class="nav-link">Blog</a></li>
-        <li><a href="/contact/" class="nav-link">Contact</a></li>
+      <a href="/" class="nav-logo" aria-label="Vanessa Awo — Home"><img src="/assets/LOGO.png" alt="Vanessa Awo" class="nav-logo-img"></a>
+      <ul class="nav-menu" id="nav-menu" role="list">
+        <li role="listitem"><a href="/" class="nav-link active" aria-current="page">Home</a></li>
+        <li role="listitem"><a href="/about/" class="nav-link">About</a></li>
+        <li role="listitem"><a href="/projects/" class="nav-link">Projects</a></li>
+        <li role="listitem"><a href="/experience/" class="nav-link">Experience</a></li>
+        <li role="listitem"><a href="/certifications/" class="nav-link">Certifications</a></li>
+        <li role="listitem"><a href="/blog/" class="nav-link">Blog</a></li>
+        <li role="listitem"><a href="/contact/" class="nav-link">Contact</a></li>
       </ul>
-      <button class="theme-toggle" aria-label="Toggle theme"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+      <button class="theme-toggle" aria-label="Toggle light/dark theme"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
       <a href="/contact/" class="nav-cta">Hire Me</a>
-      <button class="nav-toggle" id="nav-toggle" aria-label="Toggle menu">
+      <button class="nav-toggle" id="nav-toggle" aria-label="Open menu" aria-expanded="false" aria-controls="nav-menu">
         <span></span><span></span><span></span>
       </button>
     </div>
   </nav>
 
   <!-- ===================== HERO / HOME ===================== -->
+  <main id="main-content">
   <section class="hero" id="home">
-    <div class="hero-bg-grid"></div>
+    <div class="hero-bg-grid" aria-hidden="true"></div>
     <div class="container hero-content">
       <div class="hero-text">
-        <p class="hero-greeting"><span class="hero-role-badge">Solutions Architect | Solutions Engineer</span></p>
+        <p class="hero-greeting">
+          <span class="hero-role-badge">AWS Certified Solutions Architect &ndash; Associate</span>
+          <span class="hero-role-badge hero-avail-badge">Open to Entry-Level &amp; Associate Opportunities</span>
+        </p>
         <h1 class="hero-name">Vanessa Awo</h1>
-        <h2 class="hero-title" aria-label="Solutions Architect">
-          <span class="typed-text" id="typed-text">Solutions Architect</span><span class="cursor">|</span>
+        <h2 class="hero-title" aria-label="Solutions Architect | Solutions Engineer | Cloud Engineer">
+          <span class="typed-text" id="typed-text">Solutions Architect</span><span class="cursor" aria-hidden="true">|</span>
         </h2>
         <p class="hero-description">
-          I design scalable, secure, and customer-focused technology solutions that solve complex business challenges. My background spans client-facing consulting, enterprise architecture, and multi-cloud infrastructure.
+          AWS-certified cloud professional combining hands-on architecture projects with more than three years of client-facing experience. Skilled in requirements gathering, stakeholder communication, AWS solution design, technical documentation, and explaining complex decisions in clear business language.
         </p>
-        <div class="hero-proof">
-          <span class="hero-proof-chip">&bull; AWS Certified SAA-C03</span>
+        <div class="hero-proof" aria-label="Key credentials">
+          <span class="hero-proof-chip">&bull; AWS SAA-C03 Certified</span>
           <span class="hero-proof-chip">&bull; ITIL 4 Certified</span>
           <span class="hero-proof-chip">&bull; 3+ Yrs Client-Facing</span>
-          <span class="hero-proof-chip">&bull; Multi-AZ &amp; Multi-Region IaC</span>
+          <span class="hero-proof-chip">&bull; Per Scholas AWS re/Start</span>
         </div>
         <div class="hero-buttons">
           <a href="/projects/" class="btn btn-primary">View Projects</a>
-          <a href="/demo/" class="btn btn-outline">Portfolio Deck</a>
-          <a href="https://github.com/vanessa9373/portfolio" class="btn btn-ghost" target="_blank" rel="noopener">GitHub</a>
+          <a href="/assets/Vanessa_Awo_Resume.pdf" class="btn btn-outline" download>Download Resume</a>
+          <a href="https://www.linkedin.com/in/vanessajen/" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">LinkedIn</a>
+          <a href="https://github.com/vanessa9373" class="btn btn-ghost" target="_blank" rel="noopener noreferrer">GitHub</a>
         </div>
-        <div class="hero-stats">
+        <div class="hero-stats" aria-label="Key stats">
           <div class="stat">
-            <span class="stat-number" data-target="5">0</span><span class="stat-suffix">+</span>
-            <span class="stat-label">SA/SE Projects</span>
+            <span class="stat-number" data-target="5">5</span><span class="stat-suffix">+</span>
+            <span class="stat-label">Cloud Architecture Projects</span>
           </div>
           <div class="stat">
-            <span class="stat-number" data-target="3">0</span>
-            <span class="stat-label">Cloud Platforms</span>
+            <span class="stat-number" data-target="3">3</span><span class="stat-suffix">+</span>
+            <span class="stat-label">Years Client-Facing</span>
           </div>
           <div class="stat">
-            <span class="stat-number" data-target="40">0</span><span class="stat-suffix">+</span>
-            <span class="stat-label">IaC Modules</span>
+            <span class="stat-number" data-target="3">3</span>
+            <span class="stat-label">Professional Certifications</span>
           </div>
           <div class="stat">
-            <span class="stat-number" data-target="6">0</span>
+            <span class="stat-number" data-target="6">6</span>
             <span class="stat-label">Well-Arch Pillars</span>
           </div>
         </div>
       </div>
       <div class="hero-visual">
         <div class="hero-photo">
-          <img src="assets/jenella-profile-2.jpeg" alt="Vanessa Awo Solutions Architect portfolio hero image" class="hero-photo-img">
+          <img src="/assets/jenella-profile-2.jpeg" alt="Vanessa Awo, Solutions Architect and Cloud Engineer" class="hero-photo-img" width="400" height="400" loading="eager">
         </div>
       </div>
     </div>
-    <a href="/about/" class="scroll-indicator" aria-label="Scroll down">
-      <div class="scroll-arrow"></div>
+    <a href="/about/" class="scroll-indicator" aria-label="Scroll down to learn more">
+      <div class="scroll-arrow" aria-hidden="true"></div>
     </a>
   </section>
 
@@ -146,49 +151,46 @@
   <section class="section about-fullbg" id="about">
     <div class="container">
       <h2 class="section-title" data-aos="fade-up">About Me</h2>
-      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Solutions Architect and Solutions Engineer with client-facing consulting experience across enterprise and mid-market environments.</p>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">AWS-certified cloud professional transitioning into Solutions Architecture and Solutions Engineering.</p>
 
       <div class="about-grid" data-aos="fade-up" data-aos-delay="150">
         <div class="about-content">
           <p>
-            Cloud professional focused on <strong>Solutions Architect and Solutions Engineer</strong> roles across AWS, Azure, and Google Cloud. I design production-grade architectures, automate cloud infrastructure, and translate technical decisions into clear business outcomes. Open to Cloud Engineer, DevOps, SRE, TAM, and other technology-focused opportunities.
+            I am an <strong>AWS Certified Solutions Architect &ndash; Associate</strong> transitioning into Solutions Architecture and Solutions Engineering. My background includes more than three years of customer-facing experience managing complex claims, gathering information from multiple stakeholders, explaining technical decisions, and delivering outcomes under strict service-level deadlines.
           </p>
           <p>
-            Hands-on experience across the AWS stack: <strong>EC2, S3, VPC, IAM, Lambda, RDS (Multi-AZ), DynamoDB, CloudFront, Route 53, Auto Scaling, ECS, CloudWatch, WAF, and KMS</strong>. I automate infrastructure as code and have built full 3-tier architectures, Multi-AZ deployments, and multi-account landing zones using AWS Organizations, Transit Gateway, and IAM Identity Center.
+            Through AWS training, certification, labs, and personal projects, I have designed highly available web architectures, serverless applications, multi-account governance models, secure VPC environments, and event-driven systems. I work hands-on with <strong>EC2, S3, VPC, IAM, Lambda, RDS (Multi-AZ), DynamoDB, CloudFront, Route 53, Auto Scaling, CloudWatch, WAF, and KMS</strong>.
           </p>
           <p>
-            Currently enrolled in the <strong>Per Scholas AWS Re/Start</strong> program in Seattle, completing my <strong>B.S. in Computer Science at WGU</strong>, and holding the <strong>AWS Solutions Architect Associate (SAA-C03)</strong>, <strong>ITIL 4 Foundation (PeopleCert)</strong>, and <strong>Linux Essentials (LPI)</strong> certifications.
-          </p>
-          <p>
-            Before moving into cloud, I spent 3+ years managing 100+ concurrent client cases as a Claims Adjuster at <strong>Pilot Catastrophe Services</strong> and as a Customer Solutions Associate at <strong>Instacart</strong>. Those roles built skills that directly transfer to SA and SE work: structured discovery, stakeholder communication, multi-party coordination under SLA pressure, and translating complex decisions into plain language for non-technical audiences.
+            I am seeking an entry-level or associate opportunity where I can combine cloud architecture, customer discovery, technical communication, and structured problem-solving.
           </p>
           <div class="about-details">
             <div class="about-detail">
-              <span class="detail-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg></span>
+              <span class="detail-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg></span>
               <div>
                 <strong>Education</strong>
-                <p>Per Scholas AWS Re/Start (2026) | B.S. Computer Science, WGU (2023–2026) | B.S. Business Mgmt, Univ. of Douala (2019)</p>
+                <p>Per Scholas AWS re/Start (2026) | B.S. Computer Science, WGU (In Progress) | B.S. Business Mgmt, Univ. of Douala (2019)</p>
               </div>
             </div>
             <div class="about-detail">
-              <span class="detail-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
+              <span class="detail-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></span>
               <div>
                 <strong>Location</strong>
-                <p>Seattle, WA · Remote-Ready · Open to Relocation</p>
+                <p>Seattle, WA &middot; Remote Available</p>
               </div>
             </div>
             <div class="about-detail">
-              <span class="detail-icon"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
+              <span class="detail-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></span>
               <div>
                 <strong>Availability</strong>
-                <p>Open to Solutions Architect, Solutions Engineer, DevOps, SRE, TAM, and cloud engineering roles. Remote preferred.</p>
+                <p>Open to entry-level and associate Solutions Architect, Solutions Engineer, Cloud Engineer, TAM roles.</p>
               </div>
             </div>
             <div class="about-detail">
-              <span class="detail-icon"><svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
+              <span class="detail-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></span>
               <div>
                 <strong>Focus Areas</strong>
-                <p>AWS Architecture, Infrastructure as Code, Well-Architected Framework, POC Delivery, Technical Discovery, Cloud Consulting</p>
+                <p>AWS Architecture, Well-Architected Framework, Technical Discovery, Cloud Consulting, IaC with Terraform</p>
               </div>
             </div>
           </div>
@@ -200,242 +202,224 @@
   <!-- ===================== SKILLS ===================== -->
   <section class="section section-alt section-decorated" id="skills">
     <div class="container">
-      <h2 class="section-title" data-aos="fade-up">Skills &amp; Expertise</h2>
-      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Technologies and tools I work with daily</p>
+      <h2 class="section-title" data-aos="fade-up">Cloud &amp; Technical Skills</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Developed through projects, training, labs, and certification</p>
 
-      <!-- Skill Category Tabs -->
-      <div class="skill-tabs" data-aos="fade-up" data-aos-delay="150">
-        <button class="skill-tab active" data-tab="technical">Technical</button>
-        <button class="skill-tab" data-tab="professional">Professional</button>
-        <button class="skill-tab" data-tab="soft">Soft Skills</button>
+      <div class="skill-tabs" data-aos="fade-up" data-aos-delay="150" role="tablist" aria-label="Skill categories">
+        <button class="skill-tab active" data-tab="technical" role="tab" aria-selected="true" aria-controls="panel-technical" id="tab-technical">Technical</button>
+        <button class="skill-tab" data-tab="professional" role="tab" aria-selected="false" aria-controls="panel-professional" id="tab-professional">Professional</button>
+        <button class="skill-tab" data-tab="soft" role="tab" aria-selected="false" aria-controls="panel-soft" id="tab-soft">Soft Skills</button>
       </div>
 
       <!-- Technical Skills -->
-      <div class="skill-panel active" id="panel-technical">
+      <div class="skill-panel active" id="panel-technical" role="tabpanel" aria-labelledby="tab-technical">
         <div class="skills-grid">
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
             <h3>Cloud Platforms</h3>
+            <p class="skill-desc" style="font-size:0.82rem;color:var(--text-muted,#64748b);margin-bottom:0.5rem;">Primary: AWS &mdash; Exposure: Azure &amp; GCP concepts</p>
             <div class="skill-tags">
-              <span class="tag tag-aws">AWS</span>
-              <span class="tag tag-azure">Azure</span>
-              <span class="tag tag-gcp">GCP</span>
+              <span class="tag tag-aws">AWS (Primary)</span>
+              <span class="tag">Azure (Concepts)</span>
+              <span class="tag">GCP (Concepts)</span>
             </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="90"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
             <h3>AWS Core Services</h3>
+            <p class="skill-desc" style="font-size:0.82rem;color:var(--text-muted,#64748b);margin-bottom:0.5rem;">Hands-on through projects and labs</p>
             <div class="skill-tags">
               <span class="tag">EC2</span>
               <span class="tag">S3</span>
+              <span class="tag">VPC</span>
+              <span class="tag">IAM</span>
               <span class="tag">Lambda</span>
               <span class="tag">RDS</span>
-              <span class="tag">ECS / EKS</span>
+              <span class="tag">DynamoDB</span>
               <span class="tag">CloudFront</span>
               <span class="tag">Route 53</span>
               <span class="tag">Auto Scaling</span>
+              <span class="tag">ELB</span>
+              <span class="tag">CloudWatch</span>
             </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="93"></div></div>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="88"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z"/><path d="M12 6v6l4 2"/></svg></div>
-            <h3>AI/ML & Generative AI</h3>
-            <div class="skill-tags">
-              <span class="tag tag-aws">Amazon Bedrock</span>
-              <span class="tag">SageMaker</span>
-              <span class="tag">Gemini AI</span>
-              <span class="tag">RAG</span>
-              <span class="tag">LLM APIs</span>
-            </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
             <h3>Infrastructure as Code</h3>
+            <p class="skill-desc" style="font-size:0.82rem;color:var(--text-muted,#64748b);margin-bottom:0.5rem;">Working knowledge &mdash; used in architecture projects</p>
             <div class="skill-tags">
               <span class="tag">Terraform</span>
               <span class="tag">CloudFormation</span>
-              <span class="tag">Ansible</span>
             </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="78"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
-            <h3>Serverless & App Architecture</h3>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+            <h3>Serverless &amp; App Architecture</h3>
+            <p class="skill-desc" style="font-size:0.82rem;color:var(--text-muted,#64748b);margin-bottom:0.5rem;">Hands-on through projects and certification</p>
             <div class="skill-tags">
               <span class="tag">Lambda</span>
               <span class="tag">API Gateway</span>
-              <span class="tag">Step Functions</span>
               <span class="tag">SQS / SNS</span>
               <span class="tag">EventBridge</span>
+              <span class="tag">Step Functions</span>
             </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="84"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
-            <h3>Databases & Storage</h3>
-            <div class="skill-tags">
-              <span class="tag">RDS / Aurora</span>
-              <span class="tag">DynamoDB</span>
-              <span class="tag">Redshift</span>
-              <span class="tag">ElastiCache</span>
-              <span class="tag">S3 / Glacier</span>
-            </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="87"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <h3>Security & Compliance</h3>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>Security &amp; Compliance</h3>
             <div class="skill-tags">
               <span class="tag">IAM</span>
               <span class="tag">KMS</span>
               <span class="tag">WAF</span>
               <span class="tag">GuardDuty</span>
-              <span class="tag">Zero Trust</span>
-              <span class="tag">SOC 2</span>
+              <span class="tag">Security Hub</span>
+              <span class="tag">SCPs</span>
             </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="87"></div></div>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="82"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
             <h3>Networking</h3>
             <div class="skill-tags">
               <span class="tag">VPC</span>
+              <span class="tag">Subnets</span>
               <span class="tag">Transit Gateway</span>
-              <span class="tag">Direct Connect</span>
               <span class="tag">Route 53</span>
               <span class="tag">Load Balancers</span>
             </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="86"></div></div>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="83"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
-            <h3>Monitoring & Observability</h3>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/></svg></div>
+            <h3>Databases &amp; Storage</h3>
             <div class="skill-tags">
-              <span class="tag">CloudWatch</span>
-              <span class="tag">X-Ray</span>
-              <span class="tag">CloudTrail</span>
-              <span class="tag">Config</span>
-              <span class="tag">Datadog</span>
+              <span class="tag">RDS / Aurora</span>
+              <span class="tag">DynamoDB</span>
+              <span class="tag">S3</span>
+              <span class="tag">Redshift</span>
+              <span class="tag">ElastiCache</span>
             </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="84"></div></div>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="81"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
-            <h3>Languages & Scripting</h3>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg></div>
+            <h3>Languages &amp; Scripting</h3>
             <div class="skill-tags">
               <span class="tag">Python</span>
               <span class="tag">SQL</span>
-              <span class="tag">Java</span>
+              <span class="tag">Linux / Bash</span>
+              <span class="tag">Git</span>
             </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="82"></div></div>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="76"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
-            <h3>Containers & Orchestration</h3>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+            <h3>Monitoring &amp; Observability</h3>
+            <div class="skill-tags">
+              <span class="tag">CloudWatch</span>
+              <span class="tag">CloudTrail</span>
+              <span class="tag">X-Ray</span>
+              <span class="tag">AWS Config</span>
+            </div>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="79"></div></div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="8" rx="2" ry="2"/><rect x="2" y="14" width="20" height="8" rx="2" ry="2"/><line x1="6" y1="6" x2="6.01" y2="6"/><line x1="6" y1="18" x2="6.01" y2="18"/></svg></div>
+            <h3>Containers</h3>
+            <p class="skill-desc" style="font-size:0.82rem;color:var(--text-muted,#64748b);margin-bottom:0.5rem;">Basic working knowledge</p>
             <div class="skill-tags">
               <span class="tag">Docker</span>
-              <span class="tag">Kubernetes</span>
-              <span class="tag">EKS / AKS</span>
+              <span class="tag">ECS</span>
             </div>
-            <div class="skill-bar"><div class="skill-fill" data-width="85"></div></div>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="65"></div></div>
           </div>
         </div>
       </div>
 
       <!-- Professional Skills -->
-      <div class="skill-panel" id="panel-professional">
+      <div class="skill-panel" id="panel-professional" role="tabpanel" aria-labelledby="tab-professional">
         <div class="skills-grid">
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg></div>
             <h3>Architecture Design</h3>
-            <p class="skill-desc">Well-Architected Framework (6 pillars), HLD/LLD, architecture decision records, multi-AZ and multi-region design, disaster recovery planning</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
+            <p class="skill-desc">Well-Architected Framework (6 pillars), HLD/LLD, architecture decision records, multi-AZ design, disaster recovery planning &mdash; applied through personal projects and labs</p>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="85"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-            <h3>Technical Discovery & Strategy</h3>
-            <p class="skill-desc">Structured discovery, requirements gathering, stakeholder qualification, POC scoping and delivery, technical proposal presentations</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="91"></div></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <h3>Technical Discovery &amp; Requirements</h3>
+            <p class="skill-desc">Structured discovery, requirements gathering, translating business needs into technical specifications &mdash; built through 3+ years of client-facing work</p>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="91"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
-            <h3>Cloud Migration</h3>
-            <p class="skill-desc">6R strategies, workload assessment, TCO analysis, cutover planning, lift-and-shift vs re-architect trade-off analysis</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></div>
-            <h3>ROI & Business Case Development</h3>
-            <p class="skill-desc">TCO modeling, ROI analysis, FinOps cost optimization, right-sizing, framed as business value for executive and non-technical stakeholders</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="86"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-            <h3>Competitive Positioning</h3>
-            <p class="skill-desc">AWS vs Azure vs GCP trade-off analysis, multi-cloud strategy, vendor comparison, solution differentiation in competitive deal cycles</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="84"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg></div>
             <h3>Technical Documentation</h3>
-            <p class="skill-desc">Architecture proposals, SOWs, RFP/RFI responses, runbooks, technical diagrams, executive summaries</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="87"></div></div>
+            <p class="skill-desc">Architecture proposals, runbooks, technical diagrams, executive summaries &mdash; written for both technical and non-technical audiences</p>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="87"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-            <h3>ITSM & Service Management</h3>
-            <p class="skill-desc">ITIL 4 certified, incident, change, and problem management; SLA accountability; service lifecycle governance</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
+            <h3>ITSM &amp; Service Management</h3>
+            <p class="skill-desc">ITIL 4 certified, incident and problem management, SLA accountability &mdash; applied across 3+ years of customer operations</p>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="88"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
-            <h3>Cloud Adoption</h3>
-            <p class="skill-desc">AWS Cloud Adoption Framework (CAF), People, Process, and Technology perspectives; readiness assessments, adoption roadmaps, organizational change management for cloud transformation programmes</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="86"></div></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+            <h3>Cloud Migration Concepts</h3>
+            <p class="skill-desc">6R strategies, workload assessment, lift-and-shift vs re-architect trade-off analysis &mdash; studied through AWS certification and training</p>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="79"></div></div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10z"/></svg></div>
+            <h3>Cloud Adoption Framework</h3>
+            <p class="skill-desc">AWS CAF People, Process, and Technology perspectives; readiness assessments and adoption roadmaps &mdash; studied through AWS training</p>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="76"></div></div>
           </div>
         </div>
       </div>
 
       <!-- Soft Skills -->
-      <div class="skill-panel" id="panel-soft">
+      <div class="skill-panel" id="panel-soft" role="tabpanel" aria-labelledby="tab-soft">
         <div class="skills-grid">
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <h3>Stakeholder Communication</h3>
-            <p class="skill-desc">Translating complex technical architecture into clear business outcomes for C-level executives and non-technical decision makers</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="92"></div></div>
+            <p class="skill-desc">Translating complex technical architecture into clear business language for non-technical stakeholders &mdash; core skill from 3+ years of client-facing work</p>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="92"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
-            <h3>Executive Presentation & Whiteboarding</h3>
-            <p class="skill-desc">Live architecture whiteboarding, EBC-style presentations, technical storytelling that aligns solution design with business strategy</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="89"></div></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
+            <h3>Active Listening &amp; Needs Analysis</h3>
+            <p class="skill-desc">Uncovering unstated requirements, asking qualifying questions, mapping pain points to solutions &mdash; built through handling 100+ concurrent client cases</p>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="91"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg></div>
-            <h3>Active Listening & Needs Analysis</h3>
-            <p class="skill-desc">Uncovering unstated requirements, asking the right qualifying questions, mapping pain points to solution capabilities in discovery calls</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="91"></div></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
+            <h3>Client-Facing Work</h3>
+            <p class="skill-desc">Managing multi-stakeholder engagements, building trust, navigating objections, managing escalations under SLA pressure</p>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="90"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg></div>
-            <h3>Client-Facing Consulting</h3>
-            <p class="skill-desc">Managing multi-stakeholder engagements, building trust, navigating objections, and driving customer success through the deal cycle</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="90"></div></div>
-          </div>
-          <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
             <h3>Cross-Functional Collaboration</h3>
-            <p class="skill-desc">Working across sales, product, engineering, and customer success teams; Agile ceremonies; aligning diverse stakeholders on technical direction</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="88"></div></div>
+            <p class="skill-desc">Working across teams, aligning diverse stakeholders, coordinating multi-party resolutions under competing priorities and tight timelines</p>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="88"></div></div>
           </div>
           <div class="skill-card">
-            <div class="skill-icon"><svg class="icon icon-md" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
-            <h3>Problem Solving & Trade-off Analysis</h3>
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg></div>
+            <h3>Problem Solving &amp; Trade-off Analysis</h3>
             <p class="skill-desc">Structured root cause analysis, architecture trade-off reasoning, creative solution design under cost, time, and technical constraints</p>
-            <div class="skill-bar"><div class="skill-fill" data-width="91"></div></div>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="89"></div></div>
+          </div>
+          <div class="skill-card">
+            <div class="skill-icon" aria-hidden="true"><svg class="icon icon-md" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 21V9"/></svg></div>
+            <h3>Documentation &amp; Presentation</h3>
+            <p class="skill-desc">Writing clear technical and executive summaries, architecture diagrams, whiteboarding solutions to both technical and business audiences</p>
+            <div class="skill-bar" aria-hidden="true"><div class="skill-fill" data-width="87"></div></div>
           </div>
         </div>
       </div>
@@ -443,3 +427,355 @@
   </section>
 
   <!-- ===================== EXPERIENCE ===================== -->
+  <section class="section section-decorated" id="experience">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Experience</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">3+ years of client-facing professional experience &mdash; plus hands-on cloud projects and training</p>
+
+      <p class="subsection-label" data-aos="fade-up" data-aos-delay="150">Professional Experience</p>
+      <div class="timeline">
+
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="0">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>Claims Adjuster</h3>
+              <span class="timeline-date">Feb 2022 &ndash; Jul 2025</span>
+            </div>
+            <p class="timeline-company">Pilot Catastrophe Services | Fort Worth, TX</p>
+            <ul>
+              <li>Managed 100+ simultaneous active claims while meeting SLA deadlines and maintaining full compliance with state regulations</li>
+              <li>Led structured discovery conversations with policyholders, contractors, and engineers to gather requirements, assess scope, and deliver solutions</li>
+              <li>Translated complex technical assessments into plain-language communications for non-technical clients, reducing escalations and improving satisfaction scores</li>
+              <li>Negotiated multi-party settlements across competing priorities and tight timelines</li>
+              <li>Used Guidewire, Xactimate, and XactAnalysis to improve workflow accuracy and audit readiness</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="150">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>Customer Solutions Associate</h3>
+              <span class="timeline-date">May 2020 &ndash; Aug 2021</span>
+            </div>
+            <p class="timeline-company">Instacart | Remote</p>
+            <ul>
+              <li>Resolved high-complexity customer issues applying structured troubleshooting to identify root cause and deliver durable solutions</li>
+              <li>Managed concurrent cases under SLA pressure in a compliance-sensitive environment</li>
+              <li>Communicated technical platform constraints in plain language to customers and internal stakeholders, building trust during escalations</li>
+              <li>Identified recurring failure patterns and surfaced them to product and operations teams</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>Operations Systems Associate</h3>
+              <span class="timeline-date">Oct 2019 &ndash; Apr 2020</span>
+            </div>
+            <p class="timeline-company">Whole Foods Market | Washington DC-Baltimore Area</p>
+            <ul>
+              <li>Managed high-volume order fulfillment workflows, ensuring accuracy and timely delivery</li>
+              <li>Used internal dashboards and reporting tools to track SLA adherence and identify bottlenecks</li>
+              <li>Collaborated with tech teams to implement process improvements</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="subsection-label" data-aos="fade-up" style="margin-top:3rem;">Cloud Projects &amp; Technical Experience</p>
+      <div class="timeline">
+
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="0">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>AWS re/Start Cloud Training Program</h3>
+              <span class="timeline-date">2026 &middot; In Progress</span>
+            </div>
+            <p class="timeline-company">Per Scholas | Seattle, WA &middot; Training Program</p>
+            <ul>
+              <li>Hands-on training in cloud computing, networking, Linux, Python, and AWS services (EC2, Lambda, DynamoDB, Auto Scaling, Redshift)</li>
+              <li>Lab-based exercises simulating real-world cloud deployment and operations scenarios</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="100">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>Highly Available WordPress on AWS</h3>
+              <span class="timeline-date">2025 &middot; Personal Project</span>
+            </div>
+            <p class="timeline-company">Personal Project &middot; Terraform + AWS</p>
+            <ul>
+              <li>Designed and documented a zero-single-point-of-failure architecture spanning 3 AZs using EC2 Auto Scaling, ALB, RDS Multi-AZ, CloudFront, and WAF</li>
+              <li>Applied all 6 AWS Well-Architected pillars with full Terraform IaC and architecture diagrams</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="150">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>Multi-Account AWS Landing Zone</h3>
+              <span class="timeline-date">2025 &middot; Personal Project</span>
+            </div>
+            <p class="timeline-company">Personal Project &middot; Terraform + AWS Organizations</p>
+            <ul>
+              <li>Built an enterprise-grade governance foundation with AWS Organizations, 4 OUs, 8+ SCPs, IAM Identity Center SSO, and GuardDuty with Security Hub</li>
+              <li>Implemented Transit Gateway hub-and-spoke topology for network isolation between environments</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="timeline-item" data-aos="fade-right" data-aos-delay="200">
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-header">
+              <h3>AWS Solutions Architecture Job Simulation</h3>
+              <span class="timeline-date">Sep 2025 &middot; Job Simulation</span>
+            </div>
+            <p class="timeline-company">Amazon Web Services &middot; Forage</p>
+            <ul>
+              <li>Completed AWS job simulation covering technical discovery, solution design, and architecture recommendation for a business scenario</li>
+              <li>Produced architecture documentation and cost-benefit analysis following AWS Well-Architected best practices</li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== EDUCATION & CERTIFICATIONS ===================== -->
+  <section class="section section-alt section-decorated" id="certifications">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Education &amp; Certifications</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Academic background and validated cloud credentials</p>
+
+      <p class="subsection-label" data-aos="fade-up" data-aos-delay="150">Education</p>
+      <div class="edu-grid" data-aos="fade-up" data-aos-delay="200">
+
+        <div class="edu-card">
+          <span class="edu-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg></span>
+          <div class="edu-info">
+            <h3>AWS re/Start Program</h3>
+            <p class="edu-school">Per Scholas | Seattle, WA</p>
+            <p class="edu-detail">Cloud Computing, Networking, Databases, AWS Management &amp; Governance. Focus: Linux, Python, EC2, Lambda, Auto Scaling, DynamoDB</p>
+            <p class="edu-date">Expected Aug 2026</p>
+            <span class="cert-status progress">In Progress</span>
+          </div>
+        </div>
+
+        <div class="edu-card">
+          <span class="edu-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg></span>
+          <div class="edu-info">
+            <h3>B.S. Computer Science</h3>
+            <p class="edu-school">Western Governors University</p>
+            <p class="edu-detail">Computer Networks, Operating Systems, Database Systems, Software Engineering</p>
+            <p class="edu-date">Jul 2023 &ndash; Jul 2026</p>
+            <span class="cert-status progress">In Progress</span>
+          </div>
+        </div>
+
+        <div class="edu-card">
+          <span class="edu-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg></span>
+          <div class="edu-info">
+            <h3>Certification in Data Analytics</h3>
+            <p class="edu-school">Colaberry School of Data Analytics | Plano, TX</p>
+            <p class="edu-detail">Data analysis, visualization, and analytics workflows</p>
+            <p class="edu-date">Jul 2022 &ndash; Jul 2023</p>
+            <span class="cert-status earned">Completed</span>
+          </div>
+        </div>
+
+        <div class="edu-card">
+          <span class="edu-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5"/></svg></span>
+          <div class="edu-info">
+            <h3>Bachelor&rsquo;s in Business Management</h3>
+            <p class="edu-school">University of Douala</p>
+            <p class="edu-detail">Business strategy, stakeholder management, and process optimization</p>
+            <p class="edu-date">Oct 2015 &ndash; Jun 2019</p>
+            <span class="cert-status earned">Completed</span>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="subsection-label" data-aos="fade-up">Certifications</p>
+      <div class="certs-grid">
+
+        <div class="cert-card earned" data-aos="zoom-in" data-aos-delay="0">
+          <div class="cert-badge">
+            <span class="cert-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span>
+          </div>
+          <h3>AWS Solutions Architect Associate (SAA-C03)</h3>
+          <p class="cert-issuer">Amazon Web Services</p>
+          <p class="cert-date">Sep 2025</p>
+          <span class="cert-status earned">Earned</span>
+        </div>
+
+        <div class="cert-card earned" data-aos="zoom-in" data-aos-delay="100">
+          <div class="cert-badge">
+            <span class="cert-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span>
+          </div>
+          <h3>ITIL 4 Foundation: IT Service Management</h3>
+          <p class="cert-issuer">PeopleCert</p>
+          <p class="cert-date">Jun 2026</p>
+          <span class="cert-status earned">Earned</span>
+        </div>
+
+        <div class="cert-card earned" data-aos="zoom-in" data-aos-delay="200">
+          <div class="cert-badge">
+            <span class="cert-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span>
+          </div>
+          <h3>Linux Essentials Certificate</h3>
+          <p class="cert-issuer">Linux Professional Institute (LPI)</p>
+          <p class="cert-date">May 2025</p>
+          <span class="cert-status earned">Earned</span>
+        </div>
+
+        <div class="cert-card earned" data-aos="zoom-in" data-aos-delay="150">
+          <div class="cert-badge">
+            <span class="cert-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
+          </div>
+          <h3>AWS Solutions Architecture Job Simulation</h3>
+          <p class="cert-issuer">Amazon Web Services &middot; Forage</p>
+          <p class="cert-date">Sep 2025</p>
+          <span class="cert-status earned">Completed</span>
+        </div>
+
+        <div class="cert-card earned" data-aos="zoom-in" data-aos-delay="200">
+          <div class="cert-badge">
+            <span class="cert-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
+          </div>
+          <h3>Verizon Cloud Platform Job Simulation</h3>
+          <p class="cert-issuer">Verizon Communications &middot; Forage</p>
+          <p class="cert-date">Sep 2025</p>
+          <span class="cert-status earned">Completed</span>
+        </div>
+
+        <div class="cert-card earned" data-aos="zoom-in" data-aos-delay="250">
+          <div class="cert-badge">
+            <span class="cert-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M4.5 16.5c-1.5 1.26-2 5-2 5s3.74-.5 5-2c.71-.84.7-2.13-.09-2.91a2.18 2.18 0 0 0-2.91-.09z"/><path d="m12 15-3-3a22 22 0 0 1 2-3.95A12.88 12.88 0 0 1 22 2c0 2.72-.78 7.5-6 11a22.35 22.35 0 0 1-4 2z"/><path d="M9 12H4s.55-3.03 2-4c1.62-1.08 5 0 5 0"/><path d="M12 15v5s3.03-.55 4-2c1.08-1.62 0-5 0-5"/></svg></span>
+          </div>
+          <h3>BCG, IT Architecture Job Simulation</h3>
+          <p class="cert-issuer">Boston Consulting Group &middot; Forage</p>
+          <p class="cert-date">Jun 2026 &middot; ID: 6z3Wvs3WAb336jRCd</p>
+          <span class="cert-status earned">Completed</span>
+        </div>
+
+        <div class="cert-card earned" data-aos="zoom-in" data-aos-delay="300">
+          <div class="cert-badge">
+            <span class="cert-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg></span>
+          </div>
+          <h3>Cloud Practitioner: Foundations Training Badge</h3>
+          <p class="cert-issuer">Amazon Web Services &middot; AWS Skills Center</p>
+          <p class="cert-date">Jun 2026</p>
+          <span class="cert-status earned">Earned</span>
+        </div>
+
+        <div class="cert-card in-progress" data-aos="zoom-in" data-aos-delay="300">
+          <div class="cert-badge">
+            <span class="cert-icon" aria-hidden="true"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></span>
+          </div>
+          <h3>AWS Solutions Architect Professional</h3>
+          <p class="cert-issuer">Amazon Web Services</p>
+          <p class="cert-date">Currently Studying</p>
+          <span class="cert-status progress">In Progress</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== CONTACT ===================== -->
+  <section class="section section-decorated" id="contact">
+    <div class="container">
+      <h2 class="section-title" data-aos="fade-up">Get In Touch</h2>
+      <p class="section-subtitle" data-aos="fade-up" data-aos-delay="100">Interested in discussing an entry-level Solutions Architect, Solutions Engineer, or Cloud Engineer opportunity? Let&rsquo;s connect.</p>
+
+      <div class="contact-grid" data-aos="fade-up" data-aos-delay="200">
+        <div class="contact-icons-wrap">
+          <p class="contact-icons-label">Reach out or find my work:</p>
+          <div class="contact-icons">
+            <a href="mailto:jenellaawo93@gmail.com" class="contact-icon-link" aria-label="Send email to Vanessa">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            </a>
+            <a href="https://www.linkedin.com/in/vanessajen/" class="contact-icon-link" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile (opens in new tab)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+            </a>
+            <a href="https://github.com/vanessa9373" class="contact-icon-link" target="_blank" rel="noopener noreferrer" aria-label="GitHub profile (opens in new tab)">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+            </a>
+          </div>
+          <div style="margin-top:1.5rem;font-size:0.9rem;color:var(--text-secondary,#94a3b8);line-height:1.7;">
+            <p><strong style="color:var(--text-primary);">Location:</strong> Seattle, Washington</p>
+            <p><strong style="color:var(--text-primary);">Availability:</strong> Remote &middot; Open to relocation</p>
+            <p><strong style="color:var(--text-primary);">Email:</strong> <a href="mailto:jenellaawo93@gmail.com" style="color:var(--accent,#00b4d8);">jenellaawo93@gmail.com</a></p>
+          </div>
+          <div style="margin-top:1.5rem;">
+            <a href="/assets/Vanessa_Awo_Resume.pdf" class="btn btn-outline" download>Download Resume</a>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contact-form" action="https://formsubmit.co/jenellaawo93@gmail.com" method="POST" novalidate>
+          <input type="hidden" name="_subject" value="Portfolio Contact &mdash; Opportunity Inquiry">
+          <input type="hidden" name="_captcha" value="false">
+          <input type="hidden" name="_next" value="https://jenellavan.com/thanks/">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_autoresponse" value="Thanks for reaching out! I'll get back to you within 24 hours. — Vanessa Awo">
+          <input type="text" name="_honey" style="display:none" tabindex="-1" aria-hidden="true">
+          <div class="form-group">
+            <label for="name">Your Name</label>
+            <input type="text" id="name" name="name" placeholder="Jane Smith" required autocomplete="name">
+          </div>
+          <div class="form-group">
+            <label for="email">Your Email</label>
+            <input type="email" id="email" name="email" placeholder="jane@company.com" required autocomplete="email">
+          </div>
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input type="text" id="subject" name="subject" placeholder="Entry-Level SA Opportunity">
+          </div>
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" rows="5" placeholder="Your message..." required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary btn-full">Send Message</button>
+        </form>
+      </div>
+    </div>
+  </section>
+  </main>
+
+  <!-- ===================== FOOTER ===================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <p class="footer-logo"><img src="/assets/LOGO.png" alt="Vanessa Awo" class="footer-logo-img"></p>
+        <p>&copy; 2026 Vanessa Awo. All rights reserved.</p>
+        <div class="footer-socials">
+          <a href="https://www.linkedin.com/in/vanessajen/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn (opens in new tab)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg></a>
+          <a href="https://github.com/vanessa9373" target="_blank" rel="noopener noreferrer" aria-label="GitHub (opens in new tab)"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg></a>
+          <a href="mailto:jenellaawo93@gmail.com" aria-label="Email Vanessa"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to Top -->
+  <button class="back-to-top" id="back-to-top" aria-label="Back to top"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><polyline points="18 15 12 9 6 15"/></svg></button>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+</html>
