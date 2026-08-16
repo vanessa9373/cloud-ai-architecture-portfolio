@@ -1,0 +1,96 @@
+# Frontend Service — Deployment + Service
+#
+# Deployment = tells Kubernetes: "always keep N copies of this container running"
+# Service = stable network endpoint for reaching the Deployment
+#           (Pods have random IPs; the Service IP is stable)
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend
+  namespace: online-boutique
+spec:
+  replicas: 2                    # Keep 2 copies running at all times
+  selector:
+    matchLabels:
+      app: frontend
+  template:
+    metadata:
+      labels:
+        app: frontend
+    spec:
+      serviceAccountName: frontend   # IRSA: this SA has IAM permissions
+      containers:
+        - name: frontend
+          # Replace AWS_ACCOUNT_ID with your actual account ID
+          image: AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/frontend:latest
+          ports:
+            - containerPort: 8080
+          # Resource limits: prevents one container from using all node resources
+          resources:
+            requests:
+              cpu: "100m"      # 0.1 CPU core
+              memory: "64Mi"   # 64 megabytes
+            limits:
+              cpu: "200m"
+              memory: "128Mi"
+          # Environment variables the frontend needs
+          env:
+            - name: PORT
+              value: "8080"
+            - name: PRODUCT_CATALOG_SERVICE_ADDR
+              value: "productcatalogservice:3550"
+            - name: CURRENCY_SERVICE_ADDR
+              value: "currencyservice:7000"
+            - name: CART_SERVICE_ADDR
+              value: "cartservice:7070"
+            - name: RECOMMENDATION_SERVICE_ADDR
+              value: "recommendationservice:8080"
+            - name: SHIPPING_SERVICE_ADDR
+              value: "shippingservice:50051"
+            - name: CHECKOUT_SERVICE_ADDR
+              value: "checkoutservice:5050"
+            - name: AD_SERVICE_ADDR
+              value: "adservice:9555"
+          # Health checks: Kubernetes uses these to know if the container is OK
+          livenessProbe:
+            httpGet:
+              path: "/_healthz"
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 10
+          readinessProbe:
+            httpGet:
+              path: "/_healthz"
+              port: 8080
+            initialDelaySeconds: 10
+            periodSeconds: 5
+---
+# External Service: exposes frontend to the internet via a LoadBalancer
+# AWS creates an ELB (Elastic Load Balancer) automatically
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend-external
+  namespace: online-boutique
+spec:
+  type: LoadBalancer          # Creates AWS ELB automatically
+  selector:
+    app: frontend             # Routes to Pods with label app=frontend
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+# Internal Service: for other services to reach frontend internally
+apiVersion: v1
+kind: Service
+metadata:
+  name: frontend
+  namespace: online-boutique
+spec:
+  type: ClusterIP             # Only accessible within the cluster
+  selector:
+    app: frontend
+  ports:
+    - port: 80
+      targetPort: 8080

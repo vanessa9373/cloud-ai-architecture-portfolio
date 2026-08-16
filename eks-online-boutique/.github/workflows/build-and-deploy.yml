@@ -1,0 +1,107 @@
+name: "Build, Scan & Deploy — EKS Online Boutique"
+
+# Trigger: when code in eks-online-boutique/src/ changes
+on:
+  push:
+    branches: [main]
+    paths: ["eks-online-boutique/src/**"]
+  pull_request:
+    branches: [main]
+    paths: ["eks-online-boutique/src/**"]
+
+permissions:
+  contents: write     # Needed to update image tags in kubernetes/ manifests
+  id-token: write     # Needed for OIDC auth to AWS
+  security-events: write  # Needed to upload Trivy scan results
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REGISTRY: ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.us-east-1.amazonaws.com
+
+jobs:
+  build-and-deploy:
+    name: "Build → Scan → Push → Update Manifest"
+    runs-on: ubuntu-latest
+
+    # Build each microservice in parallel using matrix strategy
+    strategy:
+      matrix:
+        service:
+          - frontend
+          - productcatalogservice
+          - cartservice
+          - checkoutservice
+          - paymentservice
+          - emailservice
+          - shippingservice
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Authenticate to AWS using OIDC — no stored AWS keys!
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Log in to Amazon ECR
+      - name: Login to ECR
+        id: login-ecr
+        uses: aws-actions/amazon-ecr-login@v2
+
+      # Build the Docker image
+      - name: Build Docker image
+        id: build
+        run: |
+          IMAGE_TAG=$(git rev-parse --short HEAD)
+          IMAGE_URI="${{ env.ECR_REGISTRY }}/${{ matrix.service }}:${IMAGE_TAG}"
+          docker build \
+            -t "$IMAGE_URI" \
+            eks-online-boutique/src/${{ matrix.service }}/
+          echo "image_uri=$IMAGE_URI" >> $GITHUB_OUTPUT
+          echo "image_tag=$IMAGE_TAG" >> $GITHUB_OUTPUT
+
+      # SECURITY SCAN: Trivy scans the image for CVEs
+      # If any CRITICAL vulnerabilities are found → the build FAILS
+      # This is "shift left" security — catch issues before they reach production
+      - name: Security scan with Trivy
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: ${{ steps.build.outputs.image_uri }}
+          format: "sarif"
+          output: "trivy-results.sarif"
+          severity: "CRITICAL,HIGH"
+          exit-code: "1"          # FAIL if CRITICAL CVEs found
+          ignore-unfixed: true    # Ignore CVEs with no fix yet
+
+      # Upload scan results to GitHub Security tab
+      - name: Upload Trivy results to GitHub Security
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: "trivy-results.sarif"
+
+      # Push the image to ECR (only if scan passed)
+      - name: Push to ECR
+        if: github.ref == 'refs/heads/main'
+        run: docker push ${{ steps.build.outputs.image_uri }}
+
+      # Update the Kubernetes manifest with the new image tag
+      # ArgoCD will detect this change and deploy automatically
+      - name: Update image tag in manifest
+        if: github.ref == 'refs/heads/main'
+        run: |
+          IMAGE_TAG=${{ steps.build.outputs.image_tag }}
+          MANIFEST="eks-online-boutique/kubernetes/services/${{ matrix.service }}.yaml"
+
+          # Replace the old image tag with the new one
+          sed -i "s|/${{ matrix.service }}:.*|/${{ matrix.service }}:${IMAGE_TAG}|g" "$MANIFEST"
+
+          # Commit the manifest update
+          git config user.name "GitHub Actions"
+          git config user.email "actions@github.com"
+          git add "$MANIFEST"
+          git commit -m "ci: update ${{ matrix.service }} image to ${IMAGE_TAG} [skip ci]"
+          git push

@@ -1,0 +1,44 @@
+# ArgoCD Application — tells ArgoCD what to deploy and where to watch
+#
+# HOW IT WORKS:
+# 1. ArgoCD watches the `repoURL` git repo
+# 2. It looks at the `path` folder for Kubernetes YAML files
+# 3. It compares those files to what's running in the cluster
+# 4. If they differ → ArgoCD syncs the cluster (applies the changes)
+# 5. This is GitOps: git is the source of truth
+#
+# Apply with: kubectl apply -f argocd/application.yaml
+
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: online-boutique
+  namespace: argocd
+spec:
+  # The target cluster (in-cluster means the same cluster ArgoCD is running in)
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: online-boutique
+
+  # The git repo to watch
+  project: default
+
+  source:
+    # CHANGE THIS to your fork of the repo
+    repoURL: https://github.com/vanessa9373/my-projects
+    targetRevision: main    # Which branch to watch
+    path: eks-online-boutique/kubernetes  # Which folder has the manifests
+
+  # Sync policy — how ArgoCD handles changes
+  syncPolicy:
+    automated:
+      prune: true     # Delete resources that are removed from git
+      selfHeal: true  # If someone manually changes the cluster, revert it
+    syncOptions:
+      - CreateNamespace=true  # Create the namespace if it doesn't exist
+    retry:
+      limit: 5
+      backoff:
+        duration: 5s
+        factor: 2
+        maxDuration: 3m

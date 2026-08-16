@@ -1,0 +1,14 @@
+# Namespace — a logical boundary within Kubernetes
+# Like a folder that separates one application's resources from another
+#
+# All Online Boutique pods/services live in this namespace
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: online-boutique
+  labels:
+    app: online-boutique
+    # This label enables Pod Security Standards (baseline security)
+    pod-security.kubernetes.io/enforce: baseline
+    pod-security.kubernetes.io/warn: restricted
