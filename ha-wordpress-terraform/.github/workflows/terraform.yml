@@ -1,0 +1,115 @@
+# ─── GitHub Actions CI/CD — Terraform Plan & Apply ────────────────────────────
+# This workflow runs automatically when you push code or open a pull request.
+#
+# WHAT IT DOES:
+#   On Pull Request → runs terraform plan (shows what would change, no deployment)
+#   On merge to main → runs terraform apply (actually deploys to AWS)
+#
+# AUTHENTICATION:
+#   Uses OIDC — no AWS keys stored in GitHub. Safer than storing secrets.
+#
+# HOW TO SET UP GITHUB SECRETS:
+#   1. Go to your GitHub repo → Settings → Secrets and variables → Actions
+#   2. Add these secrets:
+#      - AWS_ROLE_ARN: arn:aws:iam::YOUR_ACCOUNT_ID:role/github-actions-role
+#      - TF_VAR_alert_email: your-email@gmail.com
+#      - TF_VAR_domain_name: yourdomain.com
+# ──────────────────────────────────────────────────────────────────────────────
+
+name: "Terraform — HA WordPress"
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "ha-wordpress-terraform/**"
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "ha-wordpress-terraform/**"
+
+permissions:
+  contents: read
+  id-token: write   # Required for OIDC authentication to AWS
+  pull-requests: write  # Required to post plan output as PR comment
+
+env:
+  TF_VERSION: "1.6.0"
+  AWS_REGION: "us-east-1"
+  WORKING_DIR: "ha-wordpress-terraform"
+
+jobs:
+  terraform:
+    name: "Terraform Plan / Apply"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIR }}
+
+    steps:
+      # Step 1: Download your repo code
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # Step 2: Install the specific Terraform version
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: ${{ env.TF_VERSION }}
+
+      # Step 3: Authenticate to AWS using OIDC (no long-lived keys!)
+      # OIDC = OpenID Connect. GitHub proves its identity to AWS without storing keys.
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      # Step 4: Initialize Terraform (download providers and modules)
+      - name: Terraform Init
+        run: terraform init
+
+      # Step 5: Check code formatting (fails if not formatted correctly)
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+        continue-on-error: true  # Don't fail the whole pipeline on format issues
+
+      # Step 6: Validate the configuration syntax
+      - name: Terraform Validate
+        run: terraform validate
+
+      # Step 7: Generate a plan (shows what will change)
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color -out=tfplan
+        env:
+          TF_VAR_alert_email: ${{ secrets.TF_VAR_alert_email }}
+          TF_VAR_domain_name: ${{ secrets.TF_VAR_domain_name }}
+
+      # Step 8: Post the plan output as a comment on the PR (so reviewers can see it)
+      - name: Post Plan to PR
+        if: github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const output = `#### Terraform Plan 📋
+            \`\`\`
+            ${{ steps.plan.outputs.stdout }}
+            \`\`\`
+            *Pushed by: @${{ github.actor }}*`;
+            github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: output
+            })
+
+      # Step 9: Apply the changes (only on merge to main, not on PRs)
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve tfplan
+        env:
+          TF_VAR_alert_email: ${{ secrets.TF_VAR_alert_email }}
+          TF_VAR_domain_name: ${{ secrets.TF_VAR_domain_name }}

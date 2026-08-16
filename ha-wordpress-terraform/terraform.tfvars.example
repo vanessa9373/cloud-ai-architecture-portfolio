@@ -1,0 +1,35 @@
+# ─── Copy this file to terraform.tfvars and fill in your values ───────────────
+# Command: cp terraform.tfvars.example terraform.tfvars
+# NEVER commit terraform.tfvars to git (it may contain sensitive values)
+# ──────────────────────────────────────────────────────────────────────────────
+
+aws_region   = "us-east-1"
+project_name = "wp-ha"
+environment  = "dev"
+
+# Your domain name (e.g. "example.com"). Required for ACM certificate + CloudFront.
+# If you don't own a domain, use a placeholder — CloudFront URL will still work.
+domain_name = "yourdomain.com"
+
+# Email for CloudWatch alarm notifications
+alert_email = "your-email@gmail.com"
+
+# Database settings
+db_name          = "wordpress"
+db_username      = "wpuser"
+db_instance_class = "db.t3.micro"  # Cheapest option for learning
+
+# EC2 settings
+instance_type     = "t3.micro"     # Cheapest option for learning
+ec2_key_pair_name = "my-key-pair"  # Create this in Step 4a
+
+# Auto Scaling settings (keep small to minimize cost during practice)
+asg_min_size       = 2  # Minimum 2 for high availability
+asg_max_size       = 4
+asg_desired_capacity = 2
+
+# VPC CIDR blocks (leave these as defaults unless you have a conflict)
+vpc_cidr              = "10.0.0.0/16"
+public_subnet_cidrs   = ["10.0.1.0/24", "10.0.2.0/24", "10.0.3.0/24"]
+private_subnet_cidrs  = ["10.0.11.0/24", "10.0.12.0/24", "10.0.13.0/24"]
+database_subnet_cidrs = ["10.0.21.0/24", "10.0.22.0/24", "10.0.23.0/24"]
