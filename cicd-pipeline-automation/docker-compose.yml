@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: ./app
+    image: widget-inventory-api:local
+    ports:
+      - "3000:3000"
+    env_file:
+      - env/${APP_ENV:-development}.env

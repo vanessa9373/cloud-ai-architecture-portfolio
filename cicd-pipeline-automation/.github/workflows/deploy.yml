@@ -1,0 +1,179 @@
+name: Build, Test & Deploy to ECS
+
+on:
+  push:
+    branches: [main]
+
+permissions:
+  id-token: write   # required for OIDC -> AWS role assumption
+  contents: write    # rollback job commits nothing, but keep parity with checkout
+
+env:
+  AWS_REGION: us-east-1
+  ECR_REPOSITORY: widget-inventory-api
+  ECS_CLUSTER: cicd-pipeline-cluster
+  ECS_CONTAINER_NAME: widget-inventory-api
+
+jobs:
+  # ══════════════════════════════════════════════════════════
+  # STAGE 1 — TEST
+  # ══════════════════════════════════════════════════════════
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: app
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: npm
+          cache-dependency-path: app/package-lock.json
+      - run: npm ci
+      - run: npm run lint
+      - run: npm test
+
+  # ══════════════════════════════════════════════════════════
+  # STAGE 2 — BUILD & PUSH IMAGE TO ECR
+  # ══════════════════════════════════════════════════════════
+  build-and-push:
+    name: Build & Push Image
+    runs-on: ubuntu-latest
+    needs: test
+    outputs:
+      image: ${{ steps.build.outputs.image }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Login to Amazon ECR
+        id: ecr-login
+        uses: aws-actions/amazon-ecr-login@v2
+
+      - name: Build, tag and push image
+        id: build
+        env:
+          REGISTRY: ${{ steps.ecr-login.outputs.registry }}
+          TAG: ${{ github.sha }}
+        run: |
+          docker build -t $REGISTRY/$ECR_REPOSITORY:$TAG -t $REGISTRY/$ECR_REPOSITORY:latest ./app
+          docker push $REGISTRY/$ECR_REPOSITORY:$TAG
+          docker push $REGISTRY/$ECR_REPOSITORY:latest
+          echo "image=$REGISTRY/$ECR_REPOSITORY:$TAG" >> "$GITHUB_OUTPUT"
+
+  # ══════════════════════════════════════════════════════════
+  # STAGE 3 — DEPLOY TO STAGING
+  # ══════════════════════════════════════════════════════════
+  deploy-staging:
+    name: Deploy to Staging
+    runs-on: ubuntu-latest
+    needs: build-and-push
+    environment:
+      name: staging
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Record previous task definition (rollback target)
+        id: previous
+        run: |
+          PREV_TASK_DEF=$(aws ecs describe-services \
+            --cluster ${{ env.ECS_CLUSTER }}-staging \
+            --services widget-inventory-api-staging \
+            --query 'services[0].taskDefinition' --output text)
+          echo "task_def=$PREV_TASK_DEF" >> "$GITHUB_OUTPUT"
+
+      - name: Render new task definition
+        id: render
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition-family: widget-inventory-api-staging
+          container-name: ${{ env.ECS_CONTAINER_NAME }}
+          image: ${{ needs.build-and-push.outputs.image }}
+
+      - name: Deploy to ECS (staging)
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.render.outputs.task-definition }}
+          service: widget-inventory-api-staging
+          cluster: ${{ env.ECS_CLUSTER }}-staging
+          wait-for-service-stability: true
+
+      - name: Smoke test staging
+        id: smoke
+        run: ./scripts/smoke-test.sh "${{ vars.STAGING_HEALTH_URL }}"
+
+      - name: Roll back staging on failed smoke test
+        if: failure() && steps.smoke.outcome == 'failure'
+        run: |
+          ./scripts/rollback.sh \
+            "${{ env.ECS_CLUSTER }}-staging" \
+            "widget-inventory-api-staging" \
+            "${{ steps.previous.outputs.task_def }}"
+
+  # ══════════════════════════════════════════════════════════
+  # STAGE 4 — DEPLOY TO PRODUCTION (manual approval via GH Environment)
+  # ══════════════════════════════════════════════════════════
+  deploy-production:
+    name: Deploy to Production
+    runs-on: ubuntu-latest
+    needs: [build-and-push, deploy-staging]
+    environment:
+      name: production
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_DEPLOY_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Record previous task definition (rollback target)
+        id: previous
+        run: |
+          PREV_TASK_DEF=$(aws ecs describe-services \
+            --cluster ${{ env.ECS_CLUSTER }}-production \
+            --services widget-inventory-api-production \
+            --query 'services[0].taskDefinition' --output text)
+          echo "task_def=$PREV_TASK_DEF" >> "$GITHUB_OUTPUT"
+
+      - name: Render new task definition
+        id: render
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition-family: widget-inventory-api-production
+          container-name: ${{ env.ECS_CONTAINER_NAME }}
+          image: ${{ needs.build-and-push.outputs.image }}
+
+      - name: Deploy to ECS (production)
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.render.outputs.task-definition }}
+          service: widget-inventory-api-production
+          cluster: ${{ env.ECS_CLUSTER }}-production
+          wait-for-service-stability: true
+
+      - name: Smoke test production
+        id: smoke
+        run: ./scripts/smoke-test.sh "${{ vars.PRODUCTION_HEALTH_URL }}"
+
+      - name: Roll back production on failed smoke test
+        if: failure() && steps.smoke.outcome == 'failure'
+        run: |
+          ./scripts/rollback.sh \
+            "${{ env.ECS_CLUSTER }}-production" \
+            "widget-inventory-api-production" \
+            "${{ steps.previous.outputs.task_def }}"
