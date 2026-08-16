@@ -1,0 +1,42 @@
+name: "Deploy — Event-Driven Orders"
+
+on:
+  push:
+    branches: [main]
+    paths: ["event-driven-orders/**"]
+  pull_request:
+    branches: [main]
+    paths: ["event-driven-orders/**"]
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+env:
+  AWS_REGION: us-east-1
+
+jobs:
+  deploy:
+    name: "Terraform Plan / Apply"
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: event-driven-orders/terraform
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v3
+        with: { terraform_version: "1.6.0" }
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+      - run: terraform init
+      - run: terraform validate
+      - name: Terraform Plan
+        run: terraform plan -no-color
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve
