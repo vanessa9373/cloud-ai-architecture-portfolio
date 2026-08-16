@@ -1,0 +1,61 @@
+name: "Deploy — Serverless Task API"
+
+on:
+  push:
+    branches: [main]
+    paths: ["serverless-task-api/**"]
+  pull_request:
+    branches: [main]
+    paths: ["serverless-task-api/**"]
+
+permissions:
+  contents: read
+  id-token: write
+  pull-requests: write
+
+env:
+  AWS_REGION: "us-east-1"
+  WORKING_DIR: "serverless-task-api/terraform"
+
+jobs:
+  test:
+    name: "Unit Tests"
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with: { python-version: "3.12" }
+      - run: pip install pytest boto3 moto
+        working-directory: serverless-task-api
+      - run: pytest tests/ -v
+        working-directory: serverless-task-api
+
+  deploy:
+    name: "Terraform Plan / Apply"
+    runs-on: ubuntu-latest
+    needs: test
+    defaults:
+      run:
+        working-directory: ${{ env.WORKING_DIR }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: hashicorp/setup-terraform@v3
+        with: { terraform_version: "1.6.0" }
+
+      - name: Configure AWS credentials (OIDC)
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_ARN }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - run: terraform init
+      - run: terraform validate
+      - name: Terraform Plan
+        id: plan
+        run: terraform plan -no-color
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        run: terraform apply -auto-approve
