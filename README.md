@@ -352,17 +352,17 @@ breakdown of each.
 
 ## Certifications and Technical Skills
 
-- **AWS Solutions Architect – Associate (SAA-C03)** — Amazon Web Services, Sep 2025
+- **AWS Solutions Architect – Associate (SAA-C03)** — Amazon Web Services, Oct 2025
 - **ITIL® 4 Foundation: IT Service Management** — PeopleCert, Jun 2026
 - **Linux Essentials Certificate** — Linux Professional Institute, May 2025
 - **AWS Solutions Architect – Professional** — In Progress
-
----
-
+- **Architect AI Solutions - Coursera
+- **Architecting Solutions on AWS - Coursera
+  
 ## Contact
 
 | | |
 |--|--|
 | **LinkedIn** | [linkedin.com/in/vanessajen](https://linkedin.com/in/vanessajen) |
-| **Email** | [vanessa9373@gmail.com](mailto:vanessa9373@gmail.com) |
+| **Email** | [vanessa9373@gmail.com](mailto:vanessa93730@gmail.com) |
 | **Location** | Seattle, WA · Remote-First · Open to Relocation |
