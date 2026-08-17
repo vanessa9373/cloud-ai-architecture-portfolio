@@ -32,18 +32,19 @@ deployment that doesn't exist.
 | Project | Status | What it demonstrates |
 |---|---|---|
 | [StyleFind Visual Search](https://github.com/vanessa9373/stylefind-visual-search) | Locally tested prototype | Visual product search: embeddings, vector search, reranking, AWS multi-region design |
+| [Serverless Order Processing](https://github.com/vanessa9373/aws-serverless-order-processing) | Deployment-ready architecture | Idempotent SQS/Lambda/DynamoDB pipeline, verified retry-to-DLQ redrive |
 | [HA WordPress on AWS](#1-ha-wordpress-on-aws) | Deployment-ready architecture | Zero-SPOF 3-tier design, full Terraform |
 | [Multi-Account Landing Zone](#2-multi-account-aws-landing-zone) | Deployment-ready architecture | AWS Organizations, SCPs, centralized governance |
 | [EKS Microservices Platform](#5-eks-microservices-platform) | Deployment-ready architecture | GitOps, 11-service deployment, Karpenter |
 
 ### Cloud Architecture
-[HA WordPress](#1-ha-wordpress-on-aws) · [Multi-Account Landing Zone](#2-multi-account-aws-landing-zone) · [NexaShop E-Commerce](#4-nexashop-e-commerce-platform) · [AWS APAC Forage SA](#6-aws-apac-solutions-architecture-simulation) · [IaC Environment Automation](#9-iac-environment-automation)
+[HA WordPress](#1-ha-wordpress-on-aws) · [Multi-Account Landing Zone](#2-multi-account-aws-landing-zone) · [NexaShop E-Commerce](#4-nexashop-e-commerce-platform) · [AWS APAC Forage SA](#6-aws-apac-solutions-architecture-simulation) · [IaC Environment Automation](#9-iac-environment-automation) · [Serverless Order Processing](https://github.com/vanessa9373/aws-serverless-order-processing)
 
 ### AI and Machine Learning
 [StyleFind Visual Search](https://github.com/vanessa9373/stylefind-visual-search) — visual product search API (embeddings, vector search, reranking). Status: locally tested prototype; AWS deployment is a documented design, not deployed. See its [model card](https://github.com/vanessa9373/stylefind-visual-search/blob/main/docs/model-card.md) and [limitations](https://github.com/vanessa9373/stylefind-visual-search/blob/main/docs/limitations.md).
 
 ### DevOps and SRE
-[CI/CD Pipeline Automation](#8-cicd-pipeline-automation) · [Kubernetes Microservices Deployment](#10-kubernetes-microservices-deployment) · [EKS Microservices Platform](#5-eks-microservices-platform) · [Event-Driven Order Processing](#7-event-driven-order-processing) · [19 Hands-On Labs](#labs)
+[CI/CD Pipeline Automation](#8-cicd-pipeline-automation) · [Kubernetes Microservices Deployment](#10-kubernetes-microservices-deployment) · [EKS Microservices Platform](#5-eks-microservices-platform) · [Event-Driven Order Processing](#7-event-driven-order-processing) · [19 Hands-On Labs](#labs) · [Serverless Order Processing](https://github.com/vanessa9373/aws-serverless-order-processing) — idempotency, retry/DLQ, least-privilege IAM, Checkov-clean Terraform
 
 ### System Design
 [Architecture Case Studies](#architecture-case-studies) — 6 Solutions Architect design exercises (scenario-based, clearly labeled as practice exercises, not deployed systems).
@@ -56,13 +57,16 @@ content exists (no placeholder projects).
 See [Certifications](#certifications-and-technical-skills) and [Tech Stack](#tech-stack) below.
 
 ### Architecture Diagrams
-Each project's `diagrams/` or inline Mermaid sections — linked from its own README. StyleFind's:
-[diagrams/architecture.md](https://github.com/vanessa9373/stylefind-visual-search/blob/main/diagrams/architecture.md).
+Each project's `diagrams/` or inline Mermaid sections — linked from its own README.
+StyleFind: [diagrams/architecture.md](https://github.com/vanessa9373/stylefind-visual-search/blob/main/diagrams/architecture.md).
+Serverless Order Processing: [docs/architecture.md](https://github.com/vanessa9373/aws-serverless-order-processing/blob/main/docs/architecture.md)
+(sequence, failure path, and trust-boundary diagrams).
 
 ### Live Demos
-None hosted yet — every prototype here runs locally (`uvicorn`, Docker) rather than being
-deployed to avoid unapproved cloud spend. See each project's own deployment docs for exact
-run instructions.
+None hosted yet — every prototype here runs locally (`uvicorn`, Docker, or a runnable demo
+script) rather than being deployed to avoid unapproved cloud spend. See each project's own
+deployment docs for exact run instructions — e.g. `python scripts/demo.py` in
+`aws-serverless-order-processing` runs all required scenarios against mocked AWS.
 
 ### Contact Information
 See [Contact](#contact) below.
