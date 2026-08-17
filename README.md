@@ -1,12 +1,12 @@
 <div align="center">
 
-# Vanessa Awo — Cloud Projects Portfolio
+# Vanessa Awo — Cloud & AI Architecture Portfolio
 
-**Solutions Architect · Solutions Engineer · Cloud Engineer · DevOps Engineer · SRE Engineer**
+**Solutions Architect · Solutions Engineer · AI/ML Solutions Architect · Cloud Engineer · SRE · DevOps Engineer**
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-vanessajen-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/vanessajen)
-[![AWS SAA-C03](https://img.shields.io/badge/AWS_SAA--C03-Certified-FF9900?style=flat&logo=amazonaws&logoColor=white)](#certifications)
-[![ITIL 4](https://img.shields.io/badge/ITIL_4_Foundation-Certified-6B21A8?style=flat&logoColor=white)](#certifications)
+[![AWS SAA-C03](https://img.shields.io/badge/AWS_SAA--C03-Certified-FF9900?style=flat&logo=amazonaws&logoColor=white)](#certifications-and-technical-skills)
+[![ITIL 4](https://img.shields.io/badge/ITIL_4_Foundation-Certified-6B21A8?style=flat&logoColor=white)](#certifications-and-technical-skills)
 [![Terraform](https://img.shields.io/badge/Terraform-IaC-7B42BC?style=flat&logo=terraform&logoColor=white)](https://terraform.io)
 [![GitHub Actions](https://img.shields.io/badge/GitHub_Actions-CI/CD-2088FF?style=flat&logo=githubactions&logoColor=white)](https://github.com/features/actions)
 
@@ -16,21 +16,56 @@
 
 ## What's In This Repo
 
-Cloud infrastructure projects built to demonstrate hands-on skills across Solutions
-Architecture, Cloud Engineering, DevOps, and SRE disciplines.
+Cloud and AI infrastructure projects demonstrating hands-on skills across Solutions
+Architecture, AI/ML Solutions Architecture, Cloud Engineering, DevOps, and SRE disciplines.
 
-Every project includes:
-- **Terraform IaC** — reproducible, version-controlled infrastructure
-- **Well-Architected documentation** — design decisions with explicit trade-off analysis
-- **Real-world framing** — how each project maps to enterprise customer problems
+Every project is labeled with an honest status — **Working implementation**, **Locally tested
+prototype**, **Deployment-ready architecture**, **Architecture case study**, or **Work in
+progress** — and separates measured results from design targets. Nothing here claims a
+deployment that doesn't exist.
 
-Two kinds of work live here, kept clearly separate:
+---
 
-- **[Projects](#projects-at-a-glance)** — buildable, deployable infrastructure: real Terraform,
-  real CI/CD, meant to be `terraform apply`'d.
-- **[Architecture Case Studies](#architecture-case-studies)** — scenario-based Solutions Architect
-  design exercises (illustrative client names and numbers) backed by real Terraform, written to
-  practice architecture decision-making, not deployed production systems.
+## Portfolio Navigation
+
+### Featured Projects
+| Project | Status | What it demonstrates |
+|---|---|---|
+| [StyleFind Visual Search](https://github.com/vanessa9373/stylefind-visual-search) | Locally tested prototype | Visual product search: embeddings, vector search, reranking, AWS multi-region design |
+| [HA WordPress on AWS](#1-ha-wordpress-on-aws) | Deployment-ready architecture | Zero-SPOF 3-tier design, full Terraform |
+| [Multi-Account Landing Zone](#2-multi-account-aws-landing-zone) | Deployment-ready architecture | AWS Organizations, SCPs, centralized governance |
+| [EKS Microservices Platform](#5-eks-microservices-platform) | Deployment-ready architecture | GitOps, 11-service deployment, Karpenter |
+
+### Cloud Architecture
+[HA WordPress](#1-ha-wordpress-on-aws) · [Multi-Account Landing Zone](#2-multi-account-aws-landing-zone) · [NexaShop E-Commerce](#4-nexashop-e-commerce-platform) · [AWS APAC Forage SA](#6-aws-apac-solutions-architecture-simulation) · [IaC Environment Automation](#9-iac-environment-automation)
+
+### AI and Machine Learning
+[StyleFind Visual Search](https://github.com/vanessa9373/stylefind-visual-search) — visual product search API (embeddings, vector search, reranking). Status: locally tested prototype; AWS deployment is a documented design, not deployed. See its [model card](https://github.com/vanessa9373/stylefind-visual-search/blob/main/docs/model-card.md) and [limitations](https://github.com/vanessa9373/stylefind-visual-search/blob/main/docs/limitations.md).
+
+### DevOps and SRE
+[CI/CD Pipeline Automation](#8-cicd-pipeline-automation) · [Kubernetes Microservices Deployment](#10-kubernetes-microservices-deployment) · [EKS Microservices Platform](#5-eks-microservices-platform) · [Event-Driven Order Processing](#7-event-driven-order-processing) · [19 Hands-On Labs](#labs)
+
+### System Design
+[Architecture Case Studies](#architecture-case-studies) — 6 Solutions Architect design exercises (scenario-based, clearly labeled as practice exercises, not deployed systems).
+
+### Business and Nonprofit Technology
+Not yet published in this repo — planned, not built. Will not appear here until real, sanitized
+content exists (no placeholder projects).
+
+### Certifications and Technical Skills
+See [Certifications](#certifications-and-technical-skills) and [Tech Stack](#tech-stack) below.
+
+### Architecture Diagrams
+Each project's `diagrams/` or inline Mermaid sections — linked from its own README. StyleFind's:
+[diagrams/architecture.md](https://github.com/vanessa9373/stylefind-visual-search/blob/main/diagrams/architecture.md).
+
+### Live Demos
+None hosted yet — every prototype here runs locally (`uvicorn`, Docker) rather than being
+deployed to avoid unapproved cloud spend. See each project's own deployment docs for exact
+run instructions.
+
+### Contact Information
+See [Contact](#contact) below.
 
 ---
 
@@ -311,7 +346,7 @@ breakdown of each.
 
 ---
 
-## Certifications
+## Certifications and Technical Skills
 
 - **AWS Solutions Architect – Associate (SAA-C03)** — Amazon Web Services, Sep 2025
 - **ITIL® 4 Foundation: IT Service Management** — PeopleCert, Jun 2026
