@@ -364,5 +364,5 @@ breakdown of each.
 | | |
 |--|--|
 | **LinkedIn** | [linkedin.com/in/vanessajen](https://linkedin.com/in/vanessajen) |
-| **Email** | [vanessa9373@gmail.com](mailto:vanessa93730@gmail.com) |
+| **Email** | [denvanjen@gmail.com](mailto:denvanjen@gmail.com) |
 | **Location** | Seattle, WA · Remote-First · Open to Relocation |
