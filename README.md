@@ -358,10 +358,4 @@ breakdown of each.
 - **Architect AI Solutions - Coursera
 - **Architecting Solutions on AWS - Coursera
   
-## Contact
 
-| | |
-|--|--|
-| **LinkedIn** | [linkedin.com/in/vanessajen](https://linkedin.com/in/vanessajen) |
-| **Email** | [denvanjen@gmail.com](mailto:denvanjen@gmail.com) |
-| **Location** | Seattle, WA · Remote-First · Open to Relocation |
