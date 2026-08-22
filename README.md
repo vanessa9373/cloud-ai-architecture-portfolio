@@ -4,7 +4,6 @@
 
 **Solutions Architect · Solutions Engineer · AI/ML Solutions Architect · Cloud Engineer · SRE · DevOps Engineer**
 
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-vanessajen-0A66C2?style=flat&logo=linkedin&logoColor=white)](https://linkedin.com/in/vanessajen)
 [![AWS SAA-C03](https://img.shields.io/badge/AWS_SAA--C03-Certified-FF9900?style=flat&logo=amazonaws&logoColor=white)](#certifications-and-technical-skills)
 [![ITIL 4](https://img.shields.io/badge/ITIL_4_Foundation-Certified-6B21A8?style=flat&logoColor=white)](#certifications-and-technical-skills)
 [![Terraform](https://img.shields.io/badge/Terraform-IaC-7B42BC?style=flat&logo=terraform&logoColor=white)](https://terraform.io)
